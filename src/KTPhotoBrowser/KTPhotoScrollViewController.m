@@ -24,8 +24,6 @@
 #import "KTPhotoBrowserDataSource.h"
 #import "KTPhotoViewController.h"
 
-#define PHOTO_SEPARATOR 30
-
 @implementation KTPhotoScrollViewController
 
 - (void)dealloc {
@@ -46,7 +44,7 @@
 }
 
 - (void)loadView {
-   CGRect frame = [[UIScreen mainScreen] applicationFrame];
+   CGRect frame = [[UIScreen mainScreen] bounds];
    UIScrollView *newView = [[UIScrollView alloc] initWithFrame:frame];
    [newView setDelegate:self];
    [newView setBackgroundColor:[UIColor blackColor]];
@@ -60,6 +58,13 @@
    [scrollView_ retain];
    
    [newView release];
+}
+
+- (void)setTitleWithCurrentPhotoIndex {
+   NSInteger photoCount = [dataSource_ numberOfPhotos];
+   NSInteger index = [currentPhoto_ photoIndex] + 1;
+   NSString *title = [NSString stringWithFormat:@"%i of %i", index, photoCount, nil];
+   [self setTitle:title];
 }
 
 - (void)applyNewIndex:(NSUInteger)newIndex photoController:(KTPhotoViewController *)photoController {
@@ -93,13 +98,8 @@
       widthCount = 1;
    }
    
-   // Add a small separator between the pictures.
-   CGRect bounds = [scrollView_ bounds];
-   bounds.size.width += PHOTO_SEPARATOR;
-   [scrollView_ setBounds:bounds];
-   
-   CGSize size = CGSizeMake((scrollView_.frame.size.width + PHOTO_SEPARATOR) * widthCount, 
-                            scrollView_.frame.size.height /2);
+   // Set content size to allow scrolling.
+   CGSize size = CGSizeMake((scrollView_.frame.size.width) * widthCount, 0);
    [scrollView_ setContentSize:size];
    [scrollView_ setContentOffset:CGPointMake(0,0)];
    
@@ -111,6 +111,8 @@
    
    [self applyNewIndex:startWithIndex_ photoController:currentPhoto_];
    [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
+   
+   [self setTitleWithCurrentPhotoIndex];
 }
 
 /*
@@ -176,6 +178,8 @@
       KTPhotoViewController *swapController = currentPhoto_;
       currentPhoto_ = nextPhoto_;
       nextPhoto_ = swapController;
+      
+      [self setTitleWithCurrentPhotoIndex];
    }
 }
 

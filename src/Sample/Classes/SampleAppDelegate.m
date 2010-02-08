@@ -7,6 +7,7 @@
 //
 
 #import "SampleAppDelegate.h"
+#import "RootViewController.h"
 
 @implementation SampleAppDelegate
 
@@ -15,6 +16,17 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
 
+   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
+   
+   RootViewController *newController = [[RootViewController alloc] init];
+   UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
+   [[newNavController navigationBar] setBarStyle:UIBarStyleBlack];
+   [[newNavController navigationBar] setTranslucent:YES];
+   [newController release];
+
+   [window addSubview:[newNavController view]];
+   
+   
     // Override point for customization after application launch
     [window makeKeyAndVisible];
 }

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface UIImage (WPSCategory)
+@interface UIImage (KTCategory)
 
 - (UIImage *)scaleAndCropToMaxSize:(CGSize)newSize;
 

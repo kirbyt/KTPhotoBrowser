@@ -28,7 +28,7 @@
 }
 
 - (void)loadView {
-   CGRect frame = [[UIScreen mainScreen] applicationFrame];
+   CGRect frame = [[UIScreen mainScreen] bounds];
    UIImageView *newView = [[UIImageView alloc] initWithFrame:frame];
    [newView setBackgroundColor:[UIColor clearColor]];
    [newView setContentMode:UIViewContentModeScaleAspectFit];

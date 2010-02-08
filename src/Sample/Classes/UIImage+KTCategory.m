@@ -6,10 +6,10 @@
 //  Copyright 2010 White Peak Software Inc. All rights reserved.
 //
 
-#import "UIImage+WPSCategory.h"
+#import "UIImage+KTCategory.h"
 
 
-@implementation UIImage (WPSCategory)
+@implementation UIImage (KTCategory)
 
 - (UIImage *)scaleAndCropToMaxSize:(CGSize)newSize {
    // Disclaimer: The follow code is derived from the 
