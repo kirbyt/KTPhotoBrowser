@@ -23,6 +23,10 @@
 - (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource {
    if (self = [super init]) {
       dataSource_ = dataSource;
+
+      // Make sure to set wantsFullScreenLayout or the photo
+      // will not display behind the status bar.
+      [self setWantsFullScreenLayout:YES];
    }
    return self;
 }

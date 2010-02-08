@@ -25,6 +25,10 @@
 }
 
 - (void)loadView {
+   // Make sure to set wantsFullScreenLayout or the photo
+   // will not display behind the status bar.
+   [self setWantsFullScreenLayout:YES];
+
    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
    [scrollView setScrollsToTop:YES];
    [scrollView setScrollEnabled:YES];

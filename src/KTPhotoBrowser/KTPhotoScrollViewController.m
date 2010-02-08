@@ -39,11 +39,17 @@
    if (self = [super init]) {
       startWithIndex_ = index;
       dataSource_ = dataSource;
+
+      // Make sure to set wantsFullScreenLayout or the photo
+      // will not display behind the status bar.
+      [self setWantsFullScreenLayout:YES];
    }
    return self;
 }
 
 - (void)loadView {
+   [super loadView];
+   
    CGRect frame = [[UIScreen mainScreen] bounds];
    UIScrollView *newView = [[UIScrollView alloc] initWithFrame:frame];
    [newView setDelegate:self];
@@ -52,7 +58,7 @@
    [newView setShowsVerticalScrollIndicator:NO];
    [newView setShowsHorizontalScrollIndicator:NO];
    
-   [self setView:newView];
+   [[self view] addSubview:newView];
    
    scrollView_ = newView;
    [scrollView_ retain];
@@ -87,11 +93,12 @@
 
 - (void)viewDidLoad {
    [super viewDidLoad];
-
+  
    currentPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
    nextPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
    [scrollView_ addSubview:[currentPhoto_ view]];
    [scrollView_ addSubview:[nextPhoto_ view]];
+   
    
    NSInteger widthCount = [dataSource_ numberOfPhotos];
    if (widthCount == 0) {
@@ -99,7 +106,8 @@
    }
    
    // Set content size to allow scrolling.
-   CGSize size = CGSizeMake((scrollView_.frame.size.width) * widthCount, 0);
+   CGSize size = CGSizeMake(scrollView_.frame.size.width * widthCount, 
+                            scrollView_.frame.size.height / 2);   // Cut in half to prevent horizontal scrolling.
    [scrollView_ setContentSize:size];
    [scrollView_ setContentOffset:CGPointMake(0,0)];
    
@@ -115,14 +123,6 @@
    [self setTitleWithCurrentPhotoIndex];
 }
 
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
@@ -135,7 +135,34 @@
 	// e.g. self.myOutlet = nil;
 }
 
-#pragma mark _
+
+#pragma mark -
+#pragma mark Chrome Helpers
+
+- (void)toggleChrome:(BOOL)hide {
+   [UIView beginAnimations:nil context:nil];
+   
+   [UIView setAnimationDuration:0.3];
+   [[UIApplication sharedApplication] setStatusBarHidden:hide animated:YES];
+
+   // Must set the navigation bar's alpha, otherwise the photo
+   // view will be pushed until the navigation bar.
+   UINavigationBar *navbar = [[self navigationController] navigationBar];
+   [navbar setAlpha:hide ? 0 : 1];
+                              
+   [UIView commitAnimations];
+}
+
+- (void)hideChrome {
+   [self toggleChrome:YES];
+}
+
+- (void)showChrome {
+   [self toggleChrome:NO];
+}
+
+
+#pragma mark -
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -165,6 +192,10 @@
    }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+   [self hideChrome];
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
    [self scrollViewDidEndScrollingAnimation:scrollView];
 }
@@ -181,6 +212,8 @@
       
       [self setTitleWithCurrentPhotoIndex];
    }
+   
+   [self showChrome];
 }
 
 
