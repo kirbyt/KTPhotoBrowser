@@ -17,4 +17,3 @@ TO DO
 * Add delete message to KTPhotoBrowserDataSource.
 * Make show and hide photo viewer chrome behave like the Photos app.
 * Document "how to use" instructions.
-* Add licensing information.
