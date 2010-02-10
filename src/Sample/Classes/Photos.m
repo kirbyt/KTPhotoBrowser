@@ -22,6 +22,8 @@
    [photoCache_ release], photoCache_ = nil;
    [thumbnailCache_ release], thumbnailCache_ = nil;
    
+   [queue_ release], queue_ = nil;
+   
    [super dealloc];
 }
 
@@ -30,6 +32,7 @@
    if (self != nil) {
       photoCache_ = [[NSMutableDictionary alloc] initWithCapacity:INITIAL_CACHE_SIZE];
       thumbnailCache_ = [[NSMutableDictionary alloc] initWithCapacity:INITIAL_CACHE_SIZE];
+      queue_ = [[NSOperationQueue alloc] init];
    }
    return self;
 }
@@ -119,9 +122,21 @@
    return image;
 }
 
-- (void)savePhoto:(UIImage *)photo toPath:(NSString *)path {
+- (void)savePhoto:(id)data {
+   UIImage *photo = [data objectAtIndex:0];
+   NSString *path = [data objectAtIndex:1];
+
    NSData *jpg = UIImageJPEGRepresentation(photo, 0.8);  // 1.0 = least compression, best quality
    [jpg writeToFile:path atomically:NO];
+}
+
+- (void)savePhoto:(UIImage *)photo toPath:(NSString *)path {
+   NSArray *data = [NSArray arrayWithObjects:photo, path, nil];
+   NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self
+                                                                           selector:@selector(savePhoto:)
+                                                                             object:data];
+   [queue_ addOperation:operation];
+   [operation release];
 }
 
 - (void)savePhoto:(UIImage *)photo withName:(NSString *)name addToPhotoAlbum:(BOOL)addToPhotoAlbum{
@@ -137,8 +152,8 @@
    
    // Save thumbnail image.
    UIImage *thumbnail = [photo scaleAndCropToMaxSize:CGSizeMake(75,75)];
-   path = [[self thumbnailsPath] stringByAppendingPathComponent:fileName];
-   [self savePhoto:thumbnail toPath:path];
+   NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:fileName];
+   [self savePhoto:thumbnail toPath:thumbnailPath];
    
    // Release cached list of file names to force refresh.
    [fileNames_ release], fileNames_ = nil;

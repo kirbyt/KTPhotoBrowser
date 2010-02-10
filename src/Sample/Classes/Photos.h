@@ -17,6 +17,8 @@
    NSArray *fileNames_;
    NSMutableDictionary *photoCache_;
    NSMutableDictionary *thumbnailCache_;
+   
+   NSOperationQueue *queue_;
 }
 
 - (void)flushCache;
