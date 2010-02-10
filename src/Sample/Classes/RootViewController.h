@@ -7,19 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KTPhotoBrowserDataSource.h"
-#import "PhotoPickerController.h"
 #import "KTThumbsViewController.h"
+#import "PhotoPickerController.h"
 
 
-@protocol KTPhotoBrowserDataSource;
-@protocol PhotoPickerControllerDelegate;
-@class PhotoPickerController;
+@class Photos;
 
-@interface RootViewController : KTThumbsViewController <KTPhotoBrowserDataSource, PhotoPickerControllerDelegate> {
+@interface RootViewController : KTThumbsViewController <PhotoPickerControllerDelegate> {
    PhotoPickerController *photoPicker_;
-   NSMutableArray *photos_;
-   NSString *documentPath_;
+   Photos *myPhotos_;
 }
 
 @end

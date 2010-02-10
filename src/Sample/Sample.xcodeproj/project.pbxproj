@@ -21,6 +21,7 @@
 		6813F456112093BB006B7215 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F455112093BB006B7215 /* UIImage+KTCategory.m */; };
 		6813F46811209462006B7215 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F46711209462006B7215 /* RootViewController.m */; };
 		6813F48611209612006B7215 /* PhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F48511209612006B7215 /* PhotoPickerController.m */; };
+		68B8F54D112308DF00C16B8D /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8F54C112308DF00C16B8D /* Photos.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		6813F46711209462006B7215 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		6813F48411209612006B7215 /* PhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerController.h; sourceTree = "<group>"; };
 		6813F48511209612006B7215 /* PhotoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerController.m; sourceTree = "<group>"; };
+		68B8F54B112308DF00C16B8D /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
+		68B8F54C112308DF00C16B8D /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +80,8 @@
 				6813F48511209612006B7215 /* PhotoPickerController.m */,
 				6813F454112093BB006B7215 /* UIImage+KTCategory.h */,
 				6813F455112093BB006B7215 /* UIImage+KTCategory.m */,
+				68B8F54B112308DF00C16B8D /* Photos.h */,
+				68B8F54C112308DF00C16B8D /* Photos.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 				6813F456112093BB006B7215 /* UIImage+KTCategory.m in Sources */,
 				6813F46811209462006B7215 /* RootViewController.m in Sources */,
 				6813F48611209612006B7215 /* PhotoPickerController.m in Sources */,
+				68B8F54D112308DF00C16B8D /* Photos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +256,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = "-DDEBUG=1";
 				PREBINDING = NO;
 				SDKROOT = iphoneos3.0;
 			};
