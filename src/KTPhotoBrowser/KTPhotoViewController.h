@@ -1,6 +1,6 @@
 //
-//  WPSPhotoViewController.h
-//  HelloBaby
+//  KTPhotoViewController.h
+//  KTPhotoBrowser
 //
 //  Created by Kirby Turner on 2/3/10.
 //  Copyright 2010 White Peak Software Inc. All rights reserved.
