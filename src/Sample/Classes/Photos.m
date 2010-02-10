@@ -13,6 +13,8 @@
 
 @implementation Photos
 
+@synthesize delegate = delegate_;
+
 - (void)dealloc {
    [documentPath_ release], documentPath_ = nil;
    [photosPath_ release], photosPath_ = nil;
@@ -40,6 +42,11 @@
 - (void)flushCache {
    [photoCache_ removeAllObjects];
    [thumbnailCache_ removeAllObjects];
+}
+
+- (void)releasePhotoList {
+   // Release cached list of file names to force refresh.
+   [fileNames_ release], fileNames_ = nil;
 }
 
 
@@ -122,12 +129,26 @@
    return image;
 }
 
+- (void)sendDidFinishSaveNotification {
+   if (delegate_ != nil && [delegate_ respondsToSelector:@selector(didFinishSave)]) {
+      [delegate_ didFinishSave];
+   }
+}
+
 - (void)savePhoto:(id)data {
    UIImage *photo = [data objectAtIndex:0];
    NSString *path = [data objectAtIndex:1];
 
    NSData *jpg = UIImageJPEGRepresentation(photo, 0.8);  // 1.0 = least compression, best quality
    [jpg writeToFile:path atomically:NO];
+
+   [self performSelectorOnMainThread:@selector(releasePhotoList)
+                          withObject:nil
+                       waitUntilDone:YES];
+   
+   [self performSelectorOnMainThread:@selector(sendDidFinishSaveNotification) 
+                          withObject:nil 
+                       waitUntilDone:NO];
 }
 
 - (void)savePhoto:(UIImage *)photo toPath:(NSString *)path {
@@ -154,9 +175,6 @@
    UIImage *thumbnail = [photo scaleAndCropToMaxSize:CGSizeMake(75,75)];
    NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:fileName];
    [self savePhoto:thumbnail toPath:thumbnailPath];
-   
-   // Release cached list of file names to force refresh.
-   [fileNames_ release], fileNames_ = nil;
 }
 
 

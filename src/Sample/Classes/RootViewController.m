@@ -7,7 +7,6 @@
 //
 
 #import "RootViewController.h"
-#import "Photos.h"
 
 
 @implementation RootViewController
@@ -31,6 +30,7 @@
    
    if (myPhotos_ == nil) {
       myPhotos_ = [[Photos alloc] init];
+      [myPhotos_ setDelegate:self];
    }
    [self setDataSource:myPhotos_];
    [self loadPhotos];
@@ -68,5 +68,12 @@
    [myPhotos_ savePhoto:image withName:name addToPhotoAlbum:isFromCamera];
 }
 
+
+#pragma mark -
+#pragma mark PhotosDelegate
+
+- (void)didFinishSave {
+   [self loadPhotos];
+}
 
 @end

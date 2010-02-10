@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "KTThumbsViewController.h"
 #import "PhotoPickerController.h"
+#import "Photos.h"
 
 
 @class Photos;
 
-@interface RootViewController : KTThumbsViewController <PhotoPickerControllerDelegate> {
+@interface RootViewController : KTThumbsViewController <PhotoPickerControllerDelegate, PhotosDelegate> {
    PhotoPickerController *photoPicker_;
    Photos *myPhotos_;
 }
