@@ -27,6 +27,9 @@
 
 const CGFloat ktkDefaultToolbarHeight = 44;
 
+#define BUTTON_DELETEPHOTO 0
+#define BUTTON_CANCEL 1
+
 @interface KTPhotoScrollViewController (Private)
 - (NSInteger)pageCount;
 @end
@@ -188,6 +191,27 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    return pageCount_;
 }
 
+- (void)deleteCurrentPhoto {
+   if (dataSource_) {
+      [dataSource_ deleteImageAtIndex:[currentPhoto_ photoIndex]];
+      
+      // TODO: Animate the deletion of the current photo.
+      
+      pageCount_ -= 1;
+      if ([self pageCount] == 0) {
+         [[self navigationController] popViewControllerAnimated:YES];
+      }
+      
+      // Resize scrollview context size.
+      [self setScrollViewContentSizeWithPageCount:[self pageCount]];
+      
+      // Move to the next photo.
+      [self autoScrollToIndex:[currentPhoto_ photoIndex] + 1];
+      [self scrollViewDidEndScrollingAnimation:scrollView_];
+   }
+}
+
+
 #pragma mark -
 #pragma mark Chrome Helpers
 
@@ -287,22 +311,22 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)trashPhoto {
-   if (dataSource_) {
-      [dataSource_ deleteImageAtIndex:[currentPhoto_ photoIndex]];
-      
-      // TODO: Animate the deletion of the current photo.
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                            delegate:self
+                                                   cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel button text.")
+                                              destructiveButtonTitle:NSLocalizedString(@"Delete Photo", @"Delete Photo button text."), nil
+                                                   otherButtonTitles:nil];
+   [actionSheet showInView:[self view]];
+}
 
-      pageCount_ -= 1;
-      if ([self pageCount] == 0) {
-         [[self navigationController] popViewControllerAnimated:YES];
-      }
 
-      // Resize scrollview context size.
-      [self setScrollViewContentSizeWithPageCount:[self pageCount]];
-      
-      // Move to the next photo.
-      [self autoScrollToIndex:[currentPhoto_ photoIndex] + 1];
-      [self scrollViewDidEndScrollingAnimation:scrollView_];
+#pragma mark -
+#pragma mark UIActionSheetDelegate
+
+// Called when a button is clicked. The view will be automatically dismissed after this call returns
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+   if (buttonIndex == BUTTON_DELETEPHOTO) {
+      [self deleteCurrentPhoto];
    }
 }
 

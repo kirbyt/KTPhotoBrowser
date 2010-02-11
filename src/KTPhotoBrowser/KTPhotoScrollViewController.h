@@ -11,7 +11,7 @@
 @class KTPhotoViewController;
 @protocol KTPhotoBrowserDataSource;
 
-@interface KTPhotoScrollViewController : UIViewController<UIScrollViewDelegate> {
+@interface KTPhotoScrollViewController : UIViewController<UIScrollViewDelegate, UIActionSheetDelegate> {
    id <KTPhotoBrowserDataSource> dataSource_;
    UIScrollView *scrollView_;
    UIToolbar *toolbar_;
