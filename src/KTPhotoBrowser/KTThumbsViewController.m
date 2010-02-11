@@ -32,6 +32,7 @@
    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
    [scrollView setScrollsToTop:YES];
    [scrollView setScrollEnabled:YES];
+   [scrollView setBackgroundColor:[UIColor whiteColor]];
    
    
    // Set main view to the scroll view.
