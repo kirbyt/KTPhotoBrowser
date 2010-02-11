@@ -89,8 +89,14 @@
    CGSize contentSize = CGSizeMake(320, (rowHeight * (rowCount + 1)));
    [scrollView_ setContentSize:contentSize];
    
+   // Remove old subviews.
+   for (int i = 0; i < [[scrollView_ subviews] count]; i++) {
+      UIView *subview = [[scrollView_ subviews] objectAtIndex:i];
+      [subview removeFromSuperview];
+   }
    
-   for(int i=0; i < photoCount; i++) {
+   // Add new subviews.
+   for (int i = 0; i < photoCount; i++) {
       KTThumbView *thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight)];
       [thumbView setDelegate:self];
       [thumbView setTag:i];
