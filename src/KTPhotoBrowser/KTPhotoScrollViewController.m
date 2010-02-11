@@ -190,10 +190,14 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [UIView setAnimationDuration:0.3];
    [[UIApplication sharedApplication] setStatusBarHidden:hide animated:YES];
 
+   CGFloat alpha = hide ? 0.0 : 1.0;
+   
    // Must set the navigation bar's alpha, otherwise the photo
    // view will be pushed until the navigation bar.
    UINavigationBar *navbar = [[self navigationController] navigationBar];
-   [navbar setAlpha:hide ? 0 : 1];
+   [navbar setAlpha:alpha];
+   
+   [toolbar_ setAlpha:alpha];
                               
    [UIView commitAnimations];
 }
