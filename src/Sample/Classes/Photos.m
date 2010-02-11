@@ -177,6 +177,37 @@
    [self savePhoto:thumbnail toPath:thumbnailPath];
 }
 
+- (void)deletePhoto:(id)data {
+   if ([data isKindOfClass:[NSString class]]) {
+      NSString *path = (NSString *)data;
+      [[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+      
+      [self performSelectorOnMainThread:@selector(releasePhotoList)
+                             withObject:nil
+                          waitUntilDone:YES];
+      
+      [self performSelectorOnMainThread:@selector(sendDidFinishSaveNotification) 
+                             withObject:nil 
+                          waitUntilDone:NO];
+   }
+}
+
+- (void)deletePhotoAtPath:(NSString *)path {
+   NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self
+                                                                           selector:@selector(deletePhoto:)
+                                                                             object:path];
+   [queue_ addOperation:operation];
+   [operation release];
+}
+
+- (void)deleteImageNamed:(NSString *)name {
+   NSString *path = [[self photosPath] stringByAppendingPathComponent:name];
+   [self deletePhotoAtPath:path];
+   NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:name];
+   [self deletePhotoAtPath:thumbnailPath];
+}
+
+
 
 #pragma mark -
 #pragma mark KTPhotoBrowserDataSource
@@ -196,6 +227,11 @@
    NSString *fileName = [[self fileNames] objectAtIndex:index];
    NSString *path = [[self thumbnailsPath] stringByAppendingPathComponent:fileName];
    return [self imageAtPath:path cache:thumbnailCache_];
+}
+
+- (void)deleteImageAtIndex:(NSInteger)index {
+   NSString *fileName = [[self fileNames] objectAtIndex:index];
+   [self deleteImageNamed:fileName];
 }
 
 

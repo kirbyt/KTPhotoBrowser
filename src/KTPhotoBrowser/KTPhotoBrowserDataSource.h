@@ -15,4 +15,7 @@
 - (UIImage *)imageAtIndex:(NSInteger)index;
 - (UIImage *)thumbImageAtIndex:(NSInteger)index;
 
+@optional
+- (void)deleteImageAtIndex:(NSInteger)index;
+
 @end

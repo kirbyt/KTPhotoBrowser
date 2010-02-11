@@ -280,7 +280,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)trashPhoto {
-   
+   if (dataSource_) {
+      [dataSource_ deleteImageAtIndex:[currentPhoto_ photoIndex]];
+   }
 }
 
 @end
