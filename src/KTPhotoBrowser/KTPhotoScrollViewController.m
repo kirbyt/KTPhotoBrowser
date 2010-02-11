@@ -22,12 +22,21 @@
 
 #import "KTPhotoScrollViewController.h"
 #import "KTPhotoBrowserDataSource.h"
+#import "KTPhotoBrowserGlobal.h"
 #import "KTPhotoViewController.h"
+
+const CGFloat ktkDefaultToolbarHeight = 44;
+
 
 @implementation KTPhotoScrollViewController
 
+@synthesize statusBarStyle = statusBarStyle_;
+@synthesize navigationBarStyle = navigationBarStyle_;
+
+
 - (void)dealloc {
    [scrollView_ release], scrollView_ = nil;
+   [toolbar_ release], toolbar_ = nil;
    
    [currentPhoto_ release], currentPhoto_ = nil;
    [nextPhoto_ release], nextPhoto_ = nil;
@@ -64,6 +73,32 @@
    [scrollView_ retain];
    
    [newView release];
+   
+   UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] 
+                                  initWithImage:KTLoadImageFromBundle(@"nextIcon.png")
+                                  style:UIBarButtonItemStylePlain
+                                  target:self
+                                  action:@selector(next)];
+
+   UIBarButtonItem *previousButton = [[UIBarButtonItem alloc] 
+                                      initWithImage:KTLoadImageFromBundle(@"previousIcon.png")
+                                      style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(next)];
+
+   UIBarItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                    target:nil 
+                                                                    action:nil];
+   
+   CGRect toolbarFrame = CGRectMake(0, 
+                                    frame.size.height - ktkDefaultToolbarHeight, 
+                                    frame.size.width, 
+                                    ktkDefaultToolbarHeight);
+   toolbar_ = [[UIToolbar alloc] initWithFrame:toolbarFrame];
+   [toolbar_ setBarStyle:[self navigationBarStyle]];
+   [toolbar_ setItems:[NSArray arrayWithObjects:
+                       space, previousButton, space, nextButton, space, nil]];
+   [[self view] addSubview:toolbar_];
 }
 
 - (void)setTitleWithCurrentPhotoIndex {
@@ -216,6 +251,17 @@
    [self showChrome];
 }
 
+
+#pragma mark -
+#pragma mark Toolbar Actions
+
+- (void)next {
+   
+}
+
+- (void)previous {
+   
+}
 
 
 @end

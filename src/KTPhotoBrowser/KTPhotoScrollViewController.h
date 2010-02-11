@@ -14,11 +14,18 @@
 @interface KTPhotoScrollViewController : UIViewController<UIScrollViewDelegate> {
    id <KTPhotoBrowserDataSource> dataSource_;
    UIScrollView *scrollView_;
+   UIToolbar *toolbar_;
    NSUInteger startWithIndex_;
    
    KTPhotoViewController *currentPhoto_;
    KTPhotoViewController *nextPhoto_;
+   
+   UIStatusBarStyle statusBarStyle_;
+   UIBarStyle navigationBarStyle_;
 }
+
+@property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
+@property (nonatomic, assign) UIBarStyle navigationBarStyle;
 
 - (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource andStartWithPhotoAtIndex:(NSUInteger)index;
 

@@ -21,6 +21,8 @@
 		6813F456112093BB006B7215 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F455112093BB006B7215 /* UIImage+KTCategory.m */; };
 		6813F46811209462006B7215 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F46711209462006B7215 /* RootViewController.m */; };
 		6813F48611209612006B7215 /* PhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F48511209612006B7215 /* PhotoPickerController.m */; };
+		68316E371124726F00A906B3 /* KTPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */; };
+		68316E801124743F00A906B3 /* KTPhotoBrowserGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */; };
 		68B8F54D112308DF00C16B8D /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8F54C112308DF00C16B8D /* Photos.m */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +52,9 @@
 		6813F46711209462006B7215 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		6813F48411209612006B7215 /* PhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerController.h; sourceTree = "<group>"; };
 		6813F48511209612006B7215 /* PhotoPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoPickerController.m; sourceTree = "<group>"; };
+		68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KTPhotoBrowser.bundle; path = ../KTPhotoBrowser/KTPhotoBrowser.bundle; sourceTree = SOURCE_ROOT; };
+		68316E7E1124743F00A906B3 /* KTPhotoBrowserGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTPhotoBrowserGlobal.h; path = ../KTPhotoBrowser/KTPhotoBrowserGlobal.h; sourceTree = SOURCE_ROOT; };
+		68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTPhotoBrowserGlobal.m; path = ../KTPhotoBrowser/KTPhotoBrowserGlobal.m; sourceTree = SOURCE_ROOT; };
 		68B8F54B112308DF00C16B8D /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
 		68B8F54C112308DF00C16B8D /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -121,6 +126,7 @@
 			children = (
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Sample-Info.plist */,
+				68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -140,6 +146,8 @@
 			children = (
 				6813F439112075BB006B7215 /* KTPhotoBrowserDataSource.h */,
 				6813F43A112075BB006B7215 /* KTPhotoBrowserDataSource.m */,
+				68316E7E1124743F00A906B3 /* KTPhotoBrowserGlobal.h */,
+				68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */,
 				6813F43B112075BB006B7215 /* KTPhotoScrollViewController.h */,
 				6813F43C112075BB006B7215 /* KTPhotoScrollViewController.m */,
 				6813F43D112075BB006B7215 /* KTPhotoViewController.h */,
@@ -195,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				68316E371124726F00A906B3 /* KTPhotoBrowser.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +225,7 @@
 				6813F46811209462006B7215 /* RootViewController.m in Sources */,
 				6813F48611209612006B7215 /* PhotoPickerController.m in Sources */,
 				68B8F54D112308DF00C16B8D /* Photos.m in Sources */,
+				68316E801124743F00A906B3 /* KTPhotoBrowserGlobal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
