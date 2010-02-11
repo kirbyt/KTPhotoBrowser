@@ -22,10 +22,12 @@
    
    UIStatusBarStyle statusBarStyle_;
    UIBarStyle navigationBarStyle_;
+   BOOL translucent_;   // for the navigation and toolbars.
 }
 
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 @property (nonatomic, assign) UIBarStyle navigationBarStyle;
+@property (nonatomic, assign, getter=isTranslucent) BOOL translucent;
 
 - (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource andStartWithPhotoAtIndex:(NSUInteger)index;
 

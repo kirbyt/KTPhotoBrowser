@@ -119,8 +119,9 @@
    KTPhotoScrollViewController *newController = [[KTPhotoScrollViewController alloc] 
                                                         initWithDataSource:dataSource_ 
                                                   andStartWithPhotoAtIndex:index];
-   UIBarStyle navBarStyle = [[[self navigationController] navigationBar] barStyle];
-   [newController setNavigationBarStyle:navBarStyle];
+   UINavigationBar *navbar = [[self navigationController] navigationBar];
+   [newController setNavigationBarStyle:[navbar barStyle]];
+   [newController setTranslucent:[navbar isTranslucent]];
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
 }

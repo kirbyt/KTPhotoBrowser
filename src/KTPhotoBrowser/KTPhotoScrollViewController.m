@@ -32,6 +32,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 @synthesize statusBarStyle = statusBarStyle_;
 @synthesize navigationBarStyle = navigationBarStyle_;
+@synthesize translucent = translucent_;
 
 
 - (void)dealloc {
@@ -100,6 +101,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                     ktkDefaultToolbarHeight);
    toolbar_ = [[UIToolbar alloc] initWithFrame:toolbarFrame];
    [toolbar_ setBarStyle:[self navigationBarStyle]];
+   [toolbar_ setTranslucent:[self isTranslucent]];
    [toolbar_ setItems:[NSArray arrayWithObjects:
                        space, previousButton, space, nextButton, space, trashButton, nil]];
    [[self view] addSubview:toolbar_];
