@@ -27,6 +27,9 @@
 
 const CGFloat ktkDefaultToolbarHeight = 44;
 
+@interface KTPhotoScrollViewController (Private)
+- (NSInteger)pageCount;
+@end
 
 @implementation KTPhotoScrollViewController
 
@@ -108,15 +111,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)setTitleWithCurrentPhotoIndex {
-   NSInteger photoCount = [dataSource_ numberOfPhotos];
    NSInteger index = [currentPhoto_ photoIndex] + 1;
-   NSString *title = [NSString stringWithFormat:@"%i of %i", index, photoCount, nil];
+   NSString *title = [NSString stringWithFormat:@"%i of %i", index, pageCount_, nil];
    [self setTitle:title];
 }
 
 - (void)applyNewIndex:(NSUInteger)newIndex photoController:(KTPhotoViewController *)photoController {
-   NSInteger photoCount = [dataSource_ numberOfPhotos];
-   BOOL outOfBounds = newIndex >= photoCount || newIndex < 0;
+   BOOL outOfBounds = newIndex >= [self pageCount] || newIndex < 0;
    
    if ( !outOfBounds ) {
       CGRect photoFrame = photoController.view.frame;
@@ -139,6 +140,17 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [scrollView_ scrollRectToVisible:frame animated:NO];
 }
 
+- (void)setScrollViewContentSizeWithPageCount:(NSInteger)pageCount {
+   if (pageCount == 0) {
+      pageCount = 1;
+   }
+
+   CGSize size = CGSizeMake(scrollView_.frame.size.width * pageCount, 
+                            scrollView_.frame.size.height / 2);   // Cut in half to prevent horizontal scrolling.
+   [scrollView_ setContentSize:size];
+   [scrollView_ setContentOffset:CGPointMake(0,0)];
+}
+
 - (void)viewDidLoad {
    [super viewDidLoad];
   
@@ -147,17 +159,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [scrollView_ addSubview:[currentPhoto_ view]];
    [scrollView_ addSubview:[nextPhoto_ view]];
    
-   
-   NSInteger widthCount = [dataSource_ numberOfPhotos];
-   if (widthCount == 0) {
-      widthCount = 1;
-   }
-   
    // Set content size to allow scrolling.
-   CGSize size = CGSizeMake(scrollView_.frame.size.width * widthCount, 
-                            scrollView_.frame.size.height / 2);   // Cut in half to prevent horizontal scrolling.
-   [scrollView_ setContentSize:size];
-   [scrollView_ setContentOffset:CGPointMake(0,0)];
+   pageCount_ = [dataSource_ numberOfPhotos];
+   [self setScrollViewContentSizeWithPageCount:[self pageCount]];
    
    // Auto-scroll to the stating photo.
    [self autoScrollToIndex:startWithIndex_];
@@ -180,6 +184,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 	// e.g. self.myOutlet = nil;
 }
 
+- (NSInteger)pageCount {
+   return pageCount_;
+}
 
 #pragma mark -
 #pragma mark Chrome Helpers
@@ -282,6 +289,20 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)trashPhoto {
    if (dataSource_) {
       [dataSource_ deleteImageAtIndex:[currentPhoto_ photoIndex]];
+      
+      // TODO: Animate the deletion of the current photo.
+
+      pageCount_ -= 1;
+      if ([self pageCount] == 0) {
+         [[self navigationController] popViewControllerAnimated:YES];
+      }
+
+      // Resize scrollview context size.
+      [self setScrollViewContentSizeWithPageCount:[self pageCount]];
+      
+      // Move to the next photo.
+      [self autoScrollToIndex:[currentPhoto_ photoIndex] + 1];
+      [self scrollViewDidEndScrollingAnimation:scrollView_];
    }
 }
 
