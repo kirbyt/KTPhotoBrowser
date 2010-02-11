@@ -78,13 +78,17 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                   initWithImage:KTLoadImageFromBundle(@"nextIcon.png")
                                   style:UIBarButtonItemStylePlain
                                   target:self
-                                  action:@selector(next)];
+                                  action:@selector(nextPhoto)];
 
    UIBarButtonItem *previousButton = [[UIBarButtonItem alloc] 
                                       initWithImage:KTLoadImageFromBundle(@"previousIcon.png")
                                       style:UIBarButtonItemStylePlain
                                       target:self
-                                      action:@selector(next)];
+                                      action:@selector(previousPhoto)];
+   
+   UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                                                                target:self
+                                                                                action:@selector(trashPhoto)];
 
    UIBarItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                     target:nil 
@@ -97,7 +101,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    toolbar_ = [[UIToolbar alloc] initWithFrame:toolbarFrame];
    [toolbar_ setBarStyle:[self navigationBarStyle]];
    [toolbar_ setItems:[NSArray arrayWithObjects:
-                       space, previousButton, space, nextButton, space, nil]];
+                       space, previousButton, space, nextButton, space, trashButton, nil]];
    [[self view] addSubview:toolbar_];
 }
 
@@ -126,6 +130,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [photoController setPhotoIndex:newIndex];
 }
 
+- (void)autoScrollToIndex:(NSInteger)index {
+   CGRect frame = scrollView_.frame;
+   frame.origin.x = frame.size.width * index;
+   frame.origin.y = 0;
+   [scrollView_ scrollRectToVisible:frame animated:NO];
+}
+
 - (void)viewDidLoad {
    [super viewDidLoad];
   
@@ -147,10 +158,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [scrollView_ setContentOffset:CGPointMake(0,0)];
    
    // Auto-scroll to the stating photo.
-   CGRect frame = scrollView_.frame;
-   frame.origin.x = frame.size.width * startWithIndex_;
-   frame.origin.y = 0;
-   [scrollView_ scrollRectToVisible:frame animated:NO];
+   [self autoScrollToIndex:startWithIndex_];
    
    [self applyNewIndex:startWithIndex_ photoController:currentPhoto_];
    [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
@@ -255,13 +263,18 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark -
 #pragma mark Toolbar Actions
 
-- (void)next {
-   
+- (void)nextPhoto {
+   [self autoScrollToIndex:[currentPhoto_ photoIndex] + 1];
+   [self scrollViewDidEndScrollingAnimation:scrollView_];
 }
 
-- (void)previous {
-   
+- (void)previousPhoto {
+   [self autoScrollToIndex:[currentPhoto_ photoIndex] - 1];
+   [self scrollViewDidEndScrollingAnimation:scrollView_];
 }
 
+- (void)trashPhoto {
+   
+}
 
 @end
