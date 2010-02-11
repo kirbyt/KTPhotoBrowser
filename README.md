@@ -6,6 +6,8 @@ KTPhotoBrowser is a lightweight photo browser for the iPhone and iPad. It looks 
 Status
 ======
 
+** Changes made today broke the sample app when running on a device. I hope to have a fix by tomorrow. **
+
 The project is not ready for prime time yet. I'm working on it now and it should be ready for general use within a few days or weeks.
 
 TO DO
