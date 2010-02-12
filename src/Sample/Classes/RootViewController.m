@@ -61,8 +61,15 @@
 #pragma mark PhotoPickerControllerDelegate
 
 - (void)photoPickerController:(PhotoPickerController *)controller didFinishPickingWithImage:(UIImage *)image isFromCamera:(BOOL)isFromCamera {
-   NSProcessInfo *processInfo = [NSProcessInfo processInfo];
-   NSString *name = [processInfo globallyUniqueString];
+   NSString * const key = @"nextNumber";
+   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+   NSNumber *nextNumber = [defaults valueForKey:key];
+   if ( ! nextNumber ) {
+      nextNumber = [NSNumber numberWithInt:1];
+   }
+   [defaults setObject:[NSNumber numberWithInt:([nextNumber intValue] + 1)] forKey:key];
+   
+   NSString *name = [NSString stringWithFormat:@"picture-%05i", [nextNumber intValue]];
 
    // Save to the photo album if picture is from the camera.
    [myPhotos_ savePhoto:image withName:name addToPhotoAlbum:isFromCamera];
