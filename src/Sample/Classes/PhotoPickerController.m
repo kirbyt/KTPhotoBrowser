@@ -56,7 +56,6 @@
 - (void)showWithCamera {
    isFromCamera_ = YES;
    [[self imagePicker] setSourceType:UIImagePickerControllerSourceTypeCamera];
-   [imagePicker_ setAllowsImageEditing:NO];
    if ([delegate_ respondsToSelector:@selector(presentModalViewController:animated:)]) {
       [delegate_ presentModalViewController:imagePicker_ animated:YES];
    }

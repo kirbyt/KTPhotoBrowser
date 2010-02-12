@@ -15,7 +15,6 @@
 @synthesize delegate = delegate_;
 
 - (void)dealloc {
-   
    [super dealloc];
 }
 

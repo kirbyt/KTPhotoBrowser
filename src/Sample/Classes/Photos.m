@@ -123,7 +123,9 @@
    // and add to the cache.
    if (image == nil) {
       image = [UIImage imageWithContentsOfFile:path];
-      [cache setObject:image forKey:path];
+      if (image) {
+         [cache setObject:image forKey:path];
+      }
    }
    
    return image;
@@ -136,8 +138,8 @@
 }
 
 - (void)savePhoto:(id)data {
-   UIImage *photo = [data objectAtIndex:0];
-   NSString *path = [data objectAtIndex:1];
+   UIImage *photo = (UIImage *)[data objectAtIndex:0];
+   NSString *path = (NSString *)[data objectAtIndex:1];
 
    NSData *jpg = UIImageJPEGRepresentation(photo, 0.8);  // 1.0 = least compression, best quality
    [jpg writeToFile:path atomically:NO];
@@ -165,16 +167,17 @@
       // Save the photo to the Photo Library.
       UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil);
    }
-   
-   // Save full size image.
+
    NSString *fileName = [NSString stringWithFormat:@"%@.jpg", name];
-   NSString *path = [[self photosPath] stringByAppendingPathComponent:fileName];
-   [self savePhoto:photo toPath:path];
    
    // Save thumbnail image.
    UIImage *thumbnail = [photo scaleAndCropToMaxSize:CGSizeMake(75,75)];
    NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:fileName];
    [self savePhoto:thumbnail toPath:thumbnailPath];
+
+   // Save full size image.
+   NSString *path = [[self photosPath] stringByAppendingPathComponent:fileName];
+   [self savePhoto:photo toPath:path];
 }
 
 - (void)deletePhoto:(id)data {
