@@ -39,6 +39,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 @synthesize statusBarStyle = statusBarStyle_;
 @synthesize navigationBarStyle = navigationBarStyle_;
 @synthesize translucent = translucent_;
+@synthesize statusbarHidden = statusbarHidden_;
 
 
 - (void)dealloc {
@@ -219,7 +220,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [UIView beginAnimations:nil context:nil];
    
    [UIView setAnimationDuration:0.3];
-   [[UIApplication sharedApplication] setStatusBarHidden:hide animated:YES];
+   
+   if ( ! [self isStatusbarHidden] ) {
+      [[UIApplication sharedApplication] setStatusBarHidden:hide animated:YES];
+   }
 
    CGFloat alpha = hide ? 0.0 : 1.0;
    

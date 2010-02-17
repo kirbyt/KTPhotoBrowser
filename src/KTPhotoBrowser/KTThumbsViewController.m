@@ -128,6 +128,10 @@
    UINavigationBar *navbar = [[self navigationController] navigationBar];
    [newController setNavigationBarStyle:[navbar barStyle]];
    [newController setTranslucent:[navbar isTranslucent]];
+   
+   BOOL isStatusbarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
+   [newController setStatusbarHidden:isStatusbarHidden];
+   
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
 }
