@@ -133,7 +133,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
       photoFrame.origin.y = scrollView_.frame.size.height;
       photoController.view.frame = photoFrame;
    }
-   
+
    [photoController setPhotoIndex:newIndex];
 }
 
@@ -255,7 +255,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    
    NSInteger lowerNumber = floor(fractionalPage);
    NSInteger upperNumber = lowerNumber + 1;
-   
+
    if (lowerNumber == [currentPhoto_ photoIndex]) {
       if (upperNumber != [nextPhoto_ photoIndex]) {
          [self applyNewIndex:upperNumber photoController:nextPhoto_];
