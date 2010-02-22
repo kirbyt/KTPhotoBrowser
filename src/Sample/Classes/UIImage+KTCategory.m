@@ -38,6 +38,23 @@
                                                 8, 0, colorSpace,
                                                 kCGImageAlphaPremultipliedFirst);
    CGColorSpaceRelease(colorSpace);
+
+   switch ([self imageOrientation]) {
+      case UIImageOrientationDown:
+         CGContextTranslateCTM(context, newSize.width, newSize.height);
+         CGContextRotateCTM(context, 180 * (M_PI/180));
+         break;
+      case UIImageOrientationLeft:
+         CGContextTranslateCTM(context, newSize.height, 0);
+         CGContextRotateCTM(context, 90 * (M_PI/180));
+         break;
+      case UIImageOrientationRight:
+         CGContextTranslateCTM(context, 0, newSize.width);
+         CGContextRotateCTM(context, -90 * (M_PI/180));
+         break;
+      default:
+         break;
+   }
    
    CGContextDrawImage(context, CGRectMake(0, 0, newSize.width, newSize.height), croppedImageRef);
    CGContextFlush(context);
