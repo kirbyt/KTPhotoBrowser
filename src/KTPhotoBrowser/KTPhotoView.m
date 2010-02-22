@@ -7,6 +7,7 @@
 //
 
 #import "KTPhotoView.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation KTPhotoView
@@ -19,16 +20,16 @@
    [super dealloc];
 }
 
-- (void)drawRect:(CGRect)rect {
-   [image_ drawInRect:rect];
-}
-
 - (void)setImage:(UIImage *)newImage {
    if (image_ != newImage) {
       [image_ release];
       image_ = newImage;
       [image_ retain];
-      [self setNeedsDisplay];
+
+      CALayer *layer = [self layer];
+      [layer setContentsGravity:kCAGravityResizeAspectFill];
+      [layer setMasksToBounds:YES];
+      [layer setContents:(id)[image_ CGImage]];
    }
 }
 @end
