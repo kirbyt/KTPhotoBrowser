@@ -8,13 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class KTPhotoView;
 @protocol KTPhotoBrowserDataSource;
 
 @interface KTPhotoViewController : UIViewController {
    id <KTPhotoBrowserDataSource> dataSource_;
    NSInteger photoIndex_;
-   KTPhotoView *imageView_;
+   UIImageView *imageView_;
    
    NSOperationQueue *queue_;
 }

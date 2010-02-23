@@ -8,7 +8,6 @@
 
 #import "KTPhotoViewController.h"
 #import "KTPhotoBrowserDataSource.h"
-#import "KTPhotoView.h"
 
 
 @implementation KTPhotoViewController
@@ -36,7 +35,7 @@
 
 - (void)loadView {
    CGRect frame = [[UIScreen mainScreen] bounds];
-   KTPhotoView *newView = [[KTPhotoView alloc] initWithFrame:frame];
+   UIImageView *newView = [[UIImageView alloc] initWithFrame:frame];
    [newView setBackgroundColor:[UIColor clearColor]];
    [newView setContentMode:UIViewContentModeScaleAspectFit];
 

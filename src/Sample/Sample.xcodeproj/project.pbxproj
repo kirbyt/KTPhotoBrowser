@@ -25,7 +25,6 @@
 		68316E801124743F00A906B3 /* KTPhotoBrowserGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */; };
 		68B8F54D112308DF00C16B8D /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B8F54C112308DF00C16B8D /* Photos.m */; };
 		68FA36A7113193A900A21845 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA36A6113193A900A21845 /* QuartzCore.framework */; };
-		68FA36CF1131996000A21845 /* KTPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FA36CE1131996000A21845 /* KTPhotoView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,8 +59,6 @@
 		68B8F54B112308DF00C16B8D /* Photos.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photos.h; sourceTree = "<group>"; };
 		68B8F54C112308DF00C16B8D /* Photos.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photos.m; sourceTree = "<group>"; };
 		68FA36A6113193A900A21845 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		68FA36CD1131996000A21845 /* KTPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTPhotoView.h; path = ../KTPhotoBrowser/KTPhotoView.h; sourceTree = SOURCE_ROOT; };
-		68FA36CE1131996000A21845 /* KTPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTPhotoView.m; path = ../KTPhotoBrowser/KTPhotoView.m; sourceTree = SOURCE_ROOT; };
 		8D1107310486CEB800E47090 /* Sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,8 +156,6 @@
 				6813F43C112075BB006B7215 /* KTPhotoScrollViewController.m */,
 				6813F43D112075BB006B7215 /* KTPhotoViewController.h */,
 				6813F43E112075BB006B7215 /* KTPhotoViewController.m */,
-				68FA36CD1131996000A21845 /* KTPhotoView.h */,
-				68FA36CE1131996000A21845 /* KTPhotoView.m */,
 				6813F43F112075BB006B7215 /* KTThumbsViewController.h */,
 				6813F440112075BB006B7215 /* KTThumbsViewController.m */,
 				6813F441112075BB006B7215 /* KTThumbView.h */,
@@ -235,7 +230,6 @@
 				6813F48611209612006B7215 /* PhotoPickerController.m in Sources */,
 				68B8F54D112308DF00C16B8D /* Photos.m in Sources */,
 				68316E801124743F00A906B3 /* KTPhotoBrowserGlobal.m in Sources */,
-				68FA36CF1131996000A21845 /* KTPhotoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
