@@ -29,6 +29,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 #define BUTTON_DELETEPHOTO 0
 #define BUTTON_CANCEL 1
+#define CONTENT_OFFSET 20
 
 @interface KTPhotoScrollViewController (Private)
 - (NSInteger)pageCount;
@@ -68,6 +69,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [super loadView];
    
    CGRect frame = [[UIScreen mainScreen] bounds];
+   frame.size.width += CONTENT_OFFSET;
    UIScrollView *newView = [[UIScrollView alloc] initWithFrame:frame];
    [newView setDelegate:self];
    [newView setBackgroundColor:[UIColor blackColor]];
@@ -152,7 +154,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    CGSize size = CGSizeMake(scrollView_.frame.size.width * pageCount, 
                             scrollView_.frame.size.height / 2);   // Cut in half to prevent horizontal scrolling.
    [scrollView_ setContentSize:size];
-   [scrollView_ setContentOffset:CGPointMake(0,0)];
+   [scrollView_ setContentOffset:CGPointMake(0,CONTENT_OFFSET)];
 }
 
 - (void)viewDidLoad {
