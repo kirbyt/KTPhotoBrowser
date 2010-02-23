@@ -68,9 +68,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)loadView {
    [super loadView];
    
-   CGRect frame = [[UIScreen mainScreen] bounds];
-   frame.size.width += CONTENT_OFFSET;
-   UIScrollView *newView = [[UIScrollView alloc] initWithFrame:frame];
+   CGRect scrollFrame = [[UIScreen mainScreen] bounds];
+   scrollFrame.size.width += CONTENT_OFFSET;
+   UIScrollView *newView = [[UIScrollView alloc] initWithFrame:scrollFrame];
    [newView setDelegate:self];
    [newView setBackgroundColor:[UIColor blackColor]];
    [newView setPagingEnabled:YES];
@@ -104,9 +104,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                                                     target:nil 
                                                                     action:nil];
    
+   CGRect screenFrame = [[UIScreen mainScreen] bounds];
    CGRect toolbarFrame = CGRectMake(0, 
-                                    frame.size.height - ktkDefaultToolbarHeight, 
-                                    frame.size.width, 
+                                    screenFrame.size.height - ktkDefaultToolbarHeight, 
+                                    screenFrame.size.width, 
                                     ktkDefaultToolbarHeight);
    toolbar_ = [[UIToolbar alloc] initWithFrame:toolbarFrame];
    [toolbar_ setBarStyle:[self navigationBarStyle]];
