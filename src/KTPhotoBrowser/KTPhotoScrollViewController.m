@@ -34,6 +34,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 @interface KTPhotoScrollViewController (Private)
 - (NSInteger)pageCount;
 - (void)toggleChrome:(BOOL)hide;
+- (void)startChromeDisplayTimer;
+- (void)cancelChromeDisplayTimer;
 @end
 
 @implementation KTPhotoScrollViewController
@@ -58,7 +60,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    if (self = [super init]) {
       startWithIndex_ = index;
       dataSource_ = dataSource;
-
+      
       // Make sure to set wantsFullScreenLayout or the photo
       // will not display behind the status bar.
       [self setWantsFullScreenLayout:YES];
@@ -181,6 +183,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
    
    [self setTitleWithCurrentPhotoIndex];
+   
+   [self startChromeDisplayTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -190,9 +194,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+- (void)viewDidDisappear:(BOOL)animated {
+   [self cancelChromeDisplayTimer];
 }
 
 - (NSInteger)pageCount {
@@ -247,14 +250,37 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [toolbar_ setAlpha:alpha];
                               
    [UIView commitAnimations];
+   
+   if ( ! isChromeHidden_ ) {
+      [self startChromeDisplayTimer];
+   }
 }
 
 - (void)hideChrome {
+   if (chromeHideTimer_ && [chromeHideTimer_ isValid]) {
+      [chromeHideTimer_ invalidate];
+      chromeHideTimer_ = nil;
+   }
    [self toggleChrome:YES];
 }
 
 - (void)showChrome {
    [self toggleChrome:NO];
+}
+
+- (void)startChromeDisplayTimer {
+   [self cancelChromeDisplayTimer];
+   chromeHideTimer_ = [NSTimer scheduledTimerWithTimeInterval:5.0
+                                                       target:self 
+                                                     selector:@selector(hideChrome)
+                                                     userInfo:nil
+                                                      repeats:NO];
+}
+
+- (void)cancelChromeDisplayTimer {
+   if (chromeHideTimer_) {
+      [chromeHideTimer_ invalidate];
+   }
 }
 
 
@@ -317,11 +343,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)nextPhoto {
    [self autoScrollToIndex:[currentPhoto_ photoIndex] + 1];
    [self scrollViewDidEndScrollingAnimation:scrollView_];
+   [self startChromeDisplayTimer];
 }
 
 - (void)previousPhoto {
    [self autoScrollToIndex:[currentPhoto_ photoIndex] - 1];
    [self scrollViewDidEndScrollingAnimation:scrollView_];
+   [self startChromeDisplayTimer];
 }
 
 - (void)trashPhoto {
@@ -342,6 +370,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    if (buttonIndex == BUTTON_DELETEPHOTO) {
       [self deleteCurrentPhoto];
    }
+   [self startChromeDisplayTimer];
 }
 
 @end

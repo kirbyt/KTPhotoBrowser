@@ -26,6 +26,8 @@
    BOOL translucent_;   // for the navigation and toolbars.
    BOOL statusbarHidden_; // Determines if statusbar is hidden at initial load. In other words, statusbar remains hidden when toggling chrome.
    BOOL isChromeHidden_;
+   
+   NSTimer *chromeHideTimer_;
 }
 
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
