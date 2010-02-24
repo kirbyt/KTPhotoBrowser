@@ -308,8 +308,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
       
       [self setTitleWithCurrentPhotoIndex];
    }
-   
-   [self showChrome];
 }
 
 
