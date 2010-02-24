@@ -33,6 +33,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 @interface KTPhotoScrollViewController (Private)
 - (NSInteger)pageCount;
+- (void)toggleChrome:(BOOL)hide;
 @end
 
 @implementation KTPhotoScrollViewController
@@ -162,8 +163,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [super viewDidLoad];
   
    currentPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
-   nextPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
+   [currentPhoto_ setScroller:self];
    [scrollView_ addSubview:[currentPhoto_ view]];
+
+   nextPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
+   [nextPhoto_ setScroller:self];
    [scrollView_ addSubview:[nextPhoto_ view]];
    
    // Set content size to allow scrolling.
@@ -219,7 +223,12 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark -
 #pragma mark Chrome Helpers
 
+- (void)toggleChromeDisplay {
+   [self toggleChrome:!isChromeHidden_];
+}
+
 - (void)toggleChrome:(BOOL)hide {
+   isChromeHidden_ = hide;
    [UIView beginAnimations:nil context:nil];
    
    [UIView setAnimationDuration:0.3];

@@ -8,11 +8,13 @@
 
 #import "KTPhotoViewController.h"
 #import "KTPhotoBrowserDataSource.h"
+#import "KTPhotoScrollViewController.h"
 
 
 @implementation KTPhotoViewController
 
 @synthesize photoIndex = photoIndex_;
+@synthesize scroller = scroller_;
 
 - (void)dealloc {
    [imageView_ release], imageView_ = nil;
@@ -34,12 +36,14 @@
 }
 
 - (void)loadView {
+   [super loadView];
+   
    CGRect frame = [[UIScreen mainScreen] bounds];
    UIImageView *newView = [[UIImageView alloc] initWithFrame:frame];
    [newView setBackgroundColor:[UIColor clearColor]];
    [newView setContentMode:UIViewContentModeScaleAspectFit];
 
-   [self setView:newView];
+   [[self view] addSubview:newView];
    
    imageView_ = newView;
    [imageView_ retain];
@@ -64,6 +68,12 @@
 - (void)setImage:(id)data {
    UIImage *image = [dataSource_ imageAtIndex:photoIndex_];
    [imageView_ setImage:image];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+   if (scroller_) {
+      [scroller_ toggleChromeDisplay];
+   }
 }
 
 @end

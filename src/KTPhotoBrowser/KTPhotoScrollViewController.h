@@ -25,6 +25,7 @@
    UIBarStyle navigationBarStyle_;
    BOOL translucent_;   // for the navigation and toolbars.
    BOOL statusbarHidden_; // Determines if statusbar is hidden at initial load. In other words, statusbar remains hidden when toggling chrome.
+   BOOL isChromeHidden_;
 }
 
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
@@ -33,5 +34,6 @@
 @property (nonatomic, assign, getter=isStatusbarHidden) BOOL statusbarHidden;
 
 - (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource andStartWithPhotoAtIndex:(NSUInteger)index;
+- (void)toggleChromeDisplay;
 
 @end
