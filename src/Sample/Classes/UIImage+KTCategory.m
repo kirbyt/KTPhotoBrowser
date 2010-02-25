@@ -11,7 +11,24 @@
 
 @implementation UIImage (KTCategory)
 
-- (UIImage *)scaleAndCropToMaxSize:(CGSize)newSize {
+- (UIImage *)imageScaleAspectToMaxSize:(CGFloat)newSize {
+   CGSize size = [self size];
+   CGFloat ratio;
+   if (size.width > size.height) {
+      ratio = newSize / size.width;
+   } else {
+      ratio = newSize / size.height;
+   }
+   
+   CGRect rect = CGRectMake(0.0, 0.0, ratio * size.width, ratio * size.height);
+   UIGraphicsBeginImageContext(rect.size);
+   [self drawInRect:rect];
+   UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+   return scaledImage;
+}
+
+
+- (UIImage *)imageScaleAndCropToMaxSize:(CGSize)newSize {
 
    CGFloat offsetX = 0;
    CGFloat offsetY = 0;

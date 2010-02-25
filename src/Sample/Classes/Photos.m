@@ -137,10 +137,7 @@
    }
 }
 
-- (void)savePhoto:(id)data {
-   UIImage *photo = (UIImage *)[data objectAtIndex:0];
-   NSString *path = (NSString *)[data objectAtIndex:1];
-
+- (void)savePhoto:(UIImage *)photo toPath:(NSString *)path {
    NSData *jpg = UIImageJPEGRepresentation(photo, 0.8);  // 1.0 = least compression, best quality
    [jpg writeToFile:path atomically:NO];
 
@@ -153,31 +150,54 @@
                        waitUntilDone:NO];
 }
 
-- (void)savePhoto:(UIImage *)photo toPath:(NSString *)path {
-   NSArray *data = [NSArray arrayWithObjects:photo, path, nil];
+- (void)savePhoto:(UIImage *)photo asThumbnailNamed:(NSString *)name {
+   UIImage *thumbnail = [photo imageScaleAndCropToMaxSize:CGSizeMake(75,75)];
+   NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:name];
+   [self savePhoto:thumbnail toPath:thumbnailPath];
+}
+
+- (void)savePhoto:(UIImage *)photo named:(NSString *)name {
+   // Save full size image. Note we will scale down the full size
+   // image in order to improve display performance.
+   CGRect bounds = [[UIScreen mainScreen] bounds];
+   CGFloat newSize = (bounds.size.width > bounds.size.height) ? bounds.size.width : bounds.size.height;
+   // Make sure we are only scaling down. Do not scale up the image.
+   UIImage *scaledImage;
+   if (newSize < photo.size.width && newSize < photo.size.width) {
+      scaledImage = [photo imageScaleAspectToMaxSize:newSize];
+   } else {
+      scaledImage = photo;
+   }
+   
+   NSString *path = [[self photosPath] stringByAppendingPathComponent:name];
+   [self savePhoto:scaledImage toPath:path];
+}
+
+- (void)savePhoto:(id)data {
+   NSAssert(data != nil, @"Unassigned NSArray for data.");
+   
+   UIImage *photo = (UIImage *)[data objectAtIndex:0];
+   NSString *name = (NSString *)[data objectAtIndex:1];
+   BOOL addToPhotoAlbum = [(NSNumber *)[data objectAtIndex:2] boolValue];
+   
+   NSString *fileName = [NSString stringWithFormat:@"%@.jpg", name];
+
+   [self savePhoto:photo asThumbnailNamed:fileName];
+   [self savePhoto:photo named:fileName];
+
+   if (addToPhotoAlbum) {
+      // Save the photo to the Photo.app Photo Library.
+      UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil);
+   }
+}
+
+- (void)savePhoto:(UIImage *)photo withName:(NSString *)name addToPhotoAlbum:(BOOL)addToPhotoAlbum{
+   NSArray *data = [NSArray arrayWithObjects:photo, name, [NSNumber numberWithBool:addToPhotoAlbum], nil];
    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self
                                                                            selector:@selector(savePhoto:)
                                                                              object:data];
    [queue_ addOperation:operation];
    [operation release];
-}
-
-- (void)savePhoto:(UIImage *)photo withName:(NSString *)name addToPhotoAlbum:(BOOL)addToPhotoAlbum{
-   if (addToPhotoAlbum) {
-      // Save the photo to the Photo Library.
-      UIImageWriteToSavedPhotosAlbum(photo, nil, nil, nil);
-   }
-
-   NSString *fileName = [NSString stringWithFormat:@"%@.jpg", name];
-   
-   // Save thumbnail image.
-   UIImage *thumbnail = [photo scaleAndCropToMaxSize:CGSizeMake(75,75)];
-   NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:fileName];
-   [self savePhoto:thumbnail toPath:thumbnailPath];
-
-   // Save full size image.
-   NSString *path = [[self photosPath] stringByAppendingPathComponent:fileName];
-   [self savePhoto:photo toPath:path];
 }
 
 - (void)deletePhoto:(id)data {

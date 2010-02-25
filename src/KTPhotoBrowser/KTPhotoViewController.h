@@ -10,12 +10,13 @@
 
 @protocol KTPhotoBrowserDataSource;
 @class KTPhotoScrollViewController;
+@class KTPhotoView;
 
 @interface KTPhotoViewController : UIViewController {
    id <KTPhotoBrowserDataSource> dataSource_;
    KTPhotoScrollViewController *scroller_;
    NSInteger photoIndex_;
-   UIImageView *imageView_;
+   KTPhotoView *imageView_;
    
    NSOperationQueue *queue_;
 }

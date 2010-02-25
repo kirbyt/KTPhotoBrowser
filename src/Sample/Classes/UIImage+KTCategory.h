@@ -11,6 +11,7 @@
 
 @interface UIImage (KTCategory)
 
-- (UIImage *)scaleAndCropToMaxSize:(CGSize)newSize;
+- (UIImage *)imageScaleAspectToMaxSize:(CGFloat)newSize;
+- (UIImage *)imageScaleAndCropToMaxSize:(CGSize)newSize;
 
 @end

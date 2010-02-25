@@ -9,6 +9,7 @@
 #import "KTPhotoViewController.h"
 #import "KTPhotoBrowserDataSource.h"
 #import "KTPhotoScrollViewController.h"
+#import "KTPhotoView.h"
 
 
 @implementation KTPhotoViewController
@@ -39,9 +40,10 @@
    [super loadView];
    
    CGRect frame = [[UIScreen mainScreen] bounds];
-   UIImageView *newView = [[UIImageView alloc] initWithFrame:frame];
+   KTPhotoView *newView = [[KTPhotoView alloc] initWithFrame:frame];
    [newView setBackgroundColor:[UIColor clearColor]];
-   [newView setContentMode:UIViewContentModeScaleAspectFit];
+   [newView setContentMode:UIViewContentModeCenter]; //UIViewContentModeScaleAspectFill];
+   [newView setClipsToBounds:YES];
 
    [[self view] addSubview:newView];
    
@@ -66,8 +68,10 @@
 }
 
 - (void)setImage:(id)data {
-   UIImage *image = [dataSource_ imageAtIndex:photoIndex_];
-   [imageView_ setImage:image];
+   if (photoIndex_ < [dataSource_ numberOfPhotos]) {
+      UIImage *image = [dataSource_ imageAtIndex:photoIndex_];
+      [imageView_ setImage:image];
+   }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
