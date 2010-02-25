@@ -26,7 +26,11 @@
       [image_ retain];
       
       CALayer *layer = [self layer];
-      [layer setContentsGravity:kCAGravityResizeAspect];
+      if (image_.size.width < image_.size.height) {
+         [layer setContentsGravity:kCAGravityResizeAspectFill];
+      } else {
+         [layer setContentsGravity:kCAGravityResizeAspect];
+      }
       [layer setMasksToBounds:YES];
       [layer setContents:(id)[image_ CGImage]];
    }
