@@ -42,8 +42,6 @@
    CGRect frame = [[UIScreen mainScreen] bounds];
    KTPhotoView *newView = [[KTPhotoView alloc] initWithFrame:frame];
    [newView setBackgroundColor:[UIColor clearColor]];
-   [newView setContentMode:UIViewContentModeCenter]; //UIViewContentModeScaleAspectFill];
-   [newView setClipsToBounds:YES];
 
    [[self view] addSubview:newView];
    
