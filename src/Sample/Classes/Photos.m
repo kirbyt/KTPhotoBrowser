@@ -200,34 +200,27 @@
    [operation release];
 }
 
-- (void)deletePhoto:(id)data {
-   if ([data isKindOfClass:[NSString class]]) {
-      NSString *path = (NSString *)data;
-      [[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
-      
-      [self performSelectorOnMainThread:@selector(releasePhotoList)
-                             withObject:nil
-                          waitUntilDone:YES];
-      
-      [self performSelectorOnMainThread:@selector(sendDidFinishSaveNotification) 
-                             withObject:nil 
-                          waitUntilDone:NO];
-   }
-}
-
 - (void)deletePhotoAtPath:(NSString *)path {
-   NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self
-                                                                           selector:@selector(deletePhoto:)
-                                                                             object:path];
-   [queue_ addOperation:operation];
-   [operation release];
+   [[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
+   
+   [self performSelectorOnMainThread:@selector(releasePhotoList)
+                          withObject:nil
+                       waitUntilDone:YES];
+   
+   [self performSelectorOnMainThread:@selector(sendDidFinishSaveNotification) 
+                          withObject:nil 
+                       waitUntilDone:NO];
 }
 
-- (void)deleteImageNamed:(NSString *)name {
-   NSString *path = [[self photosPath] stringByAppendingPathComponent:name];
-   [self deletePhotoAtPath:path];
-   NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:name];
-   [self deletePhotoAtPath:thumbnailPath];
+- (void)deleteImageNamed:(id)data {
+   if ([data isKindOfClass:[NSString class]]) {
+      NSString *name = (NSString *)data;
+      NSString *path = [[self photosPath] stringByAppendingPathComponent:name];
+      [self deletePhotoAtPath:path];
+      
+      NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:name];
+      [self deletePhotoAtPath:thumbnailPath];
+   }
 }
 
 
@@ -253,8 +246,12 @@
 }
 
 - (void)deleteImageAtIndex:(NSInteger)index {
-   NSString *fileName = [[self fileNames] objectAtIndex:index];
-   [self deleteImageNamed:fileName];
+   NSString *name = [[self fileNames] objectAtIndex:index];
+   NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self
+                                                                           selector:@selector(deleteImageNamed:)
+                                                                             object:name];
+   [queue_ addOperation:operation];
+   [operation release];
 }
 
 
