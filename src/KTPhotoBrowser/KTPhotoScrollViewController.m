@@ -32,10 +32,14 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #define CONTENT_OFFSET 20
 
 @interface KTPhotoScrollViewController (Private)
-- (NSInteger)pageCount;
 - (void)toggleChrome:(BOOL)hide;
 - (void)startChromeDisplayTimer;
 - (void)cancelChromeDisplayTimer;
+- (void)hideChrome;
+- (void)showChrome;
+- (void)swapCurrentAndNextPhotos;
+- (void)nextPhoto;
+- (void)previousPhoto;
 @end
 
 @implementation KTPhotoScrollViewController
@@ -127,7 +131,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)applyNewIndex:(NSUInteger)newIndex photoController:(KTPhotoViewController *)photoController {
-   BOOL outOfBounds = newIndex >= [self pageCount] || newIndex < 0;
+   BOOL outOfBounds = newIndex >= pageCount_ || newIndex < 0;
    
    if ( !outOfBounds ) {
       CGRect photoFrame = photoController.view.frame;
@@ -158,7 +162,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    CGSize size = CGSizeMake(scrollView_.frame.size.width * pageCount, 
                             scrollView_.frame.size.height / 2);   // Cut in half to prevent horizontal scrolling.
    [scrollView_ setContentSize:size];
-   [scrollView_ setContentOffset:CGPointMake(0,CONTENT_OFFSET)];
 }
 
 - (void)viewDidLoad {
@@ -174,7 +177,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    
    // Set content size to allow scrolling.
    pageCount_ = [dataSource_ numberOfPhotos];
-   [self setScrollViewContentSizeWithPageCount:[self pageCount]];
+   [self setScrollViewContentSizeWithPageCount:pageCount_];
+   // Add a separator between the frames.
+   [scrollView_ setContentOffset:CGPointMake(0,CONTENT_OFFSET) animated:NO];
+
    
    // Auto-scroll to the stating photo.
    [self autoScrollToIndex:startWithIndex_];
@@ -198,28 +204,42 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self cancelChromeDisplayTimer];
 }
 
-- (NSInteger)pageCount {
-   return pageCount_;
-}
-
 - (void)deleteCurrentPhoto {
    if (dataSource_) {
-      [dataSource_ deleteImageAtIndex:[currentPhoto_ photoIndex]];
-      
+      NSInteger photoIndexToDelete = [currentPhoto_ photoIndex];
+
+      // We were are deleting any photo other than the
+      // last one in the browser then we need to display
+      // the next photo prior to performing the delete.
+      if (photoIndexToDelete < (pageCount_ - 1)) {
+         [self nextPhoto];
+      } else if (photoIndexToDelete > 0) {
+         [self previousPhoto];
+      }
+
       // TODO: Animate the deletion of the current photo.
+      // Delete the current photo.
+      [dataSource_ deleteImageAtIndex:photoIndexToDelete];
       
       pageCount_ -= 1;
-      if ([self pageCount] == 0) {
+      if (pageCount_ == 0) {
+         [self showChrome];
          [[self navigationController] popViewControllerAnimated:YES];
+      } else {
+         // Seems calling [UIScrollView setContentSize:] causes the
+         // view to scroll. But we don't want to scroll so we set
+         // a flag to prevent the extra scroll.
+         dontScroll_ = YES;
+         [self setScrollViewContentSizeWithPageCount:pageCount_];
+         [self setTitleWithCurrentPhotoIndex];
       }
-      
-      // Resize scrollview context size.
-      [self setScrollViewContentSizeWithPageCount:[self pageCount]];
-      
-      // Move to the next photo.
-      [self autoScrollToIndex:[currentPhoto_ photoIndex] + 1];
-      [self scrollViewDidEndScrollingAnimation:scrollView_];
    }
+}
+
+- (void)swapCurrentAndNextPhotos {
+   KTPhotoViewController *swapController = currentPhoto_;
+   currentPhoto_ = nextPhoto_;
+   nextPhoto_ = swapController;
 }
 
 
@@ -288,6 +308,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+   if (dontScroll_) {
+      dontScroll_ = NO; // Reset the flag.
+      return;
+   }
+   
    CGFloat pageWidth = scrollView.frame.size.width;
    float fractionalPage = scrollView.contentOffset.x / pageWidth;
    
@@ -328,10 +353,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    NSInteger nearestNumber = lround(fractionalPage);
    
    if ([currentPhoto_ photoIndex] != nearestNumber) {
-      KTPhotoViewController *swapController = currentPhoto_;
-      currentPhoto_ = nextPhoto_;
-      nextPhoto_ = swapController;
-      
+      [self swapCurrentAndNextPhotos];
       [self setTitleWithCurrentPhotoIndex];
    }
 }
