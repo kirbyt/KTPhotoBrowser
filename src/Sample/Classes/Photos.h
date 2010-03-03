@@ -18,7 +18,7 @@
    NSString *photosPath_;
    NSString *thumbnailsPath_;
    
-   NSArray *fileNames_;
+   NSMutableArray *fileNames_;
    NSMutableDictionary *photoCache_;
    NSMutableDictionary *thumbnailCache_;
    

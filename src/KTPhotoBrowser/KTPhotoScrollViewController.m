@@ -178,8 +178,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    // Set content size to allow scrolling.
    pageCount_ = [dataSource_ numberOfPhotos];
    [self setScrollViewContentSizeWithPageCount:pageCount_];
-   // Add a separator between the frames.
-   [scrollView_ setContentOffset:CGPointMake(0,CONTENT_OFFSET) animated:NO];
 
    
    // Auto-scroll to the stating photo.
@@ -206,40 +204,23 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)deleteCurrentPhoto {
    if (dataSource_) {
-      NSInteger photoIndexToDelete = [currentPhoto_ photoIndex];
-
-      // We were are deleting any photo other than the
-      // last one in the browser then we need to display
-      // the next photo prior to performing the delete.
-      if (photoIndexToDelete < (pageCount_ - 1)) {
-         [self nextPhoto];
-      } else if (photoIndexToDelete > 0) {
-         [self previousPhoto];
-      }
-
       // TODO: Animate the deletion of the current photo.
-      // Delete the current photo.
+
+      NSInteger photoIndexToDelete = [currentPhoto_ photoIndex];
       [dataSource_ deleteImageAtIndex:photoIndexToDelete];
-      
+
       pageCount_ -= 1;
       if (pageCount_ == 0) {
          [self showChrome];
          [[self navigationController] popViewControllerAnimated:YES];
       } else {
-         // Seems calling [UIScrollView setContentSize:] causes the
-         // view to scroll. But we don't want to scroll so we set
-         // a flag to prevent the extra scroll.
-         dontScroll_ = YES;
          [self setScrollViewContentSizeWithPageCount:pageCount_];
+         [self applyNewIndex:photoIndexToDelete photoController:currentPhoto_];
+         [self autoScrollToIndex:photoIndexToDelete];
+         [self scrollViewDidEndScrollingAnimation:scrollView_];
          [self setTitleWithCurrentPhotoIndex];
       }
    }
-}
-
-- (void)swapCurrentAndNextPhotos {
-   KTPhotoViewController *swapController = currentPhoto_;
-   currentPhoto_ = nextPhoto_;
-   nextPhoto_ = swapController;
 }
 
 
@@ -308,10 +289,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-   if (dontScroll_) {
-      dontScroll_ = NO; // Reset the flag.
-      return;
-   }
+   CGPoint offset = [scrollView_ contentOffset];
+   NSLog(@"offset %f, %f", offset.x, offset.y);
    
    CGFloat pageWidth = scrollView.frame.size.width;
    float fractionalPage = scrollView.contentOffset.x / pageWidth;
@@ -353,7 +332,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    NSInteger nearestNumber = lround(fractionalPage);
    
    if ([currentPhoto_ photoIndex] != nearestNumber) {
-      [self swapCurrentAndNextPhotos];
+      KTPhotoViewController *swapController = currentPhoto_;
+      currentPhoto_ = nextPhoto_;
+      nextPhoto_ = swapController;
       [self setTitleWithCurrentPhotoIndex];
    }
 }

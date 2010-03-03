@@ -100,7 +100,8 @@
    NSArray *dirContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self photosPath] error:&error];
    if ( ! error) {
       NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self ENDSWITH '.jpg'"];
-      fileNames_ = [dirContents filteredArrayUsingPredicate:predicate];
+      NSArray *imagesOnly = [dirContents filteredArrayUsingPredicate:predicate];
+      fileNames_ = [NSMutableArray arrayWithArray:imagesOnly];
       [fileNames_ retain];
    } else {
 #ifdef DEBUG
@@ -221,8 +222,21 @@
       NSString *thumbnailPath = [[self thumbnailsPath] stringByAppendingPathComponent:name];
       [self deletePhotoAtPath:thumbnailPath];
    }
+   [data release];
 }
 
+- (void)removeCachedImageNamed:(NSString *)name {
+   // Remove from the full image cache.
+   NSString *path = [[self photosPath] stringByAppendingPathComponent:name];
+   [photoCache_ removeObjectForKey:path];
+
+   // Remove from the thumbnail image cache.
+   path = [[self thumbnailsPath] stringByAppendingPathComponent:name];
+   [thumbnailCache_ removeObjectForKey:path];
+
+   // Remove from the file list.
+   [fileNames_ removeObject:name];
+}
 
 
 #pragma mark -
@@ -247,6 +261,19 @@
 
 - (void)deleteImageAtIndex:(NSInteger)index {
    NSString *name = [[self fileNames] objectAtIndex:index];
+   
+   // Note: name will be released when removed from 
+   // the cache (in the message removeCachedImageNamed:).
+   // However, it is needed in the secondary thread that
+   // performs the physical delete of the image files.
+   // Therefore, we will retain name and release it in
+   // the secondary thread.
+   [name retain];
+
+   // Remove the image from the cache. 
+   [self removeCachedImageNamed:name];
+   
+   // Delete the images from the device.
    NSInvocationOperation *operation = [[NSInvocationOperation alloc] initWithTarget:self
                                                                            selector:@selector(deleteImageNamed:)
                                                                              object:name];
