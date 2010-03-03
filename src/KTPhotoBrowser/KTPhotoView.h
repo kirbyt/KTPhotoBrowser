@@ -10,9 +10,9 @@
 
 
 @interface KTPhotoView : UIView {
-   UIImage *image_;
+
 }
 
-@property (nonatomic, retain) UIImage *image;
+- (void)setImage:(UIImage *)newImage;
 
 @end
