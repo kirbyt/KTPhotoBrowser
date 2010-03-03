@@ -40,6 +40,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)swapCurrentAndNextPhotos;
 - (void)nextPhoto;
 - (void)previousPhoto;
+- (void)toggleNavButtons;
 @end
 
 @implementation KTPhotoScrollViewController
@@ -51,6 +52,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 
 - (void)dealloc {
+   [nextButton_ release], nextButton_ = nil;
+   [previousButton_ release], previousButton_ = nil;
    [scrollView_ release], scrollView_ = nil;
    [toolbar_ release], toolbar_ = nil;
    
@@ -91,17 +94,17 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    
    [newView release];
    
-   UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] 
-                                  initWithImage:KTLoadImageFromBundle(@"nextIcon.png")
-                                  style:UIBarButtonItemStylePlain
-                                  target:self
-                                  action:@selector(nextPhoto)];
-
-   UIBarButtonItem *previousButton = [[UIBarButtonItem alloc] 
-                                      initWithImage:KTLoadImageFromBundle(@"previousIcon.png")
-                                      style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(previousPhoto)];
+   nextButton_ = [[UIBarButtonItem alloc] 
+                  initWithImage:KTLoadImageFromBundle(@"nextIcon.png")
+                  style:UIBarButtonItemStylePlain
+                  target:self
+                  action:@selector(nextPhoto)];
+   
+   previousButton_ = [[UIBarButtonItem alloc] 
+                      initWithImage:KTLoadImageFromBundle(@"previousIcon.png")
+                      style:UIBarButtonItemStylePlain
+                      target:self
+                      action:@selector(previousPhoto)];
    
    UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                 target:self
@@ -120,7 +123,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [toolbar_ setBarStyle:[self navigationBarStyle]];
    [toolbar_ setTranslucent:[self isTranslucent]];
    [toolbar_ setItems:[NSArray arrayWithObjects:
-                       space, previousButton, space, nextButton, space, trashButton, nil]];
+                       space, previousButton_, space, nextButton_, space, trashButton, nil]];
    [[self view] addSubview:toolbar_];
 }
 
@@ -187,6 +190,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
    
    [self setTitleWithCurrentPhotoIndex];
+   [self toggleNavButtons];
    
    [self startChromeDisplayTimer];
 }
@@ -224,10 +228,15 @@ const CGFloat ktkDefaultToolbarHeight = 44;
          [self autoScrollToIndex:nextIndex];
          [self scrollViewDidEndScrollingAnimation:scrollView_];
          [self setTitleWithCurrentPhotoIndex];
+         [self toggleNavButtons];
       }
    }
 }
 
+- (void)toggleNavButtons {
+   [previousButton_ setEnabled:([currentPhoto_ photoIndex] > 0)];
+   [nextButton_ setEnabled:([currentPhoto_ photoIndex] < pageCount_ - 1)];
+}
 
 #pragma mark -
 #pragma mark Chrome Helpers
@@ -341,6 +350,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
       currentPhoto_ = nextPhoto_;
       nextPhoto_ = swapController;
       [self setTitleWithCurrentPhotoIndex];
+      [self toggleNavButtons];
    }
 }
 

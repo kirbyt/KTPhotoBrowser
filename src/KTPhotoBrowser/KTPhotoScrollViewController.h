@@ -28,6 +28,9 @@
    BOOL isChromeHidden_;
    
    NSTimer *chromeHideTimer_;
+   
+   UIBarButtonItem *nextButton_;
+   UIBarButtonItem *previousButton_;
 }
 
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
