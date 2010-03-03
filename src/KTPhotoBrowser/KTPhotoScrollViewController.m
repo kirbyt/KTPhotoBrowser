@@ -215,9 +215,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
          [[self navigationController] popViewControllerAnimated:YES];
       } else {
          [self setScrollViewContentSizeWithPageCount:pageCount_];
-         [self applyNewIndex:photoIndexToDelete photoController:currentPhoto_];
-         [self applyNewIndex:(photoIndexToDelete + 1) photoController:nextPhoto_];
-         [self autoScrollToIndex:photoIndexToDelete];
+         NSInteger nextIndex = photoIndexToDelete;
+         if (nextIndex == pageCount_) {
+            nextIndex -= 1;
+         }
+         [self applyNewIndex:nextIndex photoController:currentPhoto_];
+         [self applyNewIndex:(nextIndex + 1) photoController:nextPhoto_];
+         [self autoScrollToIndex:nextIndex];
          [self scrollViewDidEndScrollingAnimation:scrollView_];
          [self setTitleWithCurrentPhotoIndex];
       }
