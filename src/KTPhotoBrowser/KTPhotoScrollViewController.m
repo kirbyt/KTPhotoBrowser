@@ -125,6 +125,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [toolbar_ setItems:[NSArray arrayWithObjects:
                        space, previousButton_, space, nextButton_, space, trashButton, nil]];
    [[self view] addSubview:toolbar_];
+   
+   [trashButton release];
+   [space release];
 }
 
 - (void)setTitleWithCurrentPhotoIndex {
