@@ -34,6 +34,7 @@
    [scrollView setScrollEnabled:YES];
    [scrollView setBackgroundColor:[UIColor whiteColor]];
    
+   // Set main view to the scroll view.
    [self setView:scrollView];
    
    // Retain a reference to the scroll view.
@@ -90,13 +91,8 @@
    int rowHeight = thumbnailHeight + spaceHeight;
    CGSize contentSize = CGSizeMake(320, (rowHeight * (rowCount + 1)));
    [scrollView_ setContentSize:contentSize];
-   
-   // Remove old subviews.
-   int subviewCount = [[scrollView_ subviews] count];
-   for (int i = subviewCount; i > 0; i--) {
-      UIView *subview = [[scrollView_ subviews] objectAtIndex:i-1];
-      [subview removeFromSuperview];
-   }
+
+   [self removeAllSubviews];
    
    // Add new subviews.
    for (int i = 0; i < photoCount; i++) {
@@ -120,6 +116,14 @@
       }
    }
    [self didFinishLoadingPhotos];
+}
+
+- (void)removeAllSubviews {
+   int count = [[scrollView_ subviews] count];
+   for (int i = count; i > 0; i--) {
+      UIView *subview = [[scrollView_ subviews] objectAtIndex:i - 1];
+      [subview removeFromSuperview];
+   }
 }
 
 

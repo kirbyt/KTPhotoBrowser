@@ -28,4 +28,9 @@
  */
 - (void)didFinishLoadingPhotos;
 
+/**
+ * Removes all subviews from the scroll view. Used to remove thumbnail photos.
+ */
+- (void)removeAllSubviews;
+
 @end
