@@ -9,12 +9,27 @@
 #import "RootViewController.h"
 
 
+@interface RootViewController (Private)
+- (UIActivityIndicatorView *)activityIndicator;
+- (void)showActivityIndicator;
+- (void)hideActivityIndicator;
+@end
+
 @implementation RootViewController
 
 - (void)dealloc {
    [myPhotos_ release], myPhotos_ = nil;
+   [activityIndicatorView_ release], activityIndicatorView_ = nil;
    
    [super dealloc];
+}
+
+- (id)initWithWindow:(UIWindow *)window {
+   self = [super init];
+   if (self) {
+      window_ = window;
+   }
+   return self;
 }
 
 - (void)viewDidLoad {
@@ -44,6 +59,32 @@
    [myPhotos_ flushCache];
 }
 
+#pragma mark -
+#pragma mark Activity Indicator
+   
+- (UIActivityIndicatorView *)activityIndicator {
+   if (activityIndicatorView_) {
+      return activityIndicatorView_;
+   }
+   
+   activityIndicatorView_ = [[UIActivityIndicatorView alloc] 
+                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+   [activityIndicatorView_ setCenter:self.view.center];
+   
+   return activityIndicatorView_;
+}
+
+- (void)showActivityIndicator {
+   if (window_) {
+      [window_ addSubview:[self activityIndicator]];
+   }
+   [[self activityIndicator] startAnimating];
+}
+
+- (void)hideActivityIndicator {
+   [[self activityIndicator] stopAnimating];
+   [[self activityIndicator] removeFromSuperview];
+}
 
 
 #pragma mark -
@@ -61,6 +102,8 @@
 #pragma mark PhotoPickerControllerDelegate
 
 - (void)photoPickerController:(PhotoPickerController *)controller didFinishPickingWithImage:(UIImage *)image isFromCamera:(BOOL)isFromCamera {
+   [self showActivityIndicator];
+   
    NSString * const key = @"nextNumber";
    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
    NSNumber *nextNumber = [defaults valueForKey:key];
@@ -81,6 +124,7 @@
 
 - (void)didFinishSave {
    [self loadPhotos];
+   [self hideActivityIndicator];
 }
 
 @end

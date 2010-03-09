@@ -18,7 +18,7 @@
 
    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
    
-   RootViewController *newController = [[RootViewController alloc] init];
+   RootViewController *newController = [[RootViewController alloc] initWithWindow:window];
    UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
    [[newNavController navigationBar] setBarStyle:UIBarStyleBlack];
    [[newNavController navigationBar] setTranslucent:YES];
