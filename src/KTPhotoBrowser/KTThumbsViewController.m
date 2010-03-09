@@ -64,6 +64,10 @@
 	// e.g. self.myOutlet = nil;
 }
 
+- (void)didFinishLoadingPhotos {
+   // Do nothing by default.
+}
+
 - (void)loadPhotos {
    if ( ! dataSource_ ) {
       return;
@@ -115,6 +119,7 @@
          x += thumbnailWidth + spaceWidth;
       }
    }
+   [self didFinishLoadingPhotos];
 }
 
 

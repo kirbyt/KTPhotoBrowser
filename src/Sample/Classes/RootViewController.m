@@ -59,6 +59,11 @@
    [myPhotos_ flushCache];
 }
 
+- (void)didFinishLoadingPhotos {
+   [self hideActivityIndicator];
+}
+
+
 #pragma mark -
 #pragma mark Activity Indicator
    
@@ -124,7 +129,6 @@
 
 - (void)didFinishSave {
    [self loadPhotos];
-   [self hideActivityIndicator];
 }
 
 @end

@@ -18,6 +18,14 @@
 
 @property (nonatomic, assign) id <KTPhotoBrowserDataSource> dataSource;
 
+/**
+ * Loads the photos for display.
+ */
 - (void)loadPhotos;
+
+/**
+ * Called after loadPhotos completed. Does nothing by default.
+ */
+- (void)didFinishLoadingPhotos;
 
 @end
