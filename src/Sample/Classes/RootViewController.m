@@ -8,7 +8,13 @@
 
 #import "RootViewController.h"
 #import "LocalImageRootViewController.h"
+#import "SDWebImageRootViewController.h"
+#import "FlickrRootViewController.h"
 
+
+#define LOCAL_IMAGE_SAMPLE 0
+#define FLICKR_SAMPLE 1
+#define SDWEBIMAGE_SAMPLE 2
 
 @implementation RootViewController
 
@@ -58,6 +64,18 @@
    [newController release]; 
 }
 
+- (void)showSDWebImageSample {
+   SDWebImageRootViewController *newController = [[SDWebImageRootViewController alloc] init];
+   [[self navigationController] pushViewController:newController animated:YES];
+   [newController release];
+}
+
+- (void)showFlickrSample {
+   FlickrRootViewController *newController = [[FlickrRootViewController alloc] init];
+   [[self navigationController] pushViewController:newController animated:YES];
+   [newController release];
+}
+
 
 
 #pragma mark -
@@ -69,7 +87,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section {
-   return 1;
+   return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -79,17 +97,23 @@
    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
    if(cell == nil) {
       cell = [[[UITableViewCell alloc]
-               initWithStyle: UITableViewCellStyleValue1 
+               initWithStyle: UITableViewCellStyleSubtitle
                reuseIdentifier:CellIdentifier] autorelease];
       [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
    }
 
    switch ([indexPath row]) {
-      case 0:
+      case LOCAL_IMAGE_SAMPLE:
          [[cell textLabel] setText:@"Local Image Sample"];
+         [[cell detailTextLabel] setText:@"Shows how view images stored locally."];
          break;
-      case 1:
-         [[cell textLabel] setText:@"Web Image Sample using SDWebImage"];
+      case SDWEBIMAGE_SAMPLE:
+         [[cell textLabel] setText:@"SDWebImage Sample"];
+         [[cell detailTextLabel] setText:@"View web images with SDWebImage."];
+         break;
+      case FLICKR_SAMPLE:
+         [[cell textLabel] setText:@"Flickr Sample"];
+         [[cell detailTextLabel] setText:@"View web images, no cache or performance tuning."];
          break;
    }
    
@@ -98,8 +122,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    switch ([indexPath row]) {
-      case 0:
+      case LOCAL_IMAGE_SAMPLE:
          [self showLocalImageSample];
+         break;
+      case SDWEBIMAGE_SAMPLE:
+         [self showSDWebImageSample];
+         break;
+      case FLICKR_SAMPLE:
+         [self showFlickrSample];
          break;
    }
    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES]; 
