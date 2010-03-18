@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+@class KTThumbView;
 
 @protocol KTPhotoBrowserDataSource <NSObject>
 @required
@@ -17,5 +18,6 @@
 
 @optional
 - (void)deleteImageAtIndex:(NSInteger)index;
+- (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "SDWebImageDataSource.h"
+#import "KTThumbView+SDWebImage.h"
 
 #define FULL_SIZE_INDEX 0
 #define THUMBNAIL_INDEX 1
@@ -64,5 +65,13 @@
 
    return [self imageWithURLString:url];
 }
+
+- (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView {
+   NSArray *imageUrls = [images_ objectAtIndex:index];
+   NSString *url = [imageUrls objectAtIndex:THUMBNAIL_INDEX];
+   [thumbView setImageWithURL:[NSURL URLWithString:url]
+             placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
+}
+
 
 @end

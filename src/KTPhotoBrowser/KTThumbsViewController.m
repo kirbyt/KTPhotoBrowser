@@ -100,8 +100,13 @@
       [thumbView setDelegate:self];
       [thumbView setTag:i];
       
-      UIImage *thumbImage = [dataSource_ thumbImageAtIndex:i];
-      [thumbView setThumbImage:thumbImage];
+      if ([dataSource_ respondsToSelector:@selector(thumbImageAtIndex:thumbView:)] == NO) {
+         UIImage *thumbImage = [dataSource_ thumbImageAtIndex:i];
+         [thumbView setThumbImage:thumbImage];
+      } else {
+         [dataSource_ thumbImageAtIndex:i thumbView:thumbView];
+      }
+
 
       [scrollView_ addSubview:thumbView];
       [thumbView release];
