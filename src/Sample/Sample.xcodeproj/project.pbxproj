@@ -25,6 +25,7 @@
 		68F349C01152AA5500D9765C /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F349BA1152AA5500D9765C /* Photos.m */; };
 		68F349C11152AA5500D9765C /* LocalImageRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F349BC1152AA5500D9765C /* LocalImageRootViewController.m */; };
 		68F349C21152AA5500D9765C /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F349BE1152AA5500D9765C /* UIImage+KTCategory.m */; };
+		68F349D41152AB4200D9765C /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F349D31152AB4200D9765C /* RootViewController.m */; };
 		68FA36A7113193A900A21845 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA36A6113193A900A21845 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,8 @@
 		68F349BC1152AA5500D9765C /* LocalImageRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalImageRootViewController.m; sourceTree = "<group>"; };
 		68F349BD1152AA5500D9765C /* UIImage+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KTCategory.h"; sourceTree = "<group>"; };
 		68F349BE1152AA5500D9765C /* UIImage+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KTCategory.m"; sourceTree = "<group>"; };
+		68F349D21152AB4200D9765C /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		68F349D31152AB4200D9765C /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		68FA36A6113193A900A21845 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +88,8 @@
 			children = (
 				1D3623240D0F684500981E51 /* SampleAppDelegate.h */,
 				1D3623250D0F684500981E51 /* SampleAppDelegate.m */,
+				68F349D21152AB4200D9765C /* RootViewController.h */,
+				68F349D31152AB4200D9765C /* RootViewController.m */,
 				68F349B61152AA5500D9765C /* LocalImageSample */,
 			);
 			path = Classes;
@@ -165,12 +170,12 @@
 		68F349B61152AA5500D9765C /* LocalImageSample */ = {
 			isa = PBXGroup;
 			children = (
+				68F349BB1152AA5500D9765C /* LocalImageRootViewController.h */,
+				68F349BC1152AA5500D9765C /* LocalImageRootViewController.m */,
 				68F349B71152AA5500D9765C /* PhotoPickerController.h */,
 				68F349B81152AA5500D9765C /* PhotoPickerController.m */,
 				68F349B91152AA5500D9765C /* Photos.h */,
 				68F349BA1152AA5500D9765C /* Photos.m */,
-				68F349BB1152AA5500D9765C /* LocalImageRootViewController.h */,
-				68F349BC1152AA5500D9765C /* LocalImageRootViewController.m */,
 				68F349BD1152AA5500D9765C /* UIImage+KTCategory.h */,
 				68F349BE1152AA5500D9765C /* UIImage+KTCategory.m */,
 			);
@@ -244,6 +249,7 @@
 				68F349C01152AA5500D9765C /* Photos.m in Sources */,
 				68F349C11152AA5500D9765C /* LocalImageRootViewController.m in Sources */,
 				68F349C21152AA5500D9765C /* UIImage+KTCategory.m in Sources */,
+				68F349D41152AB4200D9765C /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

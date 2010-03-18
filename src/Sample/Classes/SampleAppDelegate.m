@@ -7,7 +7,7 @@
 //
 
 #import "SampleAppDelegate.h"
-#import "LocalImageRootViewController.h"
+#import "RootViewController.h"
 
 @implementation SampleAppDelegate
 
@@ -18,7 +18,7 @@
 
    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:NO];
    
-   LocalImageRootViewController *newController = [[LocalImageRootViewController alloc] initWithWindow:window];
+   RootViewController *newController = [[RootViewController alloc] initWithStyle:UITableViewStylePlain];
    UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
    [[newNavController navigationBar] setBarStyle:UIBarStyleBlack];
    [[newNavController navigationBar] setTranslucent:YES];
