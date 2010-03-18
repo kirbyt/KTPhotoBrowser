@@ -7,7 +7,7 @@
 //
 
 #import "FlickrRootViewController.h"
-#import "SDWebImageDataSource.h"
+#import "FlickrDataSource.h"
 
 
 @implementation FlickrRootViewController
@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
    [super viewDidLoad];
    
-   images_ = [[SDWebImageDataSource alloc] init];
+   images_ = [[FlickrDataSource alloc] init];
    [self setDataSource:images_];
    
    [self loadPhotos];

@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "KTThumbsViewController.h"
 
-@class SDWebImageDataSource;
+@class FlickrDataSource;
 
 @interface FlickrRootViewController : KTThumbsViewController {
-   SDWebImageDataSource *images_;
+   FlickrDataSource *images_;
 }
 
 @end
