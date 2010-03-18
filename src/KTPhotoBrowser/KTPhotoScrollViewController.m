@@ -49,6 +49,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 @synthesize navigationBarStyle = navigationBarStyle_;
 @synthesize translucent = translucent_;
 @synthesize statusbarHidden = statusbarHidden_;
+@synthesize photoBackgroundColor = photoBackgroundColor_;
 
 
 - (void)dealloc {
@@ -56,6 +57,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [previousButton_ release], previousButton_ = nil;
    [scrollView_ release], scrollView_ = nil;
    [toolbar_ release], toolbar_ = nil;
+   [photoBackgroundColor_ release], photoBackgroundColor_ = nil;
    
    [currentPhoto_ release], currentPhoto_ = nil;
    [nextPhoto_ release], nextPhoto_ = nil;
@@ -82,7 +84,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    scrollFrame.size.width += CONTENT_OFFSET;
    UIScrollView *newView = [[UIScrollView alloc] initWithFrame:scrollFrame];
    [newView setDelegate:self];
-   [newView setBackgroundColor:[UIColor blackColor]];
+   [newView setBackgroundColor:self.photoBackgroundColor];
    [newView setPagingEnabled:YES];
    [newView setShowsVerticalScrollIndicator:NO];
    [newView setShowsHorizontalScrollIndicator:NO];

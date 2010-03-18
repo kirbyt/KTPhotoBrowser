@@ -14,9 +14,11 @@
 @interface KTThumbsViewController : UIViewController <KTThumbViewDelegate> {
    id <KTPhotoBrowserDataSource> dataSource_;
    UIScrollView *scrollView_;
+   UIColor *photoBackgroundColor_;
 }
 
 @property (nonatomic, assign) id <KTPhotoBrowserDataSource> dataSource;
+@property (nonatomic, retain) UIColor *photoBackgroundColor;
 
 /**
  * Loads the photos for display.

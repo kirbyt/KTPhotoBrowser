@@ -17,9 +17,11 @@
 @implementation KTThumbsViewController
 
 @synthesize dataSource = dataSource_;
+@synthesize photoBackgroundColor = photoBackgroundColor_;
 
 - (void)dealloc {
    [scrollView_ release], scrollView_ = nil;
+   [photoBackgroundColor_ release], photoBackgroundColor_ = nil;
    
    [super dealloc];
 }
@@ -43,6 +45,9 @@
    
    // Release the local scroll view reference.
    [scrollView release];
+   
+   // This is the default, but can be changed in your subclass.
+   self.photoBackgroundColor = [UIColor blackColor];
 }
 
 /*
@@ -139,6 +144,7 @@
    KTPhotoScrollViewController *newController = [[KTPhotoScrollViewController alloc] 
                                                         initWithDataSource:dataSource_ 
                                                   andStartWithPhotoAtIndex:index];
+   newController.photoBackgroundColor = self.photoBackgroundColor;
    UINavigationBar *navbar = [[self navigationController] navigationBar];
    [newController setNavigationBarStyle:[navbar barStyle]];
    [newController setTranslucent:[navbar isTranslucent]];
