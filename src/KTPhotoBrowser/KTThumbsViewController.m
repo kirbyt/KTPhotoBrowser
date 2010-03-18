@@ -74,22 +74,23 @@
       return;
    }
    
+   int viewWidth = self.view.bounds.size.width;
+   
    int thumbnailWidth = 75;
    int thumbnailHeight = 75;
-   int spaceWidth = 4;
-   int spaceHeight = 4;
+   int itemsPerRow = 4;
+   int spaceWidth = round((viewWidth - thumbnailWidth * itemsPerRow) / (itemsPerRow + 1));
+   int spaceHeight = spaceWidth;
    
    int x = spaceWidth;
    int y = spaceHeight;
-   
-   int itemsPerRow = 4;
    
    // Calculate content size.
    int photoCount = [dataSource_ numberOfPhotos];
    
    int rowCount = photoCount / itemsPerRow;
    int rowHeight = thumbnailHeight + spaceHeight;
-   CGSize contentSize = CGSizeMake(320, (rowHeight * (rowCount + 1)));
+   CGSize contentSize = CGSizeMake(viewWidth, (rowHeight * (rowCount + 1)));
    [scrollView_ setContentSize:contentSize];
 
    [self removeAllSubviews];
