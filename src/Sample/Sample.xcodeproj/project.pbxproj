@@ -36,7 +36,6 @@
 		68F34AAB1152B2E700D9765C /* SDWebImageDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34AAA1152B2E700D9765C /* SDWebImageDataSource.m */; };
 		68F34AF71152B8C800D9765C /* FlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34AF41152B8C800D9765C /* FlickrDataSource.m */; };
 		68F34AF81152B8C800D9765C /* FlickrRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34AF61152B8C800D9765C /* FlickrRootViewController.m */; };
-		68F34B3E1152BF0600D9765C /* photoDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 68F34B3D1152BF0600D9765C /* photoDefault.png */; };
 		68F34B701152CA8400D9765C /* KTThumbView+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34B6F1152CA8400D9765C /* KTThumbView+SDWebImage.m */; };
 		68FA36A7113193A900A21845 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA36A6113193A900A21845 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -96,7 +95,6 @@
 		68F34AF41152B8C800D9765C /* FlickrDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrDataSource.m; sourceTree = "<group>"; };
 		68F34AF51152B8C800D9765C /* FlickrRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrRootViewController.h; sourceTree = "<group>"; };
 		68F34AF61152B8C800D9765C /* FlickrRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrRootViewController.m; sourceTree = "<group>"; };
-		68F34B3D1152BF0600D9765C /* photoDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoDefault.png; sourceTree = "<group>"; };
 		68F34B6E1152CA8400D9765C /* KTThumbView+SDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KTThumbView+SDWebImage.h"; sourceTree = "<group>"; };
 		68F34B6F1152CA8400D9765C /* KTThumbView+SDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KTThumbView+SDWebImage.m"; sourceTree = "<group>"; };
 		68FA36A6113193A900A21845 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -167,7 +165,6 @@
 			children = (
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Sample-Info.plist */,
-				68F34B3D1152BF0600D9765C /* photoDefault.png */,
 				68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */,
 			);
 			name = Resources;
@@ -310,7 +307,6 @@
 				68316E371124726F00A906B3 /* KTPhotoBrowser.bundle in Resources */,
 				68F34A961152B0C800D9765C /* LICENSE in Resources */,
 				68F34A971152B0C800D9765C /* README.md in Resources */,
-				68F34B3E1152BF0600D9765C /* photoDefault.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

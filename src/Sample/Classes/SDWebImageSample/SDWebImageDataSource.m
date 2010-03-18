@@ -69,8 +69,7 @@
 - (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView {
    NSArray *imageUrls = [images_ objectAtIndex:index];
    NSString *url = [imageUrls objectAtIndex:THUMBNAIL_INDEX];
-   [thumbView setImageWithURL:[NSURL URLWithString:url]
-             placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
+   [thumbView setImageWithURL:[NSURL URLWithString:url]];
 }
 
 
