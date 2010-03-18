@@ -14,7 +14,7 @@
 
 @class Photos;
 
-@interface RootViewController : KTThumbsViewController <PhotoPickerControllerDelegate, PhotosDelegate> {
+@interface LocalImageRootViewController : KTThumbsViewController <PhotoPickerControllerDelegate, PhotosDelegate> {
    PhotoPickerController *photoPicker_;
    Photos *myPhotos_;
    UIActivityIndicatorView *activityIndicatorView_;

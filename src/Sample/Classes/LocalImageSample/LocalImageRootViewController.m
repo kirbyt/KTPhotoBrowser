@@ -6,16 +6,16 @@
 //  Copyright 2010 White Peak Software Inc. All rights reserved.
 //
 
-#import "RootViewController.h"
+#import "LocalImageRootViewController.h"
 
 
-@interface RootViewController (Private)
+@interface LocalImageRootViewController (Private)
 - (UIActivityIndicatorView *)activityIndicator;
 - (void)showActivityIndicator;
 - (void)hideActivityIndicator;
 @end
 
-@implementation RootViewController
+@implementation LocalImageRootViewController
 
 - (void)dealloc {
    [myPhotos_ release], myPhotos_ = nil;
