@@ -105,7 +105,7 @@
    switch ([indexPath row]) {
       case LOCAL_IMAGE_SAMPLE:
          [[cell textLabel] setText:@"Local Image Sample"];
-         [[cell detailTextLabel] setText:@"Shows how view images stored locally."];
+         [[cell detailTextLabel] setText:@"Images stored locally, with add/remove."];
          break;
       case SDWEBIMAGE_SAMPLE:
          [[cell textLabel] setText:@"SDWebImage Sample"];
