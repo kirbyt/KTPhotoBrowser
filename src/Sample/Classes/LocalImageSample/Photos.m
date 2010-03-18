@@ -281,5 +281,18 @@
    [operation release];
 }
 
+// - (BOOL)thumbsHaveBorder {
+//   return NO;
+// }
+
+// - (CGSize)thumbSize {
+//   return CGSizeMake(120, 120);
+// }
+
+// - (NSInteger)thumbsPerRow {
+//   return 1;
+// }
+
+
 
 @end
