@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface RootViewController : UITableViewController {
-
+@interface RootViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+   UIWindow *window_;
 }
+
+@property (nonatomic, assign) UIWindow *window;
 
 @end
