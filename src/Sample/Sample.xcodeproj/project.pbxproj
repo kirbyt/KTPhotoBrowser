@@ -39,6 +39,7 @@
 		68F34B701152CA8400D9765C /* KTThumbView+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34B6F1152CA8400D9765C /* KTThumbView+SDWebImage.m */; };
 		68F34BBD1152CDF200D9765C /* KTPhotoView+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34BBC1152CDF200D9765C /* KTPhotoView+SDWebImage.m */; };
 		68FA36A7113193A900A21845 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA36A6113193A900A21845 /* QuartzCore.framework */; };
+		AFFB147F1152E9A700BCB9E4 /* photoDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = AFFB147E1152E9A700BCB9E4 /* photoDefault.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,7 @@
 		68F34BBC1152CDF200D9765C /* KTPhotoView+SDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KTPhotoView+SDWebImage.m"; sourceTree = "<group>"; };
 		68FA36A6113193A900A21845 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		AFFB147E1152E9A700BCB9E4 /* photoDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoDefault.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 		68F34A881152B0C800D9765C /* SDWebImageSample */ = {
 			isa = PBXGroup;
 			children = (
+				AFFB147E1152E9A700BCB9E4 /* photoDefault.png */,
 				68F34A891152B0C800D9765C /* SDWebImage */,
 				68F34AA61152B28300D9765C /* SDWebImageRootViewController.h */,
 				68F34AA71152B28300D9765C /* SDWebImageRootViewController.m */,
@@ -312,6 +315,7 @@
 				68316E371124726F00A906B3 /* KTPhotoBrowser.bundle in Resources */,
 				68F34A961152B0C800D9765C /* LICENSE in Resources */,
 				68F34A971152B0C800D9765C /* README.md in Resources */,
+				AFFB147F1152E9A700BCB9E4 /* photoDefault.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
