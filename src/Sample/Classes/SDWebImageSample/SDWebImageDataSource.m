@@ -38,12 +38,6 @@
    return self;
 }
 
-- (UIImage *)imageWithURLString:(NSString *)string {
-   NSURL *url = [NSURL URLWithString:string];
-   NSData *data = [NSData dataWithContentsOfURL:url];
-   UIImage *image = [UIImage imageWithData:data];
-   return image;
-}
 
 #pragma mark -
 #pragma mark KTPhotoBrowserDataSource
@@ -53,25 +47,10 @@
    return count;
 }
 
-- (UIImage *)imageAtIndex:(NSInteger)index {
-   NSArray *imageUrls = [images_ objectAtIndex:index];
-   NSString *url = [imageUrls objectAtIndex:FULL_SIZE_INDEX];
-
-   return [self imageWithURLString:url];
-}
-
 - (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView {
    NSArray *imageUrls = [images_ objectAtIndex:index];
    NSString *url = [imageUrls objectAtIndex:FULL_SIZE_INDEX];
    [photoView setImageWithURL:[NSURL URLWithString:url]];
-}
-
-
-- (UIImage *)thumbImageAtIndex:(NSInteger)index {
-   NSArray *imageUrls = [images_ objectAtIndex:index];
-   NSString *url = [imageUrls objectAtIndex:THUMBNAIL_INDEX];
-
-   return [self imageWithURLString:url];
 }
 
 - (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView {
