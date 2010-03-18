@@ -106,9 +106,12 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                       target:self
                       action:@selector(previousPhoto)];
    
-   UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                                target:self
-                                                                                action:@selector(trashPhoto)];
+   UIBarButtonItem *trashButton = nil;
+   if ([dataSource_ respondsToSelector:@selector(deleteImageAtIndex:)]) {
+     trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                                                 target:self
+                                                                 action:@selector(trashPhoto)];
+   }
 
    UIBarItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                     target:nil 
@@ -126,7 +129,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                        space, previousButton_, space, nextButton_, space, trashButton, nil]];
    [[self view] addSubview:toolbar_];
    
-   [trashButton release];
+   if (trashButton) [trashButton release];
    [space release];
 }
 
