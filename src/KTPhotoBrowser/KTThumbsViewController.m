@@ -114,10 +114,15 @@
    [scrollView_ setContentSize:contentSize];
 
    [self removeAllSubviews];
+  
+   BOOL thumbsHaveBorder = YES;
+   if ([dataSource_ respondsToSelector:@selector(thumbsHaveBorder)]) {
+     thumbsHaveBorder = [dataSource_ thumbsHaveBorder];
+   }
    
    // Add new subviews.
    for (int i = 0; i < photoCount; i++) {
-      KTThumbView *thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight)];
+      KTThumbView *thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight) andHasBorder:thumbsHaveBorder];
       [thumbView setDelegate:self];
       [thumbView setTag:i];
       

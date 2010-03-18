@@ -16,6 +16,7 @@
 
 @property (nonatomic, assign) id delegate;
 
+- (id)initWithFrame:(CGRect)frame andHasBorder:(BOOL)hasBorder;
 - (void)setThumbImage:(UIImage *)newImage;
 
 @end

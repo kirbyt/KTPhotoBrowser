@@ -21,5 +21,6 @@
 - (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView;
 - (CGSize)thumbSize;
 - (NSInteger)thumbsPerRow;
+- (BOOL)thumbsHaveBorder;
 
 @end

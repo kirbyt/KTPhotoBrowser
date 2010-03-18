@@ -18,11 +18,18 @@
    [super dealloc];
 }
 
-- (id)initWithFrame:(CGRect)frame {
+- (id)initWithFrame:(CGRect)frame andHasBorder:(BOOL)hasBorder {
    if (self = [super initWithFrame:frame]) {
-      [self addTarget:self
+
+     [self addTarget:self
                action:@selector(didTouch:)
      forControlEvents:UIControlEventTouchUpInside];
+
+     if (hasBorder) {
+       self.layer.borderColor = [UIColor colorWithWhite:0.85 alpha:1.0].CGColor;
+       self.layer.borderWidth = 1;
+     }
+
    }
    return self;
 }
@@ -34,7 +41,7 @@
 }
 
 - (void)setThumbImage:(UIImage *)newImage {
-   [self setImage:newImage forState:UIControlStateNormal];
+  [self setImage:newImage forState:UIControlStateNormal];
 }
 
 @end
