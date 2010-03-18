@@ -35,8 +35,6 @@
 }
 
 - (void)webImageManager:(SDWebImageManager *)imageManager didFinishWithImage:(UIImage *)image {
-   // TODO: What if the same view shows another image when this completes?
-   // Or does cancelForDelegate cover that?
    [self setImage:image];
 }
 
