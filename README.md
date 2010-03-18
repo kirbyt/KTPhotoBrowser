@@ -22,8 +22,8 @@ To use KTPhotoBrowser copy the source code into your project then add a data sou
 3. Add a new class to your project called "DataSource" or something similar. This class MUST implement the protocol **KTPhotoBrowserDataSource**. 
 4. Implement the methods required by the protocol KTPhotoBrowserDataSource.
 5. Implement the optional methods if needed.
-6. Create a view controller that derives from the class **KTThumbsViewController**.
-7. In your view controller's viewDidLoad method call `[self loadPhotos]` to display the list of thumbnails in the scroll view.
+6. Create a view controller that derives from the class **KTThumbsViewController** and stick it inside a navigation controller.
+7. In your view controller's viewDidLoad method call `[self setDataSource:anInstanceOfYourDataSource]` and then `[self loadPhotos]` to display the list of thumbnails in the scroll view. Note that your data source is assigned, not retained, so keep it around.
 
 Using the Data Source
 ---------------------
