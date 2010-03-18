@@ -109,11 +109,11 @@
          break;
       case SDWEBIMAGE_SAMPLE:
          [[cell textLabel] setText:@"SDWebImage Sample"];
-         [[cell detailTextLabel] setText:@"View web images with SDWebImage."];
+         [[cell detailTextLabel] setText:@"Web images, asynchronous with cache."];
          break;
       case FLICKR_SAMPLE:
          [[cell textLabel] setText:@"Flickr Sample"];
-         [[cell detailTextLabel] setText:@"View web images, no cache or performance tuning."];
+         [[cell detailTextLabel] setText:@"Web images, synchronous without cache."];
          break;
    }
    

@@ -19,6 +19,7 @@
 
 - (void)viewDidLoad {
    [super viewDidLoad];
+   self.title = @"Flickr Sample";
    
    images_ = [[FlickrDataSource alloc] init];
    [self setDataSource:images_];

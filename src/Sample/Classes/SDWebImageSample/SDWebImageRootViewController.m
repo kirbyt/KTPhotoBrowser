@@ -19,6 +19,8 @@
 
 - (void)viewDidLoad {
    [super viewDidLoad];
+  
+   self.title = @"SDWebImage Sample";
    
    images_ = [[SDWebImageDataSource alloc] init];
    [self setDataSource:images_];
