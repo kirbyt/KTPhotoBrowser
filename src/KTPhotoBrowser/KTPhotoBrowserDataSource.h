@@ -14,12 +14,12 @@
 @protocol KTPhotoBrowserDataSource <NSObject>
 @required
 - (NSInteger)numberOfPhotos;
-- (UIImage *)imageAtIndex:(NSInteger)index;
-- (UIImage *)thumbImageAtIndex:(NSInteger)index;
 
 @optional
 - (void)deleteImageAtIndex:(NSInteger)index;
 - (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView;
 - (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView;
+- (CGSize)thumbSize;
+- (NSInteger)thumbsPerRow;
 
 @end
