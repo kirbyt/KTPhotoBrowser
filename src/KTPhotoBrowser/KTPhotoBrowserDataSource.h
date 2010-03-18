@@ -14,6 +14,8 @@
 @protocol KTPhotoBrowserDataSource <NSObject>
 @required
 - (NSInteger)numberOfPhotos;
+- (UIImage *)imageAtIndex:(NSInteger)index;
+- (UIImage *)thumbImageAtIndex:(NSInteger)index;
 
 @optional
 - (void)deleteImageAtIndex:(NSInteger)index;
