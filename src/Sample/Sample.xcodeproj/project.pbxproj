@@ -37,6 +37,7 @@
 		68F34AF71152B8C800D9765C /* FlickrDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34AF41152B8C800D9765C /* FlickrDataSource.m */; };
 		68F34AF81152B8C800D9765C /* FlickrRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34AF61152B8C800D9765C /* FlickrRootViewController.m */; };
 		68F34B701152CA8400D9765C /* KTThumbView+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34B6F1152CA8400D9765C /* KTThumbView+SDWebImage.m */; };
+		68F34BBD1152CDF200D9765C /* KTPhotoView+SDWebImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F34BBC1152CDF200D9765C /* KTPhotoView+SDWebImage.m */; };
 		68FA36A7113193A900A21845 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA36A6113193A900A21845 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,8 @@
 		68F34AF61152B8C800D9765C /* FlickrRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrRootViewController.m; sourceTree = "<group>"; };
 		68F34B6E1152CA8400D9765C /* KTThumbView+SDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KTThumbView+SDWebImage.h"; sourceTree = "<group>"; };
 		68F34B6F1152CA8400D9765C /* KTThumbView+SDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KTThumbView+SDWebImage.m"; sourceTree = "<group>"; };
+		68F34BBB1152CDF200D9765C /* KTPhotoView+SDWebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KTPhotoView+SDWebImage.h"; sourceTree = "<group>"; };
+		68F34BBC1152CDF200D9765C /* KTPhotoView+SDWebImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KTPhotoView+SDWebImage.m"; sourceTree = "<group>"; };
 		68FA36A6113193A900A21845 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Sample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Sample-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,6 +228,8 @@
 				68F34AA71152B28300D9765C /* SDWebImageRootViewController.m */,
 				68F34AA91152B2E700D9765C /* SDWebImageDataSource.h */,
 				68F34AAA1152B2E700D9765C /* SDWebImageDataSource.m */,
+				68F34BBB1152CDF200D9765C /* KTPhotoView+SDWebImage.h */,
+				68F34BBC1152CDF200D9765C /* KTPhotoView+SDWebImage.m */,
 				68F34B6E1152CA8400D9765C /* KTThumbView+SDWebImage.h */,
 				68F34B6F1152CA8400D9765C /* KTThumbView+SDWebImage.m */,
 			);
@@ -340,6 +345,7 @@
 				68F34AF71152B8C800D9765C /* FlickrDataSource.m in Sources */,
 				68F34AF81152B8C800D9765C /* FlickrRootViewController.m in Sources */,
 				68F34B701152CA8400D9765C /* KTThumbView+SDWebImage.m in Sources */,
+				68F34BBD1152CDF200D9765C /* KTPhotoView+SDWebImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

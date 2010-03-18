@@ -67,8 +67,12 @@
 
 - (void)setImage:(id)data {
    if (photoIndex_ < [dataSource_ numberOfPhotos]) {
-      UIImage *image = [dataSource_ imageAtIndex:photoIndex_];
-      [imageView_ setImage:image];
+      if ([dataSource_ respondsToSelector:@selector(imageAtIndex:photoView:)] == NO) {
+         UIImage *image = [dataSource_ imageAtIndex:photoIndex_];
+         [imageView_ setImage:image];
+      } else {
+         [dataSource_ imageAtIndex:photoIndex_ photoView:imageView_];
+      }
    }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "SDWebImageDataSource.h"
+#import "KTPhotoView+SDWebImage.h"
 #import "KTThumbView+SDWebImage.h"
 
 #define FULL_SIZE_INDEX 0
@@ -58,6 +59,13 @@
 
    return [self imageWithURLString:url];
 }
+
+- (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView {
+   NSArray *imageUrls = [images_ objectAtIndex:index];
+   NSString *url = [imageUrls objectAtIndex:FULL_SIZE_INDEX];
+   [photoView setImageWithURL:[NSURL URLWithString:url]];
+}
+
 
 - (UIImage *)thumbImageAtIndex:(NSInteger)index {
    NSArray *imageUrls = [images_ objectAtIndex:index];
