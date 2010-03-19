@@ -312,7 +312,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
    CGPoint offset = [scrollView_ contentOffset];
-   NSLog(@"offset %f, %f", offset.x, offset.y);
+   //NSLog(@"offset %f, %f", offset.x, offset.y);
    
    CGFloat pageWidth = scrollView.frame.size.width;
    float fractionalPage = scrollView.contentOffset.x / pageWidth;
