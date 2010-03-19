@@ -311,7 +311,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-   CGPoint offset = [scrollView_ contentOffset];
+   //CGPoint offset = [scrollView_ contentOffset];
    //NSLog(@"offset %f, %f", offset.x, offset.y);
    
    CGFloat pageWidth = scrollView.frame.size.width;
