@@ -210,6 +210,20 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 	// Release any cached data, images, etc that aren't in use.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  // We must set nav bar to translucent or the view will appear below rather than under it.
+  UINavigationBar *navbar = [[self navigationController] navigationBar];
+  [navbar setTranslucent:YES];
+  [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  // Reset nav bar translucency to whatever it was before.
+  UINavigationBar *navbar = [[self navigationController] navigationBar];
+  [navbar setTranslucent:self.isTranslucent];
+  [super viewWillDisappear:animated];
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
    [self cancelChromeDisplayTimer];
 }
