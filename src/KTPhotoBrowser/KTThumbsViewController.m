@@ -164,6 +164,7 @@
    KTPhotoScrollViewController *newController = [[KTPhotoScrollViewController alloc] 
                                                         initWithDataSource:dataSource_ 
                                                   andStartWithPhotoAtIndex:index];
+   newController.hidesBottomBarWhenPushed = YES;
    newController.photoBackgroundColor = self.photoBackgroundColor;
    UINavigationBar *navbar = [[self navigationController] navigationBar];
    [newController setNavigationBarStyle:[navbar barStyle]];
