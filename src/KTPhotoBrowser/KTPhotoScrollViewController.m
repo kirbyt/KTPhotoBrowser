@@ -126,7 +126,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                     ktkDefaultToolbarHeight);
    toolbar_ = [[UIToolbar alloc] initWithFrame:toolbarFrame];
    [toolbar_ setBarStyle:[self navigationBarStyle]];
-   [toolbar_ setTranslucent:[self isTranslucent]];
+   [toolbar_ setTranslucent:YES];
    [toolbar_ setItems:[NSArray arrayWithObjects:
                        space, previousButton_, space, nextButton_, space, trashButton, nil]];
    [[self view] addSubview:toolbar_];
