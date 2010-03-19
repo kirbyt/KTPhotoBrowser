@@ -22,6 +22,7 @@
    [newController setWindow:window];
    UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
    [[newNavController navigationBar] setBarStyle:UIBarStyleBlack];
+   [[newNavController navigationBar] setTranslucent:YES];
    [newController release];
 
    [window addSubview:[newNavController view]];
