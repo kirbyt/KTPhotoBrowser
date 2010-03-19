@@ -108,9 +108,10 @@
    // Calculate content size.
    int photoCount = [dataSource_ numberOfPhotos];
    
-   int rowCount = photoCount / itemsPerRow;
+   int rowCount = ceil(photoCount / (float)itemsPerRow);
    int rowHeight = thumbnailHeight + spaceHeight;
-   CGSize contentSize = CGSizeMake(viewWidth, (rowHeight * (rowCount + 1)));
+   CGSize contentSize = CGSizeMake(viewWidth, (rowHeight * rowCount + spaceHeight));
+  
    [scrollView_ setContentSize:contentSize];
 
    [self removeAllSubviews];
