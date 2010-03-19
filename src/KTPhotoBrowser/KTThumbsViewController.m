@@ -65,6 +65,25 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  // The first time the view appears, store away the current translucency so we can reset on pop.
+  UINavigationBar *navbar = [[self navigationController] navigationBar];
+  if (!viewDidAppearOnce_) {
+    viewDidAppearOnce_ = YES;
+    navbarWasTranslucent_ = [navbar isTranslucent];
+  }
+  // Then ensure translucency to match the look of Apple's Photos app.
+  [navbar setTranslucent:YES];
+  [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  // Restore old translucency when we pop this controller.
+  UINavigationBar *navbar = [[self navigationController] navigationBar];
+  [navbar setTranslucent:navbarWasTranslucent_];
+  [super viewWillDisappear:animated];
+}
+
 - (void)viewDidUnload {
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
@@ -169,7 +188,7 @@
    newController.photoBackgroundColor = self.photoBackgroundColor;
    UINavigationBar *navbar = [[self navigationController] navigationBar];
    [newController setNavigationBarStyle:[navbar barStyle]];
-   [newController setTranslucent:[navbar isTranslucent]];
+   [newController setTranslucent:navbarWasTranslucent_];
    
    BOOL isStatusbarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
    [newController setStatusbarHidden:isStatusbarHidden];

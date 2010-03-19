@@ -12,9 +12,11 @@
 
 
 @interface KTThumbsViewController : UIViewController <KTThumbViewDelegate> {
-   id <KTPhotoBrowserDataSource> dataSource_;
-   UIScrollView *scrollView_;
-   UIColor *photoBackgroundColor_;
+  id <KTPhotoBrowserDataSource> dataSource_;
+  UIScrollView *scrollView_;
+  UIColor *photoBackgroundColor_;
+  BOOL viewDidAppearOnce_;
+  BOOL navbarWasTranslucent_;
 }
 
 @property (nonatomic, assign) id <KTPhotoBrowserDataSource> dataSource;
