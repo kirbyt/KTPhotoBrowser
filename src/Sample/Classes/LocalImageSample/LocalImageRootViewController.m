@@ -49,7 +49,6 @@
    }
    [self setDataSource:myPhotos_];
    [self loadPhotos];
-//   [self setPhotoBackgroundColor:[UIColor blueColor]];
 }
 
 - (void)didReceiveMemoryWarning {

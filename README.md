@@ -26,7 +26,6 @@ To use KTPhotoBrowser copy the source code into your project then add a data sou
 5. Implement the optional methods if needed.
 6. Create a view controller that derives from the class **KTThumbsViewController** and stick it inside a navigation controller.
 7. In your view controller's viewDidLoad method call `[self setDataSource:anInstanceOfYourDataSource]` and then `[self loadPhotos]` to display the list of thumbnails in the scroll view.
-8. Optionally have your view controller's viewDidLoad call e.g. `[self setPhotoBackgroundColor:[UIColor whiteColor]]` to change what color the full-size images are shown against. The default is black.
 
 Using the Data Source
 ---------------------

@@ -293,6 +293,9 @@
 //   return 1;
 // }
 
+// - (UIColor *)imageBackgroundColor {
+//   return [UIColor whiteColor];
+// }
 
 
 @end

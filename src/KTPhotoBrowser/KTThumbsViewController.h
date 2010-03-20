@@ -14,13 +14,11 @@
 @interface KTThumbsViewController : UIViewController <KTThumbViewDelegate> {
   id <KTPhotoBrowserDataSource> dataSource_;
   UIScrollView *scrollView_;
-  UIColor *photoBackgroundColor_;
   BOOL viewDidAppearOnce_;
   BOOL navbarWasTranslucent_;
 }
 
 @property (nonatomic, retain) id <KTPhotoBrowserDataSource> dataSource;
-@property (nonatomic, retain) UIColor *photoBackgroundColor;
 
 /**
  * Loads the photos for display.

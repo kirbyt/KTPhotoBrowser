@@ -21,7 +21,6 @@
    KTPhotoViewController *currentPhoto_;
    KTPhotoViewController *nextPhoto_;
    
-   UIColor *photoBackgroundColor_;
    UIStatusBarStyle statusBarStyle_;
    UIBarStyle navigationBarStyle_;
    BOOL translucent_;   // for the navigation and toolbars.
@@ -36,7 +35,6 @@
 
 @property (nonatomic, assign) UIStatusBarStyle statusBarStyle;
 @property (nonatomic, assign) UIBarStyle navigationBarStyle;
-@property (nonatomic, retain) UIColor *photoBackgroundColor;
 @property (nonatomic, assign, getter=isTranslucent) BOOL translucent;
 @property (nonatomic, assign, getter=isStatusbarHidden) BOOL statusbarHidden;
 
