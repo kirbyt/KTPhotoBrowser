@@ -19,7 +19,7 @@
   BOOL navbarWasTranslucent_;
 }
 
-@property (nonatomic, assign) id <KTPhotoBrowserDataSource> dataSource;
+@property (nonatomic, retain) id <KTPhotoBrowserDataSource> dataSource;
 @property (nonatomic, retain) UIColor *photoBackgroundColor;
 
 /**

@@ -22,6 +22,7 @@
 - (void)dealloc {
    [scrollView_ release], scrollView_ = nil;
    [photoBackgroundColor_ release], photoBackgroundColor_ = nil;
+   [dataSource_ release], dataSource_ = nil;
    
    [super dealloc];
 }

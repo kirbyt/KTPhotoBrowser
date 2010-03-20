@@ -58,6 +58,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [scrollView_ release], scrollView_ = nil;
    [toolbar_ release], toolbar_ = nil;
    [photoBackgroundColor_ release], photoBackgroundColor_ = nil;
+  
+   [dataSource_ release], dataSource_ = nil;  
    
    [currentPhoto_ release], currentPhoto_ = nil;
    [nextPhoto_ release], nextPhoto_ = nil;
@@ -68,7 +70,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource andStartWithPhotoAtIndex:(NSUInteger)index {
    if (self = [super init]) {
       startWithIndex_ = index;
-      dataSource_ = dataSource;
+      dataSource_ = [dataSource retain];
       
       // Make sure to set wantsFullScreenLayout or the photo
       // will not display behind the status bar.

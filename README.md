@@ -7,6 +7,8 @@ KTPhotoBrowser is a lightweight photo browser for the iPhone and iPod touch. It 
 [![](http://farm5.static.flickr.com/4003/4438823128_4d200a3f8c_m.jpg)](http://farm5.static.flickr.com/4003/4438823128_d0e5d1e3c2_o.png)
 [![](http://farm5.static.flickr.com/4027/4438046129_5028f322b3_m.jpg)](http://farm5.static.flickr.com/4027/4438046129_1ef4a244bd_o.png)
 
+Build the included Sample app to see it in action.
+
 Requirements
 ------------
 
@@ -23,7 +25,7 @@ To use KTPhotoBrowser copy the source code into your project then add a data sou
 4. Implement the methods required by the protocol KTPhotoBrowserDataSource.
 5. Implement the optional methods if needed.
 6. Create a view controller that derives from the class **KTThumbsViewController** and stick it inside a navigation controller.
-7. In your view controller's viewDidLoad method call `[self setDataSource:anInstanceOfYourDataSource]` and then `[self loadPhotos]` to display the list of thumbnails in the scroll view. Note that your data source is assigned, not retained, so keep it around.
+7. In your view controller's viewDidLoad method call `[self setDataSource:anInstanceOfYourDataSource]` and then `[self loadPhotos]` to display the list of thumbnails in the scroll view.
 8. Optionally have your view controller's viewDidLoad call e.g. `[self setPhotoBackgroundColor:[UIColor whiteColor]]` to change what color the full-size images are shown against. The default is black.
 
 Using the Data Source
@@ -32,6 +34,8 @@ Using the Data Source
 Implementing the protocol KTPhotoBrowserDataSource in your data source class decouples KTPhotoBrowser from the logic required to retrieve images. This means you can use KTPhotoBrowser with images stored anywhere be it locally, in Core Data, or on the web. KTPhotoBrowser doesn't care where the photos come from.
 
 Please note KTPhotoBrowser does not manage the photos. It is the data source's responsibility to retrieve and cache images as needed. KTPhotoBrowser only displays the thumbnail and full size images as provided by the data source. It does not manage any local cache or the retrieval of the image from a persistence store.
+
+The sample app includes an example of using [SDWebImage](http://github.com/rs/SDWebImage) to load images asynchronously, with caching.
 
 Status
 ======
