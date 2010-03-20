@@ -217,21 +217,25 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  // The first time the view appears, store away the previous controller's translucency so we can reset on pop.
+  // The first time the view appears, store away the previous controller's values so we can reset on pop.
   UINavigationBar *navbar = [[self navigationController] navigationBar];
   if (!viewDidAppearOnce_) {
     viewDidAppearOnce_ = YES;
     navbarWasTranslucent_ = [navbar isTranslucent];
+    statusBarStyle_ = [[UIApplication sharedApplication] statusBarStyle];
   }
   // Then ensure translucency. Without it, the view will appear below rather than under it.  
   [navbar setTranslucent:YES];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+  
   [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-  // Reset nav bar translucency to whatever it was before.
+  // Reset nav bar translucency and status bar style to whatever it was before.
   UINavigationBar *navbar = [[self navigationController] navigationBar];
   [navbar setTranslucent:navbarWasTranslucent_];
+  [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle_];
   [super viewWillDisappear:animated];
 }
 
