@@ -180,9 +180,7 @@
    KTPhotoScrollViewController *newController = [[KTPhotoScrollViewController alloc] 
                                                         initWithDataSource:dataSource_ 
                                                   andStartWithPhotoAtIndex:index];
-   newController.hidesBottomBarWhenPushed = YES;
-   [newController setTranslucent:navbarWasTranslucent_];
-      
+  
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
 }

@@ -46,8 +46,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 @implementation KTPhotoScrollViewController
 
 @synthesize statusBarStyle = statusBarStyle_;
-@synthesize navigationBarStyle = navigationBarStyle_;
-@synthesize translucent = translucent_;
 @synthesize statusbarHidden = statusbarHidden_;
 
 
@@ -76,6 +74,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
      BOOL isStatusbarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
      [self setStatusbarHidden:isStatusbarHidden];
+     
+     self.hidesBottomBarWhenPushed = YES;
    }
    return self;
 }
@@ -131,8 +131,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                     screenFrame.size.width, 
                                     ktkDefaultToolbarHeight);
    toolbar_ = [[UIToolbar alloc] initWithFrame:toolbarFrame];
-   [toolbar_ setBarStyle:[self navigationBarStyle]];
-   [toolbar_ setTranslucent:YES];
+   [toolbar_ setBarStyle:UIBarStyleBlackTranslucent];
    [toolbar_ setItems:[NSArray arrayWithObjects:
                        space, previousButton_, space, nextButton_, space, trashButton, nil]];
    [[self view] addSubview:toolbar_];
@@ -218,8 +217,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  // We must set nav bar to translucent or the view will appear below rather than under it.
+  // The first time the view appears, store away the previous controller's translucency so we can reset on pop.
   UINavigationBar *navbar = [[self navigationController] navigationBar];
+  if (!viewDidAppearOnce_) {
+    viewDidAppearOnce_ = YES;
+    navbarWasTranslucent_ = [navbar isTranslucent];
+  }
+  // Then ensure translucency. Without it, the view will appear below rather than under it.  
   [navbar setTranslucent:YES];
   [super viewWillAppear:animated];
 }
@@ -227,7 +231,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)viewWillDisappear:(BOOL)animated {
   // Reset nav bar translucency to whatever it was before.
   UINavigationBar *navbar = [[self navigationController] navigationBar];
-  [navbar setTranslucent:self.isTranslucent];
+  [navbar setTranslucent:navbarWasTranslucent_];
   [super viewWillDisappear:animated];
 }
 
