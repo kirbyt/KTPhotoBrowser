@@ -187,13 +187,8 @@
                                                   andStartWithPhotoAtIndex:index];
    newController.hidesBottomBarWhenPushed = YES;
    newController.photoBackgroundColor = self.photoBackgroundColor;
-   UINavigationBar *navbar = [[self navigationController] navigationBar];
-   [newController setNavigationBarStyle:[navbar barStyle]];
    [newController setTranslucent:navbarWasTranslucent_];
-   
-   BOOL isStatusbarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
-   [newController setStatusbarHidden:isStatusbarHidden];
-   
+      
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
 }
