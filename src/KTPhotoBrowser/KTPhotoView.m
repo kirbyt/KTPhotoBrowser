@@ -17,11 +17,7 @@
 
 - (void)setImage:(UIImage *)newImage {
    CALayer *layer = [self layer];
-   if (newImage.size.width < newImage.size.height) {
-      [layer setContentsGravity:kCAGravityResizeAspectFill];
-   } else {
-      [layer setContentsGravity:kCAGravityResizeAspect];
-   }
+   [layer setContentsGravity:kCAGravityResizeAspect];
    [layer setMasksToBounds:YES];
    [layer setContents:(id)[newImage CGImage]];
 }
