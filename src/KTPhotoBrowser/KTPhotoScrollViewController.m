@@ -137,7 +137,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)setTitleWithCurrentPhotoIndex {
    NSInteger index = [currentPhoto_ photoIndex] + 1;
-   NSString *title = [NSString stringWithFormat:@"%i of %i", index, pageCount_, nil];
+   NSString *formatString = NSLocalizedString(@"%1$i of %2$i", @"Picture X out of Y total.");
+   NSString *title = [NSString stringWithFormat:formatString, index, pageCount_, nil];
    [self setTitle:title];
 }
 
