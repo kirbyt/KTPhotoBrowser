@@ -226,7 +226,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
   }
   // Then ensure translucency. Without it, the view will appear below rather than under it.  
   [navbar setTranslucent:YES];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
   
   [super viewWillAppear:animated];
 }
@@ -235,7 +235,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
   // Reset nav bar translucency and status bar style to whatever it was before.
   UINavigationBar *navbar = [[self navigationController] navigationBar];
   [navbar setTranslucent:navbarWasTranslucent_];
-  [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle_];
+  [[UIApplication sharedApplication] setStatusBarStyle:statusBarStyle_ animated:YES];
   [super viewWillDisappear:animated];
 }
 
