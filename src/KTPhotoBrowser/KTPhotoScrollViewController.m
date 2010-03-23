@@ -281,9 +281,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    // Set the new context size.
    [self setScrollViewContentSizeWithPageCount:pageCount_];
    
-   // Reposition the 2 photo views we have in memory.
-   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
-   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
    
    // Rotate the toolbar.
    [self updateToolbarWithOrientation:toInterfaceOrientation];
@@ -291,6 +288,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 
+   // Reposition the photo views we have in memory.
+   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
+   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
    [[nextPhoto_ view] setHidden:NO];
    
    [self autoScrollToIndex:[currentPhoto_ photoIndex]];
