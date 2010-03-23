@@ -263,26 +263,38 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    return YES;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
+                                duration:(NSTimeInterval)duration {
+
+   rotationInProgress_ = YES;
+   
+   // Hide the next photo to prevent it from overlapping 
+   // the during rotation's animation.
+   [[nextPhoto_ view] setHidden:YES];
+}
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                          duration:(NSTimeInterval)duration {
-   [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+   // Note the scrollview has already been resized by
+   // the time this method is called.
+   
+   // Set the new context size.
    [self setScrollViewContentSizeWithPageCount:pageCount_];
+   
+   // Reposition the 2 photo views we have in memory.
+   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
    [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
+   
+   // Rotate the toolbar.
    [self updateToolbarWithOrientation:toInterfaceOrientation];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-//   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
-//   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
+
+   [[nextPhoto_ view] setHidden:NO];
    
-   // Figure out which page we are on.
-//   CGFloat pageWidth = scrollView_.frame.size.width;
-//   NSLog(@"contentOffset %f,%f", scrollView_.contentOffset.x, scrollView_.contentOffset.y);
-//   float fractionalPage = scrollView_.contentOffset.x / pageWidth;
-//   NSInteger pageIndex = floor(fractionalPage) + 1;
-////   pageIndex = [currentPhoto_ photoIndex];
-//   NSLog(@"Pageindex %i  currentIndex %i next Index %i", pageIndex, [currentPhoto_ photoIndex], [nextPhoto_ photoIndex]);
-//   [self autoScrollToIndex:pageIndex];
+   [self autoScrollToIndex:[currentPhoto_ photoIndex]];
+   rotationInProgress_ = NO;
 }
 
 - (UIView *)rotatingFooterView {
@@ -386,6 +398,15 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+   if (rotationInProgress_) {
+      // The contentOffset is adjusted and breaks the 
+      // code below. Therefore, ignore scrolling when
+      // rotating.
+      return;
+   }
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   NSLog(@"contentOffset %f,%f", scrollView.contentOffset.x, scrollView.contentOffset.y);
+   
    CGFloat pageWidth = scrollView.frame.size.width;
    float fractionalPage = scrollView.contentOffset.x / pageWidth;
    
@@ -421,6 +442,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+   if (rotationInProgress_) {
+      // The contentOffset is adjusted and breaks the 
+      // code below. Therefore, ignore scrolling when
+      // rotating.
+      return;
+   }
+
    CGFloat pageWidth = scrollView.frame.size.width;
    float fractionalPage = scrollView.contentOffset.x / pageWidth;
    NSInteger nearestNumber = lround(fractionalPage);
