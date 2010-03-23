@@ -85,6 +85,10 @@
    // Do nothing by default.
 }
 
+- (void)reloadThumbs {
+   [scrollView_ setNeedsLayout];
+}
+
 - (void)setDataSource:(id <KTPhotoBrowserDataSource>)newDataSource {
    dataSource_ = newDataSource;
    [scrollView_ setDataSource:newDataSource];

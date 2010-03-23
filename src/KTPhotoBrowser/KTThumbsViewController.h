@@ -22,6 +22,11 @@
 @property (nonatomic, retain) id <KTPhotoBrowserDataSource> dataSource;
 
 /**
+ * Re-displays the thumbnail images.
+ */
+- (void)reloadThumbs;
+
+/**
  * Called after loadPhotos completed. Does nothing by default.
  */
 - (void)didFinishLoadingPhotos;

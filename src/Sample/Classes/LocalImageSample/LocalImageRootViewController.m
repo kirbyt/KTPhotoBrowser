@@ -127,7 +127,7 @@
 #pragma mark PhotosDelegate
 
 - (void)didFinishSave {
-   [self loadPhotos];
+   [self reloadThumbs];
 }
 
 @end
