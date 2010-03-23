@@ -267,7 +267,22 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                          duration:(NSTimeInterval)duration {
    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
    [self setScrollViewContentSizeWithPageCount:pageCount_];
+   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
    [self updateToolbarWithOrientation:toInterfaceOrientation];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+//   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
+//   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
+   
+   // Figure out which page we are on.
+//   CGFloat pageWidth = scrollView_.frame.size.width;
+//   NSLog(@"contentOffset %f,%f", scrollView_.contentOffset.x, scrollView_.contentOffset.y);
+//   float fractionalPage = scrollView_.contentOffset.x / pageWidth;
+//   NSInteger pageIndex = floor(fractionalPage) + 1;
+////   pageIndex = [currentPhoto_ photoIndex];
+//   NSLog(@"Pageindex %i  currentIndex %i next Index %i", pageIndex, [currentPhoto_ photoIndex], [nextPhoto_ photoIndex]);
+//   [self autoScrollToIndex:pageIndex];
 }
 
 - (UIView *)rotatingFooterView {
