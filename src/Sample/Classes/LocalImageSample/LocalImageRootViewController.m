@@ -58,7 +58,11 @@
    [myPhotos_ flushCache];
 }
 
-- (void)didFinishLoadingPhotos {
+- (void)willLoadThumbs {
+   [self showActivityIndicator];
+}
+
+- (void)didLoadThumbs {
    [self hideActivityIndicator];
 }
 

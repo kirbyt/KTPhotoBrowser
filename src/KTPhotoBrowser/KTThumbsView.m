@@ -8,9 +8,12 @@
 
 #import "KTThumbsView.h"
 #import "KTThumbView.h"
+#import "KTThumbsViewController.h"
 
 
 @implementation KTThumbsView
+
+@synthesize controller = controller_;
 
 - (void)setDataSource:(id <KTPhotoBrowserDataSource>)newDataSource {
    dataSource_ = newDataSource;
@@ -28,6 +31,10 @@
 - (void)layoutSubviews {
    if ( ! dataSource_ ) {
       return;
+   }
+   
+   if (controller_) {
+      [controller_ willLoadThumbs];
    }
    
    int viewWidth = self.bounds.size.width;
@@ -98,7 +105,10 @@
          x += thumbnailWidth + spaceWidth;
       }
    }
-//   [self didFinishLoadingPhotos];
+   
+   if (controller_) {
+      [controller_ didLoadThumbs];
+   }
 }
 
 @end

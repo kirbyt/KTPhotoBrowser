@@ -27,8 +27,15 @@
 - (void)reloadThumbs;
 
 /**
- * Called after loadPhotos completed. Does nothing by default.
+ * Called before the thumbnail images are loaded and displayed.
+ * Override this method to prepare. For instance, display an
+ * activity indicator.
  */
-- (void)didFinishLoadingPhotos;
+- (void)willLoadThumbs;
+
+/**
+ * Called immediately after the thumbnail images are loaded and displayed.
+ */
+- (void)didLoadThumbs;
 
 @end

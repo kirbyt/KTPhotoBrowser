@@ -31,6 +31,7 @@
    [self setWantsFullScreenLayout:YES];
 
    KTThumbsView *scrollView = [[KTThumbsView alloc] initWithFrame:CGRectZero];
+   [scrollView setController:self];
    [scrollView setScrollsToTop:YES];
    [scrollView setScrollEnabled:YES];
    [scrollView setBackgroundColor:[UIColor whiteColor]];
@@ -81,7 +82,11 @@
    return YES;
 }
 
-- (void)didFinishLoadingPhotos {
+- (void)willLoadThumbs {
+   // Do nothing by default.
+}
+
+- (void)didLoadThumbs {
    // Do nothing by default.
 }
 

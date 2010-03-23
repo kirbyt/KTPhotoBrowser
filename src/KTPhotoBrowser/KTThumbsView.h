@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "KTPhotoBrowserDataSource.h"
 
+@class KTThumbsViewController;
 
 @interface KTThumbsView : UIScrollView {
    id <KTPhotoBrowserDataSource> dataSource_;
-
+   KTThumbsViewController *controller_;
 }
+
+@property (nonatomic, assign) KTThumbsViewController *controller;
 
 /**
  * Sets the local ivar for the data source. 
