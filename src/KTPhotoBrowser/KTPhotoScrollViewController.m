@@ -25,6 +25,8 @@
 #import "KTPhotoBrowserGlobal.h"
 #import "KTPhotoViewController.h"
 
+const CGFloat ktkDefaultPortraitToolbarHeight   = 44;
+const CGFloat ktkDefaultLandscapeToolbarHeight  = 33;
 const CGFloat ktkDefaultToolbarHeight = 44;
 
 #define BUTTON_DELETEPHOTO 0
@@ -244,8 +246,31 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self cancelChromeDisplayTimer];
 }
 
+- (void)updateToolbarWithOrientation:(UIInterfaceOrientation)interfaceOrientation {
+   CGRect toolbarFrame = toolbar_.frame;
+   if ((interfaceOrientation) == UIInterfaceOrientationPortrait || (interfaceOrientation) == UIInterfaceOrientationPortraitUpsideDown) {
+      toolbarFrame.size.height = ktkDefaultPortraitToolbarHeight;
+   } else {
+      toolbarFrame.size.height = ktkDefaultLandscapeToolbarHeight+1;
+   }
+   
+   toolbarFrame.size.width = self.view.frame.size.width;
+   toolbarFrame.origin.y =  self.view.frame.size.height - toolbarFrame.size.height;
+   toolbar_.frame = toolbarFrame;
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
    return YES;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration {
+   [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+   [self updateToolbarWithOrientation:toInterfaceOrientation];
+}
+
+- (UIView *)rotatingFooterView {
+   return toolbar_;
 }
 
 - (void)deleteCurrentPhoto {
