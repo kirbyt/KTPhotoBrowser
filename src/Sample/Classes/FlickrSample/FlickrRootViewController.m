@@ -23,8 +23,6 @@
    
    images_ = [[FlickrDataSource alloc] init];
    [self setDataSource:images_];
-   
-   [self loadPhotos];
 }
 
 /*

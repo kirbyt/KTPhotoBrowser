@@ -22,18 +22,8 @@
 @property (nonatomic, retain) id <KTPhotoBrowserDataSource> dataSource;
 
 /**
- * Loads the photos for display.
- */
-- (void)loadPhotos;
-
-/**
  * Called after loadPhotos completed. Does nothing by default.
  */
 - (void)didFinishLoadingPhotos;
-
-/**
- * Removes all subviews from the scroll view. Used to remove thumbnail photos.
- */
-- (void)removeAllSubviews;
 
 @end

@@ -48,7 +48,6 @@
       [myPhotos_ setDelegate:self];
    }
    [self setDataSource:myPhotos_];
-   [self loadPhotos];
 }
 
 - (void)didReceiveMemoryWarning {

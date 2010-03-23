@@ -24,8 +24,6 @@
    
    images_ = [[SDWebImageDataSource alloc] init];
    [self setDataSource:images_];
-   
-   [self loadPhotos];
 }
 
 /*
