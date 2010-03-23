@@ -7,12 +7,13 @@
 //
 
 #import "KTThumbView.h"
+#import "KTThumbsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 
 @implementation KTThumbView
 
-@synthesize delegate = delegate_;
+@synthesize controller = controller_;
 
 - (void)dealloc {
    [super dealloc];
@@ -37,8 +38,8 @@
 }
 
 - (void)didTouch:(id)sender {
-   if (delegate_ && [delegate_ respondsToSelector:@selector(didSelectThumbAtIndex:)]) {
-      [delegate_ didSelectThumbAtIndex:[self tag]];
+   if (controller_) {
+      [controller_ didSelectThumbAtIndex:[self tag]];
    }
 }
 

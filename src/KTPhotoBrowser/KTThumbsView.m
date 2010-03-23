@@ -82,7 +82,7 @@
    // Add new subviews.
    for (int i = 0; i < photoCount; i++) {
       KTThumbView *thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight) andHasBorder:thumbsHaveBorder];
-      [thumbView setDelegate:self];
+      [thumbView setController:controller_];
       [thumbView setTag:i];
       
       if ([dataSource_ respondsToSelector:@selector(thumbImageAtIndex:thumbView:)] == NO) {

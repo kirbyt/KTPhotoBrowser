@@ -78,10 +78,6 @@
 	// e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-   return YES;
-}
-
 - (void)willLoadThumbs {
    // Do nothing by default.
 }
@@ -99,9 +95,6 @@
    [scrollView_ setDataSource:newDataSource];
 }
 
-
-#pragma mark -
-#pragma mark WPSThumbViewDelegate
 - (void)didSelectThumbAtIndex:(NSUInteger)index {
    KTPhotoScrollViewController *newController = [[KTPhotoScrollViewController alloc] 
                                                         initWithDataSource:dataSource_ 

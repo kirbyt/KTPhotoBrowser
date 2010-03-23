@@ -8,21 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol KTThumbViewDelegate;
+@class KTThumbsViewController;
 
 @interface KTThumbView : UIButton {
-   id delegate_;
+   KTThumbsViewController *controller_;
 }
 
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) KTThumbsViewController *controller;
 
 - (id)initWithFrame:(CGRect)frame andHasBorder:(BOOL)hasBorder;
 - (void)setThumbImage:(UIImage *)newImage;
 
 @end
 
-
-@protocol KTThumbViewDelegate <NSObject>
-@optional
-- (void)didSelectThumbAtIndex:(NSUInteger)index;
-@end

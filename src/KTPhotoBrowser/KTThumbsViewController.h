@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "KTPhotoBrowserDataSource.h"
-#import "KTThumbView.h"
 
 @class KTThumbsView;
 
-@interface KTThumbsViewController : UIViewController <KTThumbViewDelegate> {
+@interface KTThumbsViewController : UIViewController {
   id <KTPhotoBrowserDataSource> dataSource_;
   KTThumbsView *scrollView_;
   BOOL viewDidAppearOnce_;
@@ -37,5 +36,10 @@
  * Called immediately after the thumbnail images are loaded and displayed.
  */
 - (void)didLoadThumbs;
+
+/**
+ * Used internally. Called when the thumbnail is touched by the user.
+ */
+- (void)didSelectThumbAtIndex:(NSUInteger)index;
 
 @end

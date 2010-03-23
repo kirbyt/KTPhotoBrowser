@@ -58,6 +58,10 @@
    [myPhotos_ flushCache];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+   return YES;
+}
+
 - (void)willLoadThumbs {
    [self showActivityIndicator];
 }
