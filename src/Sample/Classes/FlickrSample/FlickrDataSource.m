@@ -31,6 +31,7 @@
                  [NSArray arrayWithObjects:@"http://farm3.static.flickr.com/2547/3768477034_94b4f15d1e_b.jpg", @"http://farm3.static.flickr.com/2547/3768477034_94b4f15d1e_s.jpg", nil],
                  [NSArray arrayWithObjects:@"http://farm2.static.flickr.com/1200/591574815_8a4a732d00_o.jpg", @"http://farm2.static.flickr.com/1200/591574815_29db79a63a_s.jpg", nil],
                  [NSArray arrayWithObjects:@"http://farm4.static.flickr.com/3610/3439180743_21b8799d82_o.jpg", @"http://farm4.static.flickr.com/3610/3439180743_b7b07df9d4_s.jpg", nil],
+                 [NSArray arrayWithObjects:@"http://farm3.static.flickr.com/2721/4441122896_eec9285a67.jpg", @"http://farm3.static.flickr.com/2721/4441122896_eec9285a67_s.jpg", nil],
                  nil];
    }
    return self;
