@@ -86,6 +86,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    CGRect scrollFrame = [[UIScreen mainScreen] bounds];
    scrollFrame.size.width += CONTENT_OFFSET;
    UIScrollView *newView = [[UIScrollView alloc] initWithFrame:scrollFrame];
+   [newView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
    [newView setDelegate:self];
    
    UIColor *backgroundColor = [dataSource_ respondsToSelector:@selector(imageBackgroundColor)] ?
@@ -243,6 +244,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self cancelChromeDisplayTimer];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+   return YES;
+}
+
 - (void)deleteCurrentPhoto {
    if (dataSource_) {
       // TODO: Animate the deletion of the current photo.
@@ -340,9 +345,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-   //CGPoint offset = [scrollView_ contentOffset];
-   //NSLog(@"offset %f, %f", offset.x, offset.y);
-   
    CGFloat pageWidth = scrollView.frame.size.width;
    float fractionalPage = scrollView.contentOffset.x / pageWidth;
    

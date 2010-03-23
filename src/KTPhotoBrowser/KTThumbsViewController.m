@@ -7,6 +7,7 @@
 //
 
 #import "KTThumbsViewController.h"
+#import "KTThumbsView.h"
 #import "KTPhotoScrollViewController.h"
 
 
@@ -30,7 +31,7 @@
    // will not display behind the status bar.
    [self setWantsFullScreenLayout:YES];
 
-   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+   KTThumbsView *scrollView = [[KTThumbsView alloc] initWithFrame:CGRectZero];
    [scrollView setScrollsToTop:YES];
    [scrollView setScrollEnabled:YES];
    [scrollView setBackgroundColor:[UIColor whiteColor]];
@@ -45,14 +46,6 @@
    // Release the local scroll view reference.
    [scrollView release];
 }
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
 
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
@@ -85,11 +78,20 @@
 	// e.g. self.myOutlet = nil;
 }
 
+//- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+//   [self loadPhotos];
+//}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+   return YES;
+}
+
 - (void)didFinishLoadingPhotos {
    // Do nothing by default.
 }
 
 - (void)loadPhotos {
+   return;
    if ( ! dataSource_ ) {
       return;
    }
@@ -171,6 +173,11 @@
       UIView *subview = [[scrollView_ subviews] objectAtIndex:i - 1];
       [subview removeFromSuperview];
    }
+}
+
+- (void)setDataSource:(id <KTPhotoBrowserDataSource>)newDataSource {
+   dataSource_ = newDataSource;
+   [scrollView_ setDataSource:newDataSource];
 }
 
 

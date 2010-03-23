@@ -39,8 +39,11 @@
 - (void)loadView {
    [super loadView];
    
+   [[self view] setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+   
    CGRect frame = [[UIScreen mainScreen] bounds];
    KTPhotoView *newView = [[KTPhotoView alloc] initWithFrame:frame];
+   [newView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
    [newView setBackgroundColor:[UIColor clearColor]];
 
    [[self view] addSubview:newView];

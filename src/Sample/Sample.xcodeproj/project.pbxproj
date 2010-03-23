@@ -20,6 +20,7 @@
 		6813F447112075BB006B7215 /* KTThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F442112075BB006B7215 /* KTThumbView.m */; };
 		68316E371124726F00A906B3 /* KTPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */; };
 		68316E801124743F00A906B3 /* KTPhotoBrowserGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */; };
+		6854010C1158FA0E00D9B688 /* KTThumbsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854010B1158FA0E00D9B688 /* KTThumbsView.m */; };
 		6890C7FA1135AF9B00A4CFFA /* KTPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6890C7F91135AF9B00A4CFFA /* KTPhotoView.m */; };
 		68F349BF1152AA5500D9765C /* PhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F349B81152AA5500D9765C /* PhotoPickerController.m */; };
 		68F349C01152AA5500D9765C /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F349BA1152AA5500D9765C /* Photos.m */; };
@@ -65,6 +66,8 @@
 		68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KTPhotoBrowser.bundle; path = ../KTPhotoBrowser/KTPhotoBrowser.bundle; sourceTree = SOURCE_ROOT; };
 		68316E7E1124743F00A906B3 /* KTPhotoBrowserGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTPhotoBrowserGlobal.h; path = ../KTPhotoBrowser/KTPhotoBrowserGlobal.h; sourceTree = SOURCE_ROOT; };
 		68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTPhotoBrowserGlobal.m; path = ../KTPhotoBrowser/KTPhotoBrowserGlobal.m; sourceTree = SOURCE_ROOT; };
+		6854010A1158FA0E00D9B688 /* KTThumbsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTThumbsView.h; path = ../KTPhotoBrowser/KTThumbsView.h; sourceTree = SOURCE_ROOT; };
+		6854010B1158FA0E00D9B688 /* KTThumbsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTThumbsView.m; path = ../KTPhotoBrowser/KTThumbsView.m; sourceTree = SOURCE_ROOT; };
 		6890C7F81135AF9B00A4CFFA /* KTPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTPhotoView.h; path = ../KTPhotoBrowser/KTPhotoView.h; sourceTree = SOURCE_ROOT; };
 		6890C7F91135AF9B00A4CFFA /* KTPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTPhotoView.m; path = ../KTPhotoBrowser/KTPhotoView.m; sourceTree = SOURCE_ROOT; };
 		68F349B71152AA5500D9765C /* PhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerController.h; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 				6890C7F91135AF9B00A4CFFA /* KTPhotoView.m */,
 				6813F43F112075BB006B7215 /* KTThumbsViewController.h */,
 				6813F440112075BB006B7215 /* KTThumbsViewController.m */,
+				6854010A1158FA0E00D9B688 /* KTThumbsView.h */,
+				6854010B1158FA0E00D9B688 /* KTThumbsView.m */,
 				6813F441112075BB006B7215 /* KTThumbView.h */,
 				6813F442112075BB006B7215 /* KTThumbView.m */,
 			);
@@ -350,6 +355,7 @@
 				68F34AF81152B8C800D9765C /* FlickrRootViewController.m in Sources */,
 				68F34B701152CA8400D9765C /* KTThumbView+SDWebImage.m in Sources */,
 				68F34BBD1152CDF200D9765C /* KTPhotoView+SDWebImage.m in Sources */,
+				6854010C1158FA0E00D9B688 /* KTThumbsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
