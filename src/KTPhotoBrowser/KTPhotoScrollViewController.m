@@ -266,6 +266,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                          duration:(NSTimeInterval)duration {
    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+   [self setScrollViewContentSizeWithPageCount:pageCount_];
    [self updateToolbarWithOrientation:toInterfaceOrientation];
 }
 
