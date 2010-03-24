@@ -41,7 +41,7 @@ The sample app includes an example of using [SDWebImage](http://github.com/rs/SD
 Status
 ======
 
-The project is a work in progress. It is already being used in apps that are available in the App Store, and the goal is to replicate all features found in the Photo app. The current implementation works in portrait mode only.
+The project is a work in progress. It is already being used in apps that are available in the App Store, and the goal is to replicate all features found in the Photo app.
 
 TO DO
 -----
