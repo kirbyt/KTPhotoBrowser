@@ -1,0 +1,31 @@
+Changes since March 23, 2010
+
+- [NEW] Added photo rotation support.
+
+- [NEW] Added thumbnail view rotation support. Turned off by default. To 
+        rotation the thumbnail view do the following (or similar):
+        
+        - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+           return YES;
+        }
+        
+- [REMOVED] [KTThumbsViewController loadPhotos] is no longer available. The thumbnails
+            automatically load when the data source is set and the needsDisplay is YES.
+            To focus a reload use the new method [KTThumbsViewController reloadThumbs].
+      
+- [NEW] New instance method reload on the KTThumbsViewController class. Call this method
+        to reload the thumbnails.
+        
+- [REMOVED] didFinishLoadingPhotos method has bee removed and replaced with more 
+            meaningful methods: willLoadThumbs and didLoadThumbs.
+
+- [NEW] New instance method willLoadThumbs on the KTThumbsViewController class. This
+        method is called prior to loading the thumbnails for display. Override this
+        method if you need to perform some prep work such as displaying an activity
+        indicator.
+        
+- [NEW] New instance method didLoadThumbs on the KTThumbsViewController class. This
+        method is called after the thumbnails are loaded and displayed. Override this 
+        method if you need to perform some type of clean up work such as hiding an
+        activity indicator.
+        
