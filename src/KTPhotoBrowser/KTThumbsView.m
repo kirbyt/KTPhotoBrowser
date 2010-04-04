@@ -55,6 +55,12 @@
       itemsPerRow = floor(viewWidth / thumbnailWidth);
    }
    
+   // Ensure a minimum of space between images.
+   int minimumSpace = 5;
+   if (viewWidth - itemsPerRow * thumbnailWidth < minimumSpace) {
+     itemsPerRow--;
+   }
+   
    if (itemsPerRow < 1) itemsPerRow = 1;  // Ensure at least one per row.
    
    int spaceWidth = round((viewWidth - thumbnailWidth * itemsPerRow) / (itemsPerRow + 1));
