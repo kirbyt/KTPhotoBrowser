@@ -408,8 +408,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
       // rotating.
       return;
    }
+#ifdef DEBUG
    NSLog(@"%s", __PRETTY_FUNCTION__);
    NSLog(@"contentOffset %f,%f", scrollView.contentOffset.x, scrollView.contentOffset.y);
+#endif
    
    CGFloat pageWidth = scrollView.frame.size.width;
    float fractionalPage = scrollView.contentOffset.x / pageWidth;
