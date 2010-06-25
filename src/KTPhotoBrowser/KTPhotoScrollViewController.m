@@ -347,7 +347,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [UIView setAnimationDuration:0.3];
    
    if ( ! [self isStatusbarHidden] ) {
+#ifdef __IPHONE_3_2
+      [[UIApplication sharedApplication] setStatusBarHidden:hide withAnimation:YES];
+#else  // Deprecated.
       [[UIApplication sharedApplication] setStatusBarHidden:hide animated:YES];
+#endif
    }
 
    CGFloat alpha = hide ? 0.0 : 1.0;
