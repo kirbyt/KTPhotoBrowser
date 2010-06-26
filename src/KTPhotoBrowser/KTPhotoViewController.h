@@ -17,8 +17,6 @@
    KTPhotoScrollViewController *scroller_;
    NSInteger photoIndex_;
    KTPhotoView *imageView_;
-   
-   NSOperationQueue *queue_;
 }
 
 @property (nonatomic) NSInteger photoIndex;
