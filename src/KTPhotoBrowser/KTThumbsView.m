@@ -38,6 +38,7 @@
    }
    
    int viewWidth = self.bounds.size.width;
+   int viewHeight = self.bounds.size.height;
    
    int thumbnailWidth = 75;
    int thumbnailHeight = 75;
@@ -66,9 +67,6 @@
    int spaceWidth = round((viewWidth - thumbnailWidth * itemsPerRow) / (itemsPerRow + 1));
    int spaceHeight = spaceWidth;
    
-   int x = spaceWidth;
-   int y = spaceHeight;
-   
    // Calculate content size.
    int photoCount = [dataSource_ numberOfPhotos];
    
@@ -85,8 +83,20 @@
       thumbsHaveBorder = [dataSource_ thumbsHaveBorder];
    }
    
+   NSInteger rowsPerView = viewHeight / rowHeight;
+   NSInteger topRow = self.contentOffset.y / rowHeight;
+   NSInteger bottomRow = topRow + rowsPerView;
+   NSLog(@"topRow: %d  bottomRow: %d", topRow, bottomRow);
+   
+   NSInteger startAtIndex = topRow * itemsPerRow;
+   NSInteger stopAtIndex = (bottomRow * itemsPerRow) + itemsPerRow;
+   NSLog(@"startAtIndex: %d  stopAtIndex: %d", startAtIndex, stopAtIndex);
+   
+   int x = spaceWidth;
+   int y = spaceHeight + (topRow * rowHeight);
+   
    // Add new subviews.
-   for (int i = 0; i < photoCount; i++) {
+   for (int i = startAtIndex; i < stopAtIndex; i++) {
       KTThumbView *thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight) andHasBorder:thumbsHaveBorder];
       [thumbView setController:controller_];
       [thumbView setTag:i];
