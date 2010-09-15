@@ -11,6 +11,7 @@
 
 @interface KTPhotoView (KTPrivateMethods)
 - (void)loadSubviewsWithFrame:(CGRect)frame;
+- (BOOL)isZoomed;
 @end
 
 @implementation KTPhotoView
@@ -43,10 +44,20 @@
 - (void)setImage:(UIImage *)newImage 
 {
    [imageView_ setImage:newImage];
-//   CALayer *layer = [self layer];
-//   [layer setContentsGravity:kCAGravityResizeAspect];
-//   [layer setMasksToBounds:YES];
-//   [layer setContents:(id)[newImage CGImage]];
+}
+
+- (void)layoutSubviews 
+{
+   [super layoutSubviews];
+
+   if ([self isZoomed] == NO && CGRectEqualToRect([self bounds], [imageView_ frame]) == NO) {
+      [imageView_ setFrame:[self bounds]];
+   }
+}
+
+- (BOOL)isZoomed
+{
+   return ([self zoomScale] > [self minimumZoomScale]);
 }
 
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center 
@@ -71,7 +82,7 @@
 {
    float newScale;
    CGRect zoomRect;
-   if ([self zoomScale] > [self minimumZoomScale]) {
+   if ([self isZoomed]) {
       newScale = 1.0;
       zoomRect = [self bounds];
    } else {
@@ -84,7 +95,7 @@
 
 - (void)turnOffZoom
 {
-   if ([self zoomScale] > [self minimumZoomScale]) {
+   if ([self isZoomed]) {
       [self zoomToLocation:CGPointZero];
    }
 }
