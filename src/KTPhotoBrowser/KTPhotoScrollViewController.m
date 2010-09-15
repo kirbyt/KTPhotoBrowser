@@ -295,6 +295,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    
    [self autoScrollToIndex:[currentPhoto_ photoIndex]];
    rotationInProgress_ = NO;
+   
+   [self startChromeDisplayTimer];
 }
 
 - (UIView *)rotatingFooterView {
