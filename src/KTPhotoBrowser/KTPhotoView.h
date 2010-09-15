@@ -17,7 +17,7 @@
    KTPhotoScrollViewController *scroller_;
 }
 
-@property (nonatomic, assign) KTPhotoScrollViewController *scroller;
+@property (nonatomic, retain) KTPhotoScrollViewController *scroller;
 
 - (void)setImage:(UIImage *)newImage;
 - (void)turnOffZoom;
