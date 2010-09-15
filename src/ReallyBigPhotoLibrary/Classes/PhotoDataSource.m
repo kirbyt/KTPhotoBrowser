@@ -22,7 +22,7 @@
    self = [super init];
    if (self) {
       data_ = [[NSMutableArray alloc] init];
-      NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"IMG_0694_th.jpg"], @"thumbnail", [UIImage imageNamed:@"IMG_0694.jpg"], @"fullsize", nil];
+      NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[UIImage imageNamed:@"IMG_0694_th.jpg"], @"thumbnail", [UIImage imageNamed:@"IMG_0694.JPG"], @"fullsize", nil];
       [data_ addObject:dict];
    }
    return self;
@@ -37,14 +37,16 @@
 // Implement either these, for synchronous images…
 - (UIImage *)imageAtIndex:(NSInteger)index
 {
-   NSDictionary *image = [data_ objectAtIndex:0];
-   return [image objectForKey:@"fullsize"];
+   NSDictionary *dict = [data_ objectAtIndex:0];
+   UIImage *image = [dict objectForKey:@"fullsize"];
+   return image;
 }
 
 - (UIImage *)thumbImageAtIndex:(NSInteger)index
 {
-   NSDictionary *image = [data_ objectAtIndex:0];
-   return [image objectForKey:@"thumbnail"];
+   NSDictionary *dict = [data_ objectAtIndex:0];
+   UIImage *image = [dict objectForKey:@"thumbnail"];
+   return image;
 }
 
 
