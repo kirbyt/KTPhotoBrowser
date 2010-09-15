@@ -71,4 +71,9 @@
    }
 }
 
+- (void)turnOffZoom
+{
+   [imageView_ turnOffZoom];
+}
+
 @end

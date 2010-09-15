@@ -23,5 +23,6 @@
 @property (nonatomic, assign) KTPhotoScrollViewController *scroller;
 
 - (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource;
+- (void)turnOffZoom;
 
 @end

@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 
-@interface KTPhotoView : UIView {
-
+@interface KTPhotoView : UIScrollView <UIScrollViewDelegate>
+{
+   UIImageView *imageView_;
 }
 
 - (void)setImage:(UIImage *)newImage;
+- (void)turnOffZoom;
 
 @end

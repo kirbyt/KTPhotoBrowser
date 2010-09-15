@@ -461,6 +461,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    NSInteger nearestNumber = lround(fractionalPage);
    
    if ([currentPhoto_ photoIndex] != nearestNumber) {
+      [currentPhoto_ turnOffZoom];
       KTPhotoViewController *swapController = currentPhoto_;
       currentPhoto_ = nextPhoto_;
       nextPhoto_ = swapController;
