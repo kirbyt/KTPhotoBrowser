@@ -267,7 +267,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ReallyBigPhotoLibrary_Prefix.pch;
 				INFOPLIST_FILE = "ReallyBigPhotoLibrary-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = ReallyBigPhotoLibrary;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
