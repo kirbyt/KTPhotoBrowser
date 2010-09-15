@@ -43,6 +43,7 @@
    KTPhotoView *newView = [[KTPhotoView alloc] initWithFrame:frame];
    [newView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
    [newView setBackgroundColor:[UIColor clearColor]];
+   [newView setScroller:scroller_];
 
    [[self view] addSubview:newView];
    
@@ -62,12 +63,6 @@
       } else {
          [dataSource_ imageAtIndex:photoIndex_ photoView:imageView_];
       }
-   }
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-   if (scroller_) {
-      [scroller_ toggleChromeDisplay];
    }
 }
 

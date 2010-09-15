@@ -7,18 +7,23 @@
 //
 
 #import "KTPhotoView.h"
+#import "KTPhotoScrollViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface KTPhotoView (KTPrivateMethods)
 - (void)loadSubviewsWithFrame:(CGRect)frame;
 - (BOOL)isZoomed;
+- (void)toggleChromeDisplay;
 @end
 
 @implementation KTPhotoView
 
+@synthesize scroller = scroller_;
+
 - (void)dealloc 
 {
    [imageView_ release], imageView_ = nil;
+   [scroller_ release], scroller_ = nil;
    [super dealloc];
 }
 
@@ -52,6 +57,13 @@
 
    if ([self isZoomed] == NO && CGRectEqualToRect([self bounds], [imageView_ frame]) == NO) {
       [imageView_ setFrame:[self bounds]];
+   }
+}
+
+- (void)toggleChromeDisplay
+{
+   if (scroller_) {
+      [scroller_ toggleChromeDisplay];
    }
 }
 
@@ -106,7 +118,21 @@
    
    if ([touch view] == self) {
       if ([touch tapCount] == 2) {
+         [NSObject cancelPreviousPerformRequestsWithTarget:self];
+      }
+   }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+   UITouch *touch = [touches anyObject];
+   
+   if ([touch view] == self) {
+      if ([touch tapCount] == 2) {
          [self zoomToLocation:[touch locationInView:self]];
+      }
+      if ([touch tapCount] == 1) {
+         [self performSelector:@selector(toggleChromeDisplay) withObject:nil afterDelay:0.5];
       }
    }
 }

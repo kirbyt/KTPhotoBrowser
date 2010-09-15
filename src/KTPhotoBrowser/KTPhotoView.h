@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class KTPhotoScrollViewController;
+
 
 @interface KTPhotoView : UIScrollView <UIScrollViewDelegate>
 {
    UIImageView *imageView_;
+   KTPhotoScrollViewController *scroller_;
 }
+
+@property (nonatomic, assign) KTPhotoScrollViewController *scroller;
 
 - (void)setImage:(UIImage *)newImage;
 - (void)turnOffZoom;
