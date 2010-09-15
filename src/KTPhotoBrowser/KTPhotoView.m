@@ -69,7 +69,7 @@
 
 - (BOOL)isZoomed
 {
-   return ([self zoomScale] > [self minimumZoomScale]);
+   return !([self zoomScale] == [self minimumZoomScale]);
 }
 
 - (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center 
@@ -118,7 +118,8 @@
    
    if ([touch view] == self) {
       if ([touch tapCount] == 2) {
-         [NSObject cancelPreviousPerformRequestsWithTarget:self];
+         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(toggleChromeDisplay) object:nil];
+         [self zoomToLocation:[touch locationInView:self]];
       }
    }
 }
@@ -128,9 +129,6 @@
    UITouch *touch = [touches anyObject];
    
    if ([touch view] == self) {
-      if ([touch tapCount] == 2) {
-         [self zoomToLocation:[touch locationInView:self]];
-      }
       if ([touch tapCount] == 1) {
          [self performSelector:@selector(toggleChromeDisplay) withObject:nil afterDelay:0.5];
       }
