@@ -86,12 +86,10 @@
    NSInteger rowsPerView = viewHeight / rowHeight;
    NSInteger topRow = self.contentOffset.y / rowHeight;
    NSInteger bottomRow = topRow + rowsPerView;
-   NSLog(@"topRow: %d  bottomRow: %d", topRow, bottomRow);
    
    NSInteger startAtIndex = topRow * itemsPerRow;
    NSInteger stopAtIndex = (bottomRow * itemsPerRow) + itemsPerRow;
    if (stopAtIndex > photoCount) stopAtIndex = photoCount;
-   NSLog(@"startAtIndex: %d  stopAtIndex: %d", startAtIndex, stopAtIndex);
    
    int x = spaceWidth;
    int y = spaceHeight + (topRow * rowHeight);
