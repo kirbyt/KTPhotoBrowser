@@ -48,5 +48,4 @@ TO DO
 
 * Decouple the photo viewer from the thumbnail viewer.
 * Fix weird animation problem displayed sometimes when rotating a photo.
-* Add zoom in feature to photo viewer.
-* Add iPad support.
+* Improve iPad support.
