@@ -90,6 +90,7 @@
    
    NSInteger startAtIndex = topRow * itemsPerRow;
    NSInteger stopAtIndex = (bottomRow * itemsPerRow) + itemsPerRow;
+   if (stopAtIndex > photoCount) stopAtIndex = photoCount;
    NSLog(@"startAtIndex: %d  stopAtIndex: %d", startAtIndex, stopAtIndex);
    
    int x = spaceWidth;
@@ -97,20 +98,22 @@
    
    // Add new subviews.
    for (int i = startAtIndex; i < stopAtIndex; i++) {
-      KTThumbView *thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight) andHasBorder:thumbsHaveBorder];
-      [thumbView setController:controller_];
-      [thumbView setTag:i];
-      
-      if ([dataSource_ respondsToSelector:@selector(thumbImageAtIndex:thumbView:)] == NO) {
-         UIImage *thumbImage = [dataSource_ thumbImageAtIndex:i];
-         [thumbView setThumbImage:thumbImage];
-      } else {
-         [dataSource_ thumbImageAtIndex:i thumbView:thumbView];
+      if (i >= 0) {
+         KTThumbView *thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight) andHasBorder:thumbsHaveBorder];
+         [thumbView setController:controller_];
+         [thumbView setTag:i];
+         
+         if ([dataSource_ respondsToSelector:@selector(thumbImageAtIndex:thumbView:)] == NO) {
+            UIImage *thumbImage = [dataSource_ thumbImageAtIndex:i];
+            [thumbView setThumbImage:thumbImage];
+         } else {
+            [dataSource_ thumbImageAtIndex:i thumbView:thumbView];
+         }
+         
+         
+         [self addSubview:thumbView];
+         [thumbView release];
       }
-      
-      
-      [self addSubview:thumbView];
-      [thumbView release];
       
       // Adjust the position.
       if ( (i+1) % itemsPerRow == 0) {
