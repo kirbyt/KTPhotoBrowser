@@ -34,6 +34,7 @@
    [scrollView setController:self];
    [scrollView setScrollsToTop:YES];
    [scrollView setScrollEnabled:YES];
+   [scrollView setAlwaysBounceVertical:YES];
    [scrollView setBackgroundColor:[UIColor whiteColor]];
    
    // Set main view to the scroll view.
