@@ -33,6 +33,8 @@
    if (self) {
       [self setDelegate:self];
       [self setMaximumZoomScale:5.0];
+      [self setShowsHorizontalScrollIndicator:NO];
+      [self setShowsVerticalScrollIndicator:NO];
       [self loadSubviewsWithFrame:frame];
    }
    return self;
