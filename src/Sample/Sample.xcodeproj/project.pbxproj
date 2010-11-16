@@ -381,6 +381,7 @@
 				INFOPLIST_FILE = "Sample-Info.plist";
 				PRODUCT_NAME = Sample;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
@@ -395,6 +396,7 @@
 				INFOPLIST_FILE = "Sample-Info.plist";
 				PRODUCT_NAME = Sample;
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

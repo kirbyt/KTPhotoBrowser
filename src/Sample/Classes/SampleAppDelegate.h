@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SampleAppDelegate : NSObject <UIApplicationDelegate> {
+@interface SampleAppDelegate : NSObject <UIApplicationDelegate> 
+{
     UIWindow *window;
 }
 
