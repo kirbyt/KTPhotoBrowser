@@ -380,6 +380,7 @@
 				GCC_PREFIX_HEADER = Sample_Prefix.pch;
 				INFOPLIST_FILE = "Sample-Info.plist";
 				PRODUCT_NAME = Sample;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
@@ -393,6 +394,7 @@
 				GCC_PREFIX_HEADER = Sample_Prefix.pch;
 				INFOPLIST_FILE = "Sample-Info.plist";
 				PRODUCT_NAME = Sample;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
