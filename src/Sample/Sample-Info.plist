@@ -26,7 +26,16 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>MainWindowPad</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleBlackTranslucent</string>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
 </dict>
 </plist>

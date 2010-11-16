@@ -18,6 +18,7 @@
 		6813F445112075BB006B7215 /* KTPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F43E112075BB006B7215 /* KTPhotoViewController.m */; };
 		6813F446112075BB006B7215 /* KTThumbsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F440112075BB006B7215 /* KTThumbsViewController.m */; };
 		6813F447112075BB006B7215 /* KTThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F442112075BB006B7215 /* KTThumbView.m */; };
+		6827FFB412930FBB00070136 /* MainWindowPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6827FFB312930FBB00070136 /* MainWindowPad.xib */; };
 		68316E371124726F00A906B3 /* KTPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */; };
 		68316E801124743F00A906B3 /* KTPhotoBrowserGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */; };
 		6854010C1158FA0E00D9B688 /* KTThumbsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854010B1158FA0E00D9B688 /* KTThumbsView.m */; };
@@ -63,6 +64,7 @@
 		6813F440112075BB006B7215 /* KTThumbsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTThumbsViewController.m; path = ../KTPhotoBrowser/KTThumbsViewController.m; sourceTree = SOURCE_ROOT; };
 		6813F441112075BB006B7215 /* KTThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTThumbView.h; path = ../KTPhotoBrowser/KTThumbView.h; sourceTree = SOURCE_ROOT; };
 		6813F442112075BB006B7215 /* KTThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTThumbView.m; path = ../KTPhotoBrowser/KTThumbView.m; sourceTree = SOURCE_ROOT; };
+		6827FFB312930FBB00070136 /* MainWindowPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindowPad.xib; sourceTree = "<group>"; };
 		68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = KTPhotoBrowser.bundle; path = ../KTPhotoBrowser/KTPhotoBrowser.bundle; sourceTree = SOURCE_ROOT; };
 		68316E7E1124743F00A906B3 /* KTPhotoBrowserGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTPhotoBrowserGlobal.h; path = ../KTPhotoBrowser/KTPhotoBrowserGlobal.h; sourceTree = SOURCE_ROOT; };
 		68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTPhotoBrowserGlobal.m; path = ../KTPhotoBrowser/KTPhotoBrowserGlobal.m; sourceTree = SOURCE_ROOT; };
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				6827FFB312930FBB00070136 /* MainWindowPad.xib */,
 				8D1107310486CEB800E47090 /* Sample-Info.plist */,
 				68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */,
 			);
@@ -328,6 +331,7 @@
 				68F34A961152B0C800D9765C /* LICENSE in Resources */,
 				68F34A971152B0C800D9765C /* README.md in Resources */,
 				AFFB147F1152E9A700BCB9E4 /* photoDefault.png in Resources */,
+				6827FFB412930FBB00070136 /* MainWindowPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

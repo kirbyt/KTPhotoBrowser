@@ -24,6 +24,7 @@
    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
       RootViewController *newController = [[RootViewController alloc] initWithStyle:UITableViewStylePlain];
       [newController setWindow:window];
+      newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
       [newController release];
    } else {
       LocalImageRootViewController *newController = [[LocalImageRootViewController alloc] initWithWindow:window];

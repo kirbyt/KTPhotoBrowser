@@ -14,6 +14,7 @@
 
 @interface PhotoPickerController (Private)
 - (UIImagePickerController *)imagePicker;
+- (UIPopoverController *)popoverController;
 - (void)showWithCamera;
 - (void)showWithPhotoLibrary;
 @end
@@ -22,6 +23,7 @@
 
 - (void)dealloc {
    [imagePicker_ release], imagePicker_ = nil;
+   [popoverController_ release], popoverController_ = nil;
    
    [super dealloc];
 }
@@ -53,20 +55,33 @@
    }
 }
 
+- (void)showImagePicker {
+   // Check for popover class. Use it if available and device is an iPad
+   // otherwise show it the old fashion way.
+   Class popoverControllerClass = NSClassFromString(@"UIPopoverController");
+   if (popoverControllerClass && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+      UIBarButtonItem *button = [[delegate_ navigationItem] rightBarButtonItem];
+      [[self popoverController] presentPopoverFromBarButtonItem:button 
+                                       permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                                       animated:YES];
+   } else {
+      if ([delegate_ respondsToSelector:@selector(presentModalViewController:animated:)]) {
+         [delegate_ presentModalViewController:imagePicker_ animated:YES];
+      }
+   }
+}
+
 - (void)showWithCamera {
    isFromCamera_ = YES;
    [[self imagePicker] setSourceType:UIImagePickerControllerSourceTypeCamera];
-   if ([delegate_ respondsToSelector:@selector(presentModalViewController:animated:)]) {
-      [delegate_ presentModalViewController:imagePicker_ animated:YES];
-   }
+   
+   [self showImagePicker];
 }
 
 - (void)showWithPhotoLibrary {
    isFromCamera_ = NO;
    [[self imagePicker] setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-   if ([delegate_ respondsToSelector:@selector(presentModalViewController:animated:)]) {
-      [delegate_ presentModalViewController:imagePicker_ animated:YES];
-   }
+   [self showImagePicker];
 }
 
 - (UIImagePickerController *)imagePicker {
@@ -76,7 +91,21 @@
    
    imagePicker_ = [[UIImagePickerController alloc] init];
    [imagePicker_ setDelegate:self];
+   [imagePicker_ setAllowsEditing:NO];
    return imagePicker_;
+}
+
+- (UIPopoverController *)popoverController {
+   if (popoverController_) {
+      return popoverController_;
+   }
+   
+   Class popoverControllerClass = NSClassFromString(@"UIPopoverController");
+   if (popoverControllerClass && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+      popoverController_ = [[UIPopoverController alloc] initWithContentViewController:[self imagePicker]];
+   }
+   
+   return popoverController_;
 }
 
 
