@@ -266,9 +266,9 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
    rotationInProgress_ = YES;
    
-//   // Hide the next photo to prevent it from overlapping 
-//   // the during rotation's animation.
-//   [[nextPhoto_ view] setHidden:YES];
+   // Hide the next photo to prevent it from overlapping 
+   // the during rotation's animation.
+   [[nextPhoto_ view] setHidden:YES];
    
    NSLog(@"%s", __PRETTY_FUNCTION__);
    // Forward message to subviews.
@@ -296,11 +296,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self setScrollViewContentSizeWithPageCount:pageCount_];
    
    // Reposition the photo views we have in memory.
-//   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
-//   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
-//   [[nextPhoto_ view] setHidden:NO];
-//   
-//   [self autoScrollToIndex:[currentPhoto_ photoIndex]];
+   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
+   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
+   [[nextPhoto_ view] setHidden:NO];
+   
+   [self autoScrollToIndex:[currentPhoto_ photoIndex]];
    rotationInProgress_ = NO;
 
    [self startChromeDisplayTimer];
