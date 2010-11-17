@@ -94,6 +94,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    UIColor *backgroundColor = [dataSource_ respondsToSelector:@selector(imageBackgroundColor)] ?
                                 [dataSource_ imageBackgroundColor] : [UIColor blackColor];  
    [newView setBackgroundColor:backgroundColor];
+   [newView setAutoresizesSubviews:YES];
    [newView setPagingEnabled:YES];
    [newView setShowsVerticalScrollIndicator:NO];
    [newView setShowsHorizontalScrollIndicator:NO];
@@ -134,6 +135,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                     screenFrame.size.width, 
                                     ktkDefaultToolbarHeight);
    toolbar_ = [[UIToolbar alloc] initWithFrame:toolbarFrame];
+   [toolbar_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin];
    [toolbar_ setBarStyle:UIBarStyleBlackTranslucent];
    [toolbar_ setItems:[NSArray arrayWithObjects:
                        space, previousButton_, space, nextButton_, space, trashButton, nil]];
@@ -195,21 +197,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [nextPhoto_ setScroller:self];
    [scrollView_ addSubview:[nextPhoto_ view]];
    
-   // Set content size to allow scrolling.
    pageCount_ = [dataSource_ numberOfPhotos];
-   [self setScrollViewContentSizeWithPageCount:pageCount_];
-
-   
-   // Auto-scroll to the stating photo.
-   [self autoScrollToIndex:startWithIndex_];
-   
-   [self applyNewIndex:startWithIndex_ photoController:currentPhoto_];
-   [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
-   
-   [self setTitleWithCurrentPhotoIndex];
-   [self toggleNavButtons];
-   
-   [self startChromeDisplayTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -220,18 +208,28 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  // The first time the view appears, store away the previous controller's values so we can reset on pop.
-  UINavigationBar *navbar = [[self navigationController] navigationBar];
-  if (!viewDidAppearOnce_) {
-    viewDidAppearOnce_ = YES;
-    navbarWasTranslucent_ = [navbar isTranslucent];
-    statusBarStyle_ = [[UIApplication sharedApplication] statusBarStyle];
-  }
-  // Then ensure translucency. Without it, the view will appear below rather than under it.  
-  [navbar setTranslucent:YES];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
-  
-  [super viewWillAppear:animated];
+   [super viewWillAppear:animated];
+   
+   // The first time the view appears, store away the previous controller's values so we can reset on pop.
+   UINavigationBar *navbar = [[self navigationController] navigationBar];
+   if (!viewDidAppearOnce_) {
+      viewDidAppearOnce_ = YES;
+      navbarWasTranslucent_ = [navbar isTranslucent];
+      statusBarStyle_ = [[UIApplication sharedApplication] statusBarStyle];
+   }
+   // Then ensure translucency. Without it, the view will appear below rather than under it.  
+   [navbar setTranslucent:YES];
+   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
+
+   // Set the scroll view's content size, auto-scroll to the stating photo,
+   // and setup the other display elements.
+   [self setScrollViewContentSizeWithPageCount:pageCount_];
+   [self autoScrollToIndex:startWithIndex_];
+   [self applyNewIndex:startWithIndex_ photoController:currentPhoto_];
+   [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
+   [self setTitleWithCurrentPhotoIndex];
+   [self toggleNavButtons];
+   [self startChromeDisplayTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -268,19 +266,24 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
    rotationInProgress_ = YES;
    
-   // Hide the next photo to prevent it from overlapping 
-   // the during rotation's animation.
-   [[nextPhoto_ view] setHidden:YES];
+//   // Hide the next photo to prevent it from overlapping 
+//   // the during rotation's animation.
+//   [[nextPhoto_ view] setHidden:YES];
+   
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   // Forward message to subviews.
+   [currentPhoto_ willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+   [nextPhoto_ willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                          duration:(NSTimeInterval)duration {
-   // Note the scrollview has already been resized by
-   // the time this method is called.
-   
-   // Set the new context size.
-   [self setScrollViewContentSizeWithPageCount:pageCount_];
-   
+//   // Note the scrollview has already been resized by
+//   // the time this method is called.
+//   
+//   // Set the new context size.
+//   [self setScrollViewContentSizeWithPageCount:pageCount_];
+//   
    
    // Rotate the toolbar.
    [self updateToolbarWithOrientation:toInterfaceOrientation];
@@ -288,14 +291,18 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   
+   [self setScrollViewContentSizeWithPageCount:pageCount_];
+   
    // Reposition the photo views we have in memory.
-   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
-   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
-   [[nextPhoto_ view] setHidden:NO];
-   
-   [self autoScrollToIndex:[currentPhoto_ photoIndex]];
+//   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
+//   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
+//   [[nextPhoto_ view] setHidden:NO];
+//   
+//   [self autoScrollToIndex:[currentPhoto_ photoIndex]];
    rotationInProgress_ = NO;
-   
+
    [self startChromeDisplayTimer];
 }
 
@@ -411,10 +418,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
       // rotating.
       return;
    }
-#ifdef DEBUG
-   NSLog(@"%s", __PRETTY_FUNCTION__);
-   NSLog(@"contentOffset %f,%f", scrollView.contentOffset.x, scrollView.contentOffset.y);
-#endif
+//#ifdef DEBUG
+//   NSLog(@"%s", __PRETTY_FUNCTION__);
+//   NSLog(@"contentOffset %f,%f", scrollView.contentOffset.x, scrollView.contentOffset.y);
+//#endif
    
    CGFloat pageWidth = scrollView.frame.size.width;
    float fractionalPage = scrollView.contentOffset.x / pageWidth;
