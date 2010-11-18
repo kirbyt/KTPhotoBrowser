@@ -17,7 +17,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 #define BUTTON_DELETEPHOTO 0
 #define BUTTON_CANCEL 1
-#define CONTENT_OFFSET 20
 
 @interface KTPhotoScrollViewController (KTPrivate)
 - (void)setCurrentIndex:(NSInteger)newIndex;
@@ -30,6 +29,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)nextPhoto;
 - (void)previousPhoto;
 - (void)toggleNavButtons;
+- (CGRect)frameForPagingScrollView;
+- (CGRect)frameForPageAtIndex:(NSUInteger)index;
 @end
 
 @implementation KTPhotoScrollViewController
@@ -72,7 +73,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 {
    [super loadView];
    
-   CGRect scrollFrame = [[UIScreen mainScreen] bounds];
+   CGRect scrollFrame = [self frameForPagingScrollView];
    UIScrollView *newView = [[UIScrollView alloc] initWithFrame:scrollFrame];
    [newView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
    [newView setDelegate:self];
@@ -253,6 +254,32 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 
 #pragma mark -
+#pragma mark Frame calculations
+#define PADDING  10
+
+- (CGRect)frameForPagingScrollView 
+{
+   CGRect frame = [[UIScreen mainScreen] bounds];
+   frame.origin.x -= PADDING;
+   frame.size.width += (2 * PADDING);
+   return frame;
+}
+
+- (CGRect)frameForPageAtIndex:(NSUInteger)index 
+{
+   // We have to use our paging scroll view's bounds, not frame, to calculate the page placement. When the device is in
+   // landscape orientation, the frame will still be in portrait because the pagingScrollView is the root view controller's
+   // view, so its frame is in window coordinate space, which is never rotated. Its bounds, however, will be in landscape
+   // because it has a rotation transform applied.
+   CGRect bounds = [scrollView_ bounds];
+   CGRect pageFrame = bounds;
+   pageFrame.size.width -= (2 * PADDING);
+   pageFrame.origin.x = (bounds.size.width * index) + PADDING;
+   return pageFrame;
+}
+
+
+#pragma mark -
 #pragma mark Photo (Page) Management
 
 - (void)loadPhoto:(NSInteger)index
@@ -264,11 +291,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    id currentPhotoView = [photoViews_ objectAtIndex:index];
    if (NO == [currentPhotoView isKindOfClass:[KTPhotoView class]]) {
       // Load the photo view.
-      CGRect frame = [scrollView_ frame];
-      frame = CGRectOffset(frame, frame.size.width * index, 0.0);
+      CGRect frame = [self frameForPageAtIndex:index];
       KTPhotoView *photoView = [[KTPhotoView alloc] initWithFrame:frame];
       [photoView setScroller:self];
-      [photoView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+      [photoView setIndex:index];
       [photoView setBackgroundColor:[UIColor clearColor]];
       
       // Set the photo image.
@@ -335,6 +361,27 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    toolbar_.frame = toolbarFrame;
 }
 
+- (void)layoutScrollViewSubviews
+{
+   [self setScrollViewContentSize];
+
+   NSArray *subviews = [scrollView_ subviews];
+   
+   for (KTPhotoView *photoView in subviews) {
+      CGPoint restorePoint = [photoView pointToCenterAfterRotation];
+      CGFloat restoreScale = [photoView scaleToRestoreAfterRotation];
+      [photoView setFrame:[self frameForPageAtIndex:[photoView index]]];
+      [photoView setMaxMinZoomScalesForCurrentBounds];
+      [photoView restoreCenterPoint:restorePoint scale:restoreScale];
+   }
+   
+   // adjust contentOffset to preserve page location based on values collected prior to location
+   CGFloat pageWidth = scrollView_.bounds.size.width;
+   CGFloat newOffset = (firstVisiblePageIndexBeforeRotation_ * pageWidth) + (percentScrolledIntoFirstVisiblePage_ * pageWidth);
+   scrollView_.contentOffset = CGPointMake(newOffset, 0);
+   
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
    return YES;
@@ -343,20 +390,31 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
                                 duration:(NSTimeInterval)duration 
 {
-
+   // here, our pagingScrollView bounds have not yet been updated for the new interface orientation. So this is a good
+   // place to calculate the content offset that we will need in the new orientation
+   CGFloat offset = scrollView_.contentOffset.x;
+   CGFloat pageWidth = scrollView_.bounds.size.width;
+   
+   if (offset >= 0) {
+      firstVisiblePageIndexBeforeRotation_ = floorf(offset / pageWidth);
+      percentScrolledIntoFirstVisiblePage_ = (offset - (firstVisiblePageIndexBeforeRotation_ * pageWidth)) / pageWidth;
+   } else {
+      firstVisiblePageIndexBeforeRotation_ = 0;
+      percentScrolledIntoFirstVisiblePage_ = offset / pageWidth;
+   }    
+   
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                          duration:(NSTimeInterval)duration 
 {
+   [self layoutScrollViewSubviews];
    // Rotate the toolbar.
    [self updateToolbarWithOrientation:toInterfaceOrientation];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation 
 {
-
-   [self setScrollViewContentSize];
    [self startChromeDisplayTimer];
 }
 

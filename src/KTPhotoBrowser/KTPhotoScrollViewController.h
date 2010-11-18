@@ -21,6 +21,10 @@
    NSInteger photoCount_;
    
    NSMutableArray *photoViews_;
+
+   // these values are stored off before we start rotation so we adjust our content offset appropriately during rotation
+   int firstVisiblePageIndexBeforeRotation_;
+   CGFloat percentScrolledIntoFirstVisiblePage_;
    
    UIStatusBarStyle statusBarStyle_;
 
