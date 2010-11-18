@@ -11,18 +11,16 @@
 @class KTPhotoViewController;
 @protocol KTPhotoBrowserDataSource;
 
-@interface KTPhotoScrollViewController : UIViewController<UIScrollViewDelegate, UIActionSheetDelegate> {
+@interface KTPhotoScrollViewController : UIViewController<UIScrollViewDelegate, UIActionSheetDelegate> 
+{
    id <KTPhotoBrowserDataSource> dataSource_;
    UIScrollView *scrollView_;
    UIToolbar *toolbar_;
    NSUInteger startWithIndex_;
    NSInteger currentIndex_;
-   NSInteger pageCount_;
+   NSInteger photoCount_;
    
    NSMutableArray *photoViews_;
-   
-   KTPhotoViewController *currentPhoto_;
-   KTPhotoViewController *nextPhoto_;
    
    UIStatusBarStyle statusBarStyle_;
 

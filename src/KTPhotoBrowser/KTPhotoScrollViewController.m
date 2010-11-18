@@ -5,25 +5,10 @@
 //  Created by Kirby Turner on 2/4/10.
 //  Copyright 2010 White Peak Software Inc. All rights reserved.
 //
-//  Portions of the following code was derived from the Virtual Pages scroller
-//  posted by Matt Gallagher at:
-//  http://cocoawithlove.com/2009/01/multiple-virtual-pages-in-uiscrollview.html
-//
-//  Portions created by Matt Gallagher on 24/01/09.
-//  Copyright 2009 Matt Gallagher. All rights reserved.
-//
-//  Permission is given to use this source code file, free of charge, in any
-//  project, commercial or otherwise, entirely at your risk, with the condition
-//  that any redistribution (in part or whole) of source code must retain
-//  this copyright and permission notice. Attribution in compiled projects is
-//  appreciated but not required.
-//
-//
 
 #import "KTPhotoScrollViewController.h"
 #import "KTPhotoBrowserDataSource.h"
 #import "KTPhotoBrowserGlobal.h"
-#import "KTPhotoViewController.h"
 #import "KTPhotoView.h"
 
 const CGFloat ktkDefaultPortraitToolbarHeight   = 44;
@@ -34,7 +19,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #define BUTTON_CANCEL 1
 #define CONTENT_OFFSET 20
 
-@interface KTPhotoScrollViewController (Private)
+@interface KTPhotoScrollViewController (KTPrivate)
+- (void)setCurrentIndex:(NSInteger)newIndex;
 - (void)toggleChrome:(BOOL)hide;
 - (void)startChromeDisplayTimer;
 - (void)cancelChromeDisplayTimer;
@@ -52,7 +38,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 @synthesize statusbarHidden = statusbarHidden_;
 
 
-- (void)dealloc {
+- (void)dealloc 
+{
    [nextButton_ release], nextButton_ = nil;
    [previousButton_ release], previousButton_ = nil;
    [scrollView_ release], scrollView_ = nil;
@@ -60,13 +47,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
   
    [dataSource_ release], dataSource_ = nil;  
    
-   [currentPhoto_ release], currentPhoto_ = nil;
-   [nextPhoto_ release], nextPhoto_ = nil;
-   
    [super dealloc];
 }
 
-- (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource andStartWithPhotoAtIndex:(NSUInteger)index {
+- (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource andStartWithPhotoAtIndex:(NSUInteger)index 
+{
    if (self = [super init]) {
      startWithIndex_ = index;
      dataSource_ = [dataSource retain];
@@ -83,11 +68,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    return self;
 }
 
-- (void)loadView {
+- (void)loadView 
+{
    [super loadView];
    
    CGRect scrollFrame = [[UIScreen mainScreen] bounds];
-   scrollFrame.size.width += CONTENT_OFFSET;
    UIScrollView *newView = [[UIScrollView alloc] initWithFrame:scrollFrame];
    [newView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
    [newView setDelegate:self];
@@ -102,8 +87,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    
    [[self view] addSubview:newView];
    
-   scrollView_ = newView;
-   [scrollView_ retain];
+   scrollView_ = [newView retain];
    
    [newView release];
    
@@ -146,37 +130,24 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [space release];
 }
 
-- (void)setTitleWithCurrentPhotoIndex {
+- (void)setTitleWithCurrentPhotoIndex 
+{
    NSString *formatString = NSLocalizedString(@"%1$i of %2$i", @"Picture X out of Y total.");
-   NSString *title = [NSString stringWithFormat:formatString, currentIndex_ + 1, pageCount_, nil];
+   NSString *title = [NSString stringWithFormat:formatString, currentIndex_ + 1, photoCount_, nil];
    [self setTitle:title];
 }
 
-//- (void)applyNewIndex:(NSUInteger)newIndex photoController:(KTPhotoViewController *)photoController {
-//   BOOL outOfBounds = newIndex >= pageCount_ || newIndex < 0;
-//   
-//   if ( !outOfBounds ) {
-//      CGRect photoFrame = photoController.view.frame;
-//      photoFrame.origin.y = 0;
-//      photoFrame.origin.x = scrollView_.frame.size.width * newIndex;
-//      photoController.view.frame = photoFrame;
-//   } else {
-//      CGRect photoFrame = photoController.view.frame;
-//      photoFrame.origin.y = scrollView_.frame.size.height;
-//      photoController.view.frame = photoFrame;
-//   }
-//
-//   [photoController setPhotoIndex:newIndex];
-//}
-
-- (void)autoScrollToIndex:(NSInteger)index {
+- (void)scrollToIndex:(NSInteger)index 
+{
    CGRect frame = scrollView_.frame;
    frame.origin.x = frame.size.width * index;
    frame.origin.y = 0;
    [scrollView_ scrollRectToVisible:frame animated:NO];
 }
 
-- (void)setScrollViewContentSizeWithPageCount:(NSInteger)pageCount {
+- (void)setScrollViewContentSize
+{
+   NSInteger pageCount = photoCount_;
    if (pageCount == 0) {
       pageCount = 1;
    }
@@ -186,32 +157,32 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [scrollView_ setContentSize:size];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
    [super viewDidLoad];
   
-//   currentPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
-//   [currentPhoto_ setScroller:self];
-//   [scrollView_ addSubview:[currentPhoto_ view]];
-//
-//   nextPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
-//   [nextPhoto_ setScroller:self];
-//   [scrollView_ addSubview:[nextPhoto_ view]];
+   photoCount_ = [dataSource_ numberOfPhotos];
+   [self setScrollViewContentSize];
    
-   pageCount_ = [dataSource_ numberOfPhotos];
-   photoViews_ = [[NSMutableArray alloc] initWithCapacity:pageCount_];
-   for (int i=0; i < pageCount_; i++) {
+   // Setup our photo view cache. We only keep 3 views in
+   // memory. NSNull is used as a placeholder for the other
+   // elements in the view cache array.
+   photoViews_ = [[NSMutableArray alloc] initWithCapacity:photoCount_];
+   for (int i=0; i < photoCount_; i++) {
       [photoViews_ addObject:[NSNull null]];
    }
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated 
+{
    [super viewWillAppear:animated];
    
    // The first time the view appears, store away the previous controller's values so we can reset on pop.
@@ -227,17 +198,17 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
    // Set the scroll view's content size, auto-scroll to the stating photo,
    // and setup the other display elements.
-   [self setScrollViewContentSizeWithPageCount:pageCount_];
+   [self setScrollViewContentSize];
    [self setCurrentIndex:startWithIndex_];
-   [self autoScrollToIndex:startWithIndex_];
-//   [self applyNewIndex:startWithIndex_ photoController:currentPhoto_];
-//   [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
+   [self scrollToIndex:startWithIndex_];
+
    [self setTitleWithCurrentPhotoIndex];
    [self toggleNavButtons];
    [self startChromeDisplayTimer];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewWillDisappear:(BOOL)animated 
+{
   // Reset nav bar translucency and status bar style to whatever it was before.
   UINavigationBar *navbar = [[self navigationController] navigationBar];
   [navbar setTranslucent:navbarWasTranslucent_];
@@ -245,40 +216,39 @@ const CGFloat ktkDefaultToolbarHeight = 44;
   [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated 
+{
    [self cancelChromeDisplayTimer];
 }
 
-- (void)deleteCurrentPhoto {
+- (void)deleteCurrentPhoto 
+{
    if (dataSource_) {
       // TODO: Animate the deletion of the current photo.
       
-      NSInteger photoIndexToDelete = [currentPhoto_ photoIndex];
+      NSInteger photoIndexToDelete = currentIndex_;
       [dataSource_ deleteImageAtIndex:photoIndexToDelete];
       
-      pageCount_ -= 1;
-      if (pageCount_ == 0) {
+      photoCount_ -= 1;
+      if (photoCount_ == 0) {
          [self showChrome];
          [[self navigationController] popViewControllerAnimated:YES];
       } else {
-         [self setScrollViewContentSizeWithPageCount:pageCount_];
+         [self setScrollViewContentSize];
          NSInteger nextIndex = photoIndexToDelete;
-         if (nextIndex == pageCount_) {
+         if (nextIndex == photoCount_) {
             nextIndex -= 1;
          }
-//         [self applyNewIndex:nextIndex photoController:currentPhoto_];
-//         [self applyNewIndex:(nextIndex + 1) photoController:nextPhoto_];
-         [self autoScrollToIndex:nextIndex];
-         [self scrollViewDidEndScrollingAnimation:scrollView_];
-         [self setTitleWithCurrentPhotoIndex];
-         [self toggleNavButtons];
+         [self setCurrentIndex:nextIndex];
+         //[self scrollToIndex:nextIndex];
       }
    }
 }
 
-- (void)toggleNavButtons {
-   [previousButton_ setEnabled:([currentPhoto_ photoIndex] > 0)];
-   [nextButton_ setEnabled:([currentPhoto_ photoIndex] < pageCount_ - 1)];
+- (void)toggleNavButtons 
+{
+   [previousButton_ setEnabled:(currentIndex_ > 0)];
+   [nextButton_ setEnabled:(currentIndex_ < photoCount_ - 1)];
 }
 
 
@@ -287,7 +257,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)loadPhoto:(NSInteger)index
 {
-   if (index < 0 || index >= pageCount_) {
+   if (index < 0 || index >= photoCount_) {
       return;
    }
    
@@ -322,7 +292,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (void)unloadPhoto:(NSInteger)index
 {
-   if (index < 0 || index >= pageCount_) {
+   if (index < 0 || index >= photoCount_) {
       return;
    }
    
@@ -344,13 +314,15 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self unloadPhoto:currentIndex_ - 2];
    
    [self setTitleWithCurrentPhotoIndex];
+   [self toggleNavButtons];
 }
 
 
 #pragma mark -
 #pragma mark Rotation Magic
 
-- (void)updateToolbarWithOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (void)updateToolbarWithOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
    CGRect toolbarFrame = toolbar_.frame;
    if ((interfaceOrientation) == UIInterfaceOrientationPortrait || (interfaceOrientation) == UIInterfaceOrientationPortraitUpsideDown) {
       toolbarFrame.size.height = ktkDefaultPortraitToolbarHeight;
@@ -363,42 +335,33 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    toolbar_.frame = toolbarFrame;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
    return YES;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
-                                duration:(NSTimeInterval)duration {
+                                duration:(NSTimeInterval)duration 
+{
 
-//   rotationInProgress_ = YES;
-//   
-//   // Hide the next photo to prevent it from overlapping 
-//   // the during rotation's animation.
-//   [[nextPhoto_ view] setHidden:YES];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                         duration:(NSTimeInterval)duration {
+                                         duration:(NSTimeInterval)duration 
+{
    // Rotate the toolbar.
    [self updateToolbarWithOrientation:toInterfaceOrientation];
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation 
+{
 
-   [self setScrollViewContentSizeWithPageCount:pageCount_];
-   
-   // Reposition the photo views we have in memory.
-//   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
-//   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
-//   [[nextPhoto_ view] setHidden:NO];
-   
-//   [self autoScrollToIndex:[currentPhoto_ photoIndex]];
-//   rotationInProgress_ = NO;
-
+   [self setScrollViewContentSize];
    [self startChromeDisplayTimer];
 }
 
-- (UIView *)rotatingFooterView {
+- (UIView *)rotatingFooterView 
+{
    return toolbar_;
 }
 
@@ -406,11 +369,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark -
 #pragma mark Chrome Helpers
 
-- (void)toggleChromeDisplay {
+- (void)toggleChromeDisplay 
+{
    [self toggleChrome:!isChromeHidden_];
 }
 
-- (void)toggleChrome:(BOOL)hide {
+- (void)toggleChrome:(BOOL)hide 
+{
    isChromeHidden_ = hide;
    [UIView beginAnimations:nil context:nil];
    
@@ -441,7 +406,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    }
 }
 
-- (void)hideChrome {
+- (void)hideChrome 
+{
    if (chromeHideTimer_ && [chromeHideTimer_ isValid]) {
       [chromeHideTimer_ invalidate];
       chromeHideTimer_ = nil;
@@ -449,11 +415,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self toggleChrome:YES];
 }
 
-- (void)showChrome {
+- (void)showChrome 
+{
    [self toggleChrome:NO];
 }
 
-- (void)startChromeDisplayTimer {
+- (void)startChromeDisplayTimer 
+{
    [self cancelChromeDisplayTimer];
    chromeHideTimer_ = [NSTimer scheduledTimerWithTimeInterval:5.0
                                                        target:self 
@@ -462,7 +430,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                                       repeats:NO];
 }
 
-- (void)cancelChromeDisplayTimer {
+- (void)cancelChromeDisplayTimer 
+{
    if (chromeHideTimer_) {
       [chromeHideTimer_ invalidate];
    }
@@ -475,84 +444,38 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView 
 {
    CGFloat pageWidth = scrollView.frame.size.width;
-   int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+   float fractionalPage = scrollView.contentOffset.x / pageWidth;
+   NSInteger page = floor(fractionalPage);
 	if (page != currentIndex_) {
 		[self setCurrentIndex:page];
 	}
-
-   //   CGFloat pageWidth = scrollView.frame.size.width;
-//   float fractionalPage = scrollView.contentOffset.x / pageWidth;
-//   
-//   NSInteger lowerNumber = floor(fractionalPage);
-//   NSInteger upperNumber = lowerNumber + 1;
-//
-//   if (lowerNumber == [currentPhoto_ photoIndex]) {
-//      if (upperNumber != [nextPhoto_ photoIndex]) {
-//         [self applyNewIndex:upperNumber photoController:nextPhoto_];
-//      }
-//   } else if (upperNumber == [currentPhoto_ photoIndex]) {
-//      if (lowerNumber != [nextPhoto_ photoIndex]) {
-//         [self applyNewIndex:lowerNumber photoController:nextPhoto_];
-//      }
-//   } else {
-//      if (lowerNumber == [nextPhoto_ photoIndex]) {
-//         [self applyNewIndex:upperNumber photoController:currentPhoto_];
-//      } else if (upperNumber == [nextPhoto_ photoIndex]) {
-//         [self applyNewIndex:lowerNumber photoController:currentPhoto_];
-//      } else {
-//         [self applyNewIndex:lowerNumber photoController:currentPhoto_];
-//         [self applyNewIndex:upperNumber photoController:nextPhoto_];
-//      }
-//   }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView 
+{
    [self hideChrome];
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-   [self scrollViewDidEndScrollingAnimation:scrollView];
-}
-
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-//   if (rotationInProgress_) {
-//      // The contentOffset is adjusted and breaks the 
-//      // code below. Therefore, ignore scrolling when
-//      // rotating.
-//      return;
-//   }
-//
-//   CGFloat pageWidth = scrollView.frame.size.width;
-//   float fractionalPage = scrollView.contentOffset.x / pageWidth;
-//   NSInteger nearestNumber = lround(fractionalPage);
-//   
-//   if ([currentPhoto_ photoIndex] != nearestNumber) {
-//      [currentPhoto_ turnOffZoom];
-//      KTPhotoViewController *swapController = currentPhoto_;
-//      currentPhoto_ = nextPhoto_;
-//      nextPhoto_ = swapController;
-//      [self setTitleWithCurrentPhotoIndex];
-//      [self toggleNavButtons];
-//   }
 }
 
 
 #pragma mark -
 #pragma mark Toolbar Actions
 
-- (void)nextPhoto {
-   [self autoScrollToIndex:currentIndex_ + 1];
+- (void)nextPhoto 
+{
+   [self scrollToIndex:currentIndex_ + 1];
    [self scrollViewDidEndScrollingAnimation:scrollView_];
    [self startChromeDisplayTimer];
 }
 
-- (void)previousPhoto {
-   [self autoScrollToIndex:currentIndex_ - 1];
+- (void)previousPhoto 
+{
+   [self scrollToIndex:currentIndex_ - 1];
    [self scrollViewDidEndScrollingAnimation:scrollView_];
    [self startChromeDisplayTimer];
 }
 
-- (void)trashPhoto {
+- (void)trashPhoto 
+{
    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                             delegate:self
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel button text.")
@@ -566,7 +489,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark UIActionSheetDelegate
 
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
+{
    if (buttonIndex == BUTTON_DELETEPHOTO) {
       [self deleteCurrentPhoto];
    }
