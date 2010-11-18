@@ -521,14 +521,12 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)nextPhoto 
 {
    [self scrollToIndex:currentIndex_ + 1];
-   [self scrollViewDidEndScrollingAnimation:scrollView_];
    [self startChromeDisplayTimer];
 }
 
 - (void)previousPhoto 
 {
    [self scrollToIndex:currentIndex_ - 1];
-   [self scrollViewDidEndScrollingAnimation:scrollView_];
    [self startChromeDisplayTimer];
 }
 
