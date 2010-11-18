@@ -413,6 +413,14 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [self layoutScrollViewSubviews];
    // Rotate the toolbar.
    [self updateToolbarWithOrientation:toInterfaceOrientation];
+   
+   // Adjust navigation bar if needed.
+   if (isChromeHidden_ && statusbarHidden_ == NO) {
+      UINavigationBar *navbar = [[self navigationController] navigationBar];
+      CGRect frame = [navbar frame];
+      frame.origin.y = 20;
+      [navbar setFrame:frame];
+   }
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation 
