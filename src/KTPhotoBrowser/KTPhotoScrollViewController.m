@@ -31,6 +31,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)toggleNavButtons;
 - (CGRect)frameForPagingScrollView;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
+- (void)loadPhoto:(NSInteger)index;
+- (void)unloadPhoto:(NSInteger)index;
 @end
 
 @implementation KTPhotoScrollViewController
@@ -228,6 +230,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
       // TODO: Animate the deletion of the current photo.
       
       NSInteger photoIndexToDelete = currentIndex_;
+      [self unloadPhoto:photoIndexToDelete];
       [dataSource_ deleteImageAtIndex:photoIndexToDelete];
       
       photoCount_ -= 1;
@@ -235,13 +238,12 @@ const CGFloat ktkDefaultToolbarHeight = 44;
          [self showChrome];
          [[self navigationController] popViewControllerAnimated:YES];
       } else {
-         [self setScrollViewContentSize];
          NSInteger nextIndex = photoIndexToDelete;
          if (nextIndex == photoCount_) {
             nextIndex -= 1;
          }
          [self setCurrentIndex:nextIndex];
-         //[self scrollToIndex:nextIndex];
+         [self setScrollViewContentSize];
       }
    }
 }
