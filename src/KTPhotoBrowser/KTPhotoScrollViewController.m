@@ -445,16 +445,17 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)toggleChrome:(BOOL)hide 
 {
    isChromeHidden_ = hide;
-   [UIView beginAnimations:nil context:nil];
-   
-   [UIView setAnimationDuration:0.3];
+   if (hide) {
+      [UIView beginAnimations:nil context:nil];
+      [UIView setAnimationDuration:0.4];
+   }
    
    if ( ! [self isStatusbarHidden] ) {     
      if ([[UIApplication sharedApplication] respondsToSelector:@selector(setStatusBarHidden:withAnimation:)]) {
-       [[UIApplication sharedApplication] setStatusBarHidden:hide withAnimation:YES];
+       [[UIApplication sharedApplication] setStatusBarHidden:hide withAnimation:NO];
      } else {  // Deprecated in iOS 3.2+.
        id sharedApp = [UIApplication sharedApplication];  // Get around deprecation warnings.
-       [sharedApp setStatusBarHidden:hide animated:YES];
+       [sharedApp setStatusBarHidden:hide animated:NO];
      }
    }
 
@@ -464,10 +465,12 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    // view will be pushed until the navigation bar.
    UINavigationBar *navbar = [[self navigationController] navigationBar];
    [navbar setAlpha:alpha];
-   
+
    [toolbar_ setAlpha:alpha];
-                              
-   [UIView commitAnimations];
+
+   if (hide) {
+      [UIView commitAnimations];
+   }
    
    if ( ! isChromeHidden_ ) {
       [self startChromeDisplayTimer];
