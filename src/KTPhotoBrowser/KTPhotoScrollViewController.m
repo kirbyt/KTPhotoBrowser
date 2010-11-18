@@ -24,6 +24,7 @@
 #import "KTPhotoBrowserDataSource.h"
 #import "KTPhotoBrowserGlobal.h"
 #import "KTPhotoViewController.h"
+#import "KTPhotoView.h"
 
 const CGFloat ktkDefaultPortraitToolbarHeight   = 44;
 const CGFloat ktkDefaultLandscapeToolbarHeight  = 33;
@@ -146,28 +147,27 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)setTitleWithCurrentPhotoIndex {
-   NSInteger index = [currentPhoto_ photoIndex] + 1;
    NSString *formatString = NSLocalizedString(@"%1$i of %2$i", @"Picture X out of Y total.");
-   NSString *title = [NSString stringWithFormat:formatString, index, pageCount_, nil];
+   NSString *title = [NSString stringWithFormat:formatString, currentIndex_ + 1, pageCount_, nil];
    [self setTitle:title];
 }
 
-- (void)applyNewIndex:(NSUInteger)newIndex photoController:(KTPhotoViewController *)photoController {
-   BOOL outOfBounds = newIndex >= pageCount_ || newIndex < 0;
-   
-   if ( !outOfBounds ) {
-      CGRect photoFrame = photoController.view.frame;
-      photoFrame.origin.y = 0;
-      photoFrame.origin.x = scrollView_.frame.size.width * newIndex;
-      photoController.view.frame = photoFrame;
-   } else {
-      CGRect photoFrame = photoController.view.frame;
-      photoFrame.origin.y = scrollView_.frame.size.height;
-      photoController.view.frame = photoFrame;
-   }
-
-   [photoController setPhotoIndex:newIndex];
-}
+//- (void)applyNewIndex:(NSUInteger)newIndex photoController:(KTPhotoViewController *)photoController {
+//   BOOL outOfBounds = newIndex >= pageCount_ || newIndex < 0;
+//   
+//   if ( !outOfBounds ) {
+//      CGRect photoFrame = photoController.view.frame;
+//      photoFrame.origin.y = 0;
+//      photoFrame.origin.x = scrollView_.frame.size.width * newIndex;
+//      photoController.view.frame = photoFrame;
+//   } else {
+//      CGRect photoFrame = photoController.view.frame;
+//      photoFrame.origin.y = scrollView_.frame.size.height;
+//      photoController.view.frame = photoFrame;
+//   }
+//
+//   [photoController setPhotoIndex:newIndex];
+//}
 
 - (void)autoScrollToIndex:(NSInteger)index {
    CGRect frame = scrollView_.frame;
@@ -189,15 +189,19 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)viewDidLoad {
    [super viewDidLoad];
   
-   currentPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
-   [currentPhoto_ setScroller:self];
-   [scrollView_ addSubview:[currentPhoto_ view]];
-
-   nextPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
-   [nextPhoto_ setScroller:self];
-   [scrollView_ addSubview:[nextPhoto_ view]];
+//   currentPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
+//   [currentPhoto_ setScroller:self];
+//   [scrollView_ addSubview:[currentPhoto_ view]];
+//
+//   nextPhoto_ = [[KTPhotoViewController alloc] initWithDataSource:dataSource_];
+//   [nextPhoto_ setScroller:self];
+//   [scrollView_ addSubview:[nextPhoto_ view]];
    
    pageCount_ = [dataSource_ numberOfPhotos];
+   photoViews_ = [[NSMutableArray alloc] initWithCapacity:pageCount_];
+   for (int i=0; i < pageCount_; i++) {
+      [photoViews_ addObject:[NSNull null]];
+   }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -224,9 +228,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    // Set the scroll view's content size, auto-scroll to the stating photo,
    // and setup the other display elements.
    [self setScrollViewContentSizeWithPageCount:pageCount_];
+   [self setCurrentIndex:startWithIndex_];
    [self autoScrollToIndex:startWithIndex_];
-   [self applyNewIndex:startWithIndex_ photoController:currentPhoto_];
-   [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
+//   [self applyNewIndex:startWithIndex_ photoController:currentPhoto_];
+//   [self applyNewIndex:(startWithIndex_ + 1) photoController:nextPhoto_];
    [self setTitleWithCurrentPhotoIndex];
    [self toggleNavButtons];
    [self startChromeDisplayTimer];
@@ -243,6 +248,107 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)viewDidDisappear:(BOOL)animated {
    [self cancelChromeDisplayTimer];
 }
+
+- (void)deleteCurrentPhoto {
+   if (dataSource_) {
+      // TODO: Animate the deletion of the current photo.
+      
+      NSInteger photoIndexToDelete = [currentPhoto_ photoIndex];
+      [dataSource_ deleteImageAtIndex:photoIndexToDelete];
+      
+      pageCount_ -= 1;
+      if (pageCount_ == 0) {
+         [self showChrome];
+         [[self navigationController] popViewControllerAnimated:YES];
+      } else {
+         [self setScrollViewContentSizeWithPageCount:pageCount_];
+         NSInteger nextIndex = photoIndexToDelete;
+         if (nextIndex == pageCount_) {
+            nextIndex -= 1;
+         }
+//         [self applyNewIndex:nextIndex photoController:currentPhoto_];
+//         [self applyNewIndex:(nextIndex + 1) photoController:nextPhoto_];
+         [self autoScrollToIndex:nextIndex];
+         [self scrollViewDidEndScrollingAnimation:scrollView_];
+         [self setTitleWithCurrentPhotoIndex];
+         [self toggleNavButtons];
+      }
+   }
+}
+
+- (void)toggleNavButtons {
+   [previousButton_ setEnabled:([currentPhoto_ photoIndex] > 0)];
+   [nextButton_ setEnabled:([currentPhoto_ photoIndex] < pageCount_ - 1)];
+}
+
+
+#pragma mark -
+#pragma mark Photo (Page) Management
+
+- (void)loadPhoto:(NSInteger)index
+{
+   if (index < 0 || index >= pageCount_) {
+      return;
+   }
+   
+   id currentPhotoView = [photoViews_ objectAtIndex:index];
+   if (NO == [currentPhotoView isKindOfClass:[KTPhotoView class]]) {
+      // Load the photo view.
+      CGRect frame = [scrollView_ frame];
+      frame = CGRectOffset(frame, frame.size.width * index, 0.0);
+      KTPhotoView *photoView = [[KTPhotoView alloc] initWithFrame:frame];
+      [photoView setScroller:self];
+      [photoView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+      [photoView setBackgroundColor:[UIColor clearColor]];
+      
+      // Set the photo image.
+      if (dataSource_) {
+         if ([dataSource_ respondsToSelector:@selector(imageAtIndex:photoView:)] == NO) {
+            UIImage *image = [dataSource_ imageAtIndex:index];
+            [photoView setImage:image];
+         } else {
+            [dataSource_ imageAtIndex:index photoView:photoView];
+         }
+      }
+      
+      [scrollView_ addSubview:photoView];
+      [photoViews_ replaceObjectAtIndex:index withObject:photoView];
+      [photoView release];
+   } else {
+      // Turn off zooming.
+      [currentPhotoView turnOffZoom];
+   }
+}
+
+- (void)unloadPhoto:(NSInteger)index
+{
+   if (index < 0 || index >= pageCount_) {
+      return;
+   }
+   
+   id currentPhotoView = [photoViews_ objectAtIndex:index];
+   if ([currentPhotoView isKindOfClass:[KTPhotoView class]]) {
+      [currentPhotoView removeFromSuperview];
+      [photoViews_ replaceObjectAtIndex:index withObject:[NSNull null]];
+   }
+}
+
+- (void)setCurrentIndex:(NSInteger)newIndex
+{
+   currentIndex_ = newIndex;
+   
+   [self loadPhoto:currentIndex_];
+   [self loadPhoto:currentIndex_ + 1];
+   [self loadPhoto:currentIndex_ - 1];
+   [self unloadPhoto:currentIndex_ + 2];
+   [self unloadPhoto:currentIndex_ - 2];
+   
+   [self setTitleWithCurrentPhotoIndex];
+}
+
+
+#pragma mark -
+#pragma mark Rotation Magic
 
 - (void)updateToolbarWithOrientation:(UIInterfaceOrientation)interfaceOrientation {
    CGRect toolbarFrame = toolbar_.frame;
@@ -264,44 +370,30 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
                                 duration:(NSTimeInterval)duration {
 
-   rotationInProgress_ = YES;
-   
-   // Hide the next photo to prevent it from overlapping 
-   // the during rotation's animation.
-   [[nextPhoto_ view] setHidden:YES];
-   
-   NSLog(@"%s", __PRETTY_FUNCTION__);
-   // Forward message to subviews.
-   [currentPhoto_ willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-   [nextPhoto_ willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+//   rotationInProgress_ = YES;
+//   
+//   // Hide the next photo to prevent it from overlapping 
+//   // the during rotation's animation.
+//   [[nextPhoto_ view] setHidden:YES];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
                                          duration:(NSTimeInterval)duration {
-//   // Note the scrollview has already been resized by
-//   // the time this method is called.
-//   
-//   // Set the new context size.
-//   [self setScrollViewContentSizeWithPageCount:pageCount_];
-//   
-   
    // Rotate the toolbar.
    [self updateToolbarWithOrientation:toInterfaceOrientation];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 
-   NSLog(@"%s", __PRETTY_FUNCTION__);
-   
    [self setScrollViewContentSizeWithPageCount:pageCount_];
    
    // Reposition the photo views we have in memory.
-   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
-   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
-   [[nextPhoto_ view] setHidden:NO];
+//   [self applyNewIndex:[currentPhoto_ photoIndex] photoController:currentPhoto_];
+//   [self applyNewIndex:[nextPhoto_ photoIndex] photoController:nextPhoto_];
+//   [[nextPhoto_ view] setHidden:NO];
    
-   [self autoScrollToIndex:[currentPhoto_ photoIndex]];
-   rotationInProgress_ = NO;
+//   [self autoScrollToIndex:[currentPhoto_ photoIndex]];
+//   rotationInProgress_ = NO;
 
    [self startChromeDisplayTimer];
 }
@@ -310,37 +402,6 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    return toolbar_;
 }
 
-- (void)deleteCurrentPhoto {
-   if (dataSource_) {
-      // TODO: Animate the deletion of the current photo.
-
-      NSInteger photoIndexToDelete = [currentPhoto_ photoIndex];
-      [dataSource_ deleteImageAtIndex:photoIndexToDelete];
-
-      pageCount_ -= 1;
-      if (pageCount_ == 0) {
-         [self showChrome];
-         [[self navigationController] popViewControllerAnimated:YES];
-      } else {
-         [self setScrollViewContentSizeWithPageCount:pageCount_];
-         NSInteger nextIndex = photoIndexToDelete;
-         if (nextIndex == pageCount_) {
-            nextIndex -= 1;
-         }
-         [self applyNewIndex:nextIndex photoController:currentPhoto_];
-         [self applyNewIndex:(nextIndex + 1) photoController:nextPhoto_];
-         [self autoScrollToIndex:nextIndex];
-         [self scrollViewDidEndScrollingAnimation:scrollView_];
-         [self setTitleWithCurrentPhotoIndex];
-         [self toggleNavButtons];
-      }
-   }
-}
-
-- (void)toggleNavButtons {
-   [previousButton_ setEnabled:([currentPhoto_ photoIndex] > 0)];
-   [nextButton_ setEnabled:([currentPhoto_ photoIndex] < pageCount_ - 1)];
-}
 
 #pragma mark -
 #pragma mark Chrome Helpers
@@ -411,42 +472,38 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark -
 #pragma mark UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-   if (rotationInProgress_) {
-      // The contentOffset is adjusted and breaks the 
-      // code below. Therefore, ignore scrolling when
-      // rotating.
-      return;
-   }
-//#ifdef DEBUG
-//   NSLog(@"%s", __PRETTY_FUNCTION__);
-//   NSLog(@"contentOffset %f,%f", scrollView.contentOffset.x, scrollView.contentOffset.y);
-//#endif
-   
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView 
+{
    CGFloat pageWidth = scrollView.frame.size.width;
-   float fractionalPage = scrollView.contentOffset.x / pageWidth;
-   
-   NSInteger lowerNumber = floor(fractionalPage);
-   NSInteger upperNumber = lowerNumber + 1;
+   int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+	if (page != currentIndex_) {
+		[self setCurrentIndex:page];
+	}
 
-   if (lowerNumber == [currentPhoto_ photoIndex]) {
-      if (upperNumber != [nextPhoto_ photoIndex]) {
-         [self applyNewIndex:upperNumber photoController:nextPhoto_];
-      }
-   } else if (upperNumber == [currentPhoto_ photoIndex]) {
-      if (lowerNumber != [nextPhoto_ photoIndex]) {
-         [self applyNewIndex:lowerNumber photoController:nextPhoto_];
-      }
-   } else {
-      if (lowerNumber == [nextPhoto_ photoIndex]) {
-         [self applyNewIndex:upperNumber photoController:currentPhoto_];
-      } else if (upperNumber == [nextPhoto_ photoIndex]) {
-         [self applyNewIndex:lowerNumber photoController:currentPhoto_];
-      } else {
-         [self applyNewIndex:lowerNumber photoController:currentPhoto_];
-         [self applyNewIndex:upperNumber photoController:nextPhoto_];
-      }
-   }
+   //   CGFloat pageWidth = scrollView.frame.size.width;
+//   float fractionalPage = scrollView.contentOffset.x / pageWidth;
+//   
+//   NSInteger lowerNumber = floor(fractionalPage);
+//   NSInteger upperNumber = lowerNumber + 1;
+//
+//   if (lowerNumber == [currentPhoto_ photoIndex]) {
+//      if (upperNumber != [nextPhoto_ photoIndex]) {
+//         [self applyNewIndex:upperNumber photoController:nextPhoto_];
+//      }
+//   } else if (upperNumber == [currentPhoto_ photoIndex]) {
+//      if (lowerNumber != [nextPhoto_ photoIndex]) {
+//         [self applyNewIndex:lowerNumber photoController:nextPhoto_];
+//      }
+//   } else {
+//      if (lowerNumber == [nextPhoto_ photoIndex]) {
+//         [self applyNewIndex:upperNumber photoController:currentPhoto_];
+//      } else if (upperNumber == [nextPhoto_ photoIndex]) {
+//         [self applyNewIndex:lowerNumber photoController:currentPhoto_];
+//      } else {
+//         [self applyNewIndex:lowerNumber photoController:currentPhoto_];
+//         [self applyNewIndex:upperNumber photoController:nextPhoto_];
+//      }
+//   }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
@@ -458,25 +515,25 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
-   if (rotationInProgress_) {
-      // The contentOffset is adjusted and breaks the 
-      // code below. Therefore, ignore scrolling when
-      // rotating.
-      return;
-   }
-
-   CGFloat pageWidth = scrollView.frame.size.width;
-   float fractionalPage = scrollView.contentOffset.x / pageWidth;
-   NSInteger nearestNumber = lround(fractionalPage);
-   
-   if ([currentPhoto_ photoIndex] != nearestNumber) {
-      [currentPhoto_ turnOffZoom];
-      KTPhotoViewController *swapController = currentPhoto_;
-      currentPhoto_ = nextPhoto_;
-      nextPhoto_ = swapController;
-      [self setTitleWithCurrentPhotoIndex];
-      [self toggleNavButtons];
-   }
+//   if (rotationInProgress_) {
+//      // The contentOffset is adjusted and breaks the 
+//      // code below. Therefore, ignore scrolling when
+//      // rotating.
+//      return;
+//   }
+//
+//   CGFloat pageWidth = scrollView.frame.size.width;
+//   float fractionalPage = scrollView.contentOffset.x / pageWidth;
+//   NSInteger nearestNumber = lround(fractionalPage);
+//   
+//   if ([currentPhoto_ photoIndex] != nearestNumber) {
+//      [currentPhoto_ turnOffZoom];
+//      KTPhotoViewController *swapController = currentPhoto_;
+//      currentPhoto_ = nextPhoto_;
+//      nextPhoto_ = swapController;
+//      [self setTitleWithCurrentPhotoIndex];
+//      [self toggleNavButtons];
+//   }
 }
 
 
@@ -484,13 +541,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 #pragma mark Toolbar Actions
 
 - (void)nextPhoto {
-   [self autoScrollToIndex:[currentPhoto_ photoIndex] + 1];
+   [self autoScrollToIndex:currentIndex_ + 1];
    [self scrollViewDidEndScrollingAnimation:scrollView_];
    [self startChromeDisplayTimer];
 }
 
 - (void)previousPhoto {
-   [self autoScrollToIndex:[currentPhoto_ photoIndex] - 1];
+   [self autoScrollToIndex:currentIndex_ - 1];
    [self scrollViewDidEndScrollingAnimation:scrollView_];
    [self startChromeDisplayTimer];
 }

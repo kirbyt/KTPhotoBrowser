@@ -53,6 +53,10 @@
    [newView release];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+   return YES;
+}
+
 - (void)setPhotoIndex:(NSInteger)newPageIndex {
    photoIndex_ = newPageIndex;
    

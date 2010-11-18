@@ -16,7 +16,10 @@
    UIScrollView *scrollView_;
    UIToolbar *toolbar_;
    NSUInteger startWithIndex_;
+   NSInteger currentIndex_;
    NSInteger pageCount_;
+   
+   NSMutableArray *photoViews_;
    
    KTPhotoViewController *currentPhoto_;
    KTPhotoViewController *nextPhoto_;
