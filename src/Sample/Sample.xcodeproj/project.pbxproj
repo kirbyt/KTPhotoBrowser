@@ -27,6 +27,9 @@
 		688065D612B00A36008D1AB8 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 688065CC12B00A36008D1AB8 /* SDWebImageDownloader.m */; };
 		688065D712B00A36008D1AB8 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 688065CF12B00A36008D1AB8 /* SDWebImageManager.m */; };
 		688065D812B00A36008D1AB8 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 688065D212B00A36008D1AB8 /* UIImageView+WebCache.m */; };
+		688065F212B00CD3008D1AB8 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 688065F112B00CD3008D1AB8 /* Icon.png */; };
+		688065FA12B00DB0008D1AB8 /* Icon-72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 688065F812B00DB0008D1AB8 /* Icon-72x72.png */; };
+		688065FB12B00DB0008D1AB8 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 688065F912B00DB0008D1AB8 /* Icon@2x.png */; };
 		6890C7FA1135AF9B00A4CFFA /* KTPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6890C7F91135AF9B00A4CFFA /* KTPhotoView.m */; };
 		68F349BF1152AA5500D9765C /* PhotoPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F349B81152AA5500D9765C /* PhotoPickerController.m */; };
 		68F349C01152AA5500D9765C /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F349BA1152AA5500D9765C /* Photos.m */; };
@@ -80,6 +83,9 @@
 		688065D012B00A36008D1AB8 /* SDWebImageManagerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageManagerDelegate.h; sourceTree = "<group>"; };
 		688065D112B00A36008D1AB8 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
 		688065D212B00A36008D1AB8 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
+		688065F112B00CD3008D1AB8 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		688065F812B00DB0008D1AB8 /* Icon-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72x72.png"; sourceTree = "<group>"; };
+		688065F912B00DB0008D1AB8 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6890C7F81135AF9B00A4CFFA /* KTPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTPhotoView.h; path = ../KTPhotoBrowser/KTPhotoView.h; sourceTree = SOURCE_ROOT; };
 		6890C7F91135AF9B00A4CFFA /* KTPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTPhotoView.m; path = ../KTPhotoBrowser/KTPhotoView.m; sourceTree = SOURCE_ROOT; };
 		68F349B71152AA5500D9765C /* PhotoPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoPickerController.h; sourceTree = "<group>"; };
@@ -174,6 +180,9 @@
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				6827FFB312930FBB00070136 /* MainWindowPad.xib */,
 				8D1107310486CEB800E47090 /* Sample-Info.plist */,
+				688065F112B00CD3008D1AB8 /* Icon.png */,
+				688065F812B00DB0008D1AB8 /* Icon-72x72.png */,
+				688065F912B00DB0008D1AB8 /* Icon@2x.png */,
 				68316E361124726F00A906B3 /* KTPhotoBrowser.bundle */,
 			);
 			name = Resources;
@@ -329,6 +338,9 @@
 				6827FFB412930FBB00070136 /* MainWindowPad.xib in Resources */,
 				688065D312B00A36008D1AB8 /* LICENSE in Resources */,
 				688065D412B00A36008D1AB8 /* README.md in Resources */,
+				688065F212B00CD3008D1AB8 /* Icon.png in Resources */,
+				688065FA12B00DB0008D1AB8 /* Icon-72x72.png in Resources */,
+				688065FB12B00DB0008D1AB8 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
