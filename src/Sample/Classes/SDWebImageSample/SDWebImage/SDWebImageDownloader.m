@@ -8,21 +8,43 @@
 
 #import "SDWebImageDownloader.h"
 
+NSString *const SDWebImageDownloadStartNotification = @"SDWebImageDownloadStartNotification";
+NSString *const SDWebImageDownloadStopNotification = @"SDWebImageDownloadStopNotification";
+
 @interface SDWebImageDownloader ()
 @property (nonatomic, retain) NSURLConnection *connection;
-@property (nonatomic, retain) NSMutableData *imageData;
 @end
 
 @implementation SDWebImageDownloader
-@synthesize url, delegate, connection, imageData;
+@synthesize url, delegate, connection, imageData, userInfo;
 
 #pragma mark Public Methods
 
 + (id)downloaderWithURL:(NSURL *)url delegate:(id<SDWebImageDownloaderDelegate>)delegate
 {
+	return [[self class] downloaderWithURL:url delegate:delegate userInfo:nil];
+}
+
++ (id)downloaderWithURL:(NSURL *)url delegate:(id<SDWebImageDownloaderDelegate>)delegate userInfo:(id)userInfo
+{
+
+    // Bind SDNetworkActivityIndicator if available (download it here: http://github.com/rs/SDNetworkActivityIndicator )
+    // To use it, just add #import "SDNetworkActivityIndicator.h" in addition to the SDWebImage import
+    if (NSClassFromString(@"SDNetworkActivityIndicator"))
+    {
+        id activityIndicator = [NSClassFromString(@"SDNetworkActivityIndicator") performSelector:NSSelectorFromString(@"sharedActivityIndicator")];
+        [[NSNotificationCenter defaultCenter] addObserver:activityIndicator
+                                                 selector:NSSelectorFromString(@"startActivity")
+                                                     name:SDWebImageDownloadStartNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:activityIndicator
+                                                 selector:NSSelectorFromString(@"stopActivity")
+                                                     name:SDWebImageDownloadStopNotification object:nil];
+    }
+
     SDWebImageDownloader *downloader = [[[SDWebImageDownloader alloc] init] autorelease];
     downloader.url = url;
     downloader.delegate = delegate;
+	downloader.userInfo = userInfo;
     [downloader performSelectorOnMainThread:@selector(start) withObject:nil waitUntilDone:YES];
     return downloader;
 }
@@ -45,6 +67,7 @@
     if (connection)
     {
         self.imageData = [NSMutableData data];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SDWebImageDownloadStartNotification object:nil];
     }
     else
     {
@@ -61,6 +84,7 @@
     {
         [connection cancel];
         self.connection = nil;
+        [[NSNotificationCenter defaultCenter] postNotificationName:SDWebImageDownloadStopNotification object:nil];
     }
 }
 
@@ -71,22 +95,30 @@
     [imageData appendData:data];
 }
 
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
 - (void)connectionDidFinishLoading:(NSURLConnection *)aConnection
 {
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    self.imageData = nil;
     self.connection = nil;
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDWebImageDownloadStopNotification object:nil];
+
+    if ([delegate respondsToSelector:@selector(imageDownloaderDidFinish:)])
+    {
+        [delegate performSelector:@selector(imageDownloaderDidFinish:) withObject:self];
+    }
 
     if ([delegate respondsToSelector:@selector(imageDownloader:didFinishWithImage:)])
     {
+        UIImage *image = [[UIImage alloc] initWithData:imageData];
         [delegate performSelector:@selector(imageDownloader:didFinishWithImage:) withObject:self withObject:image];
+        [image release];
     }
-
-    [image release];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDWebImageDownloadStopNotification object:nil];
+
     if ([delegate respondsToSelector:@selector(imageDownloader:didFailWithError:)])
     {
         [delegate performSelector:@selector(imageDownloader:didFailWithError:) withObject:self withObject:error];
@@ -100,9 +132,11 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [url release], url = nil;
     [connection release], connection = nil;
     [imageData release], imageData = nil;
+	[userInfo release], userInfo = nil;
     [super dealloc];
 }
 
