@@ -548,9 +548,10 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                             delegate:self
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel button text.")
-                                              destructiveButtonTitle:NSLocalizedString(@"Delete Photo", @"Delete Photo button text."), nil
+                                              destructiveButtonTitle:NSLocalizedString(@"Delete Photo", @"Delete Photo button text.")
                                                    otherButtonTitles:nil];
    [actionSheet showInView:[self view]];
+   [actionSheet release];
 }
 
 
