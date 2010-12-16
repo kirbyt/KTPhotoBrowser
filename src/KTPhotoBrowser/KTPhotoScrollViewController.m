@@ -222,6 +222,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (void)viewDidDisappear:(BOOL)animated 
 {
    [self cancelChromeDisplayTimer];
+   [super viewDidDisappear:animated];
 }
 
 - (void)deleteCurrentPhoto 
