@@ -97,7 +97,6 @@
    float newScale;
    CGRect zoomRect;
    if ([self isZoomed]) {
-      newScale = 1.0;
       zoomRect = [self bounds];
    } else {
       newScale = [self maximumZoomScale];
