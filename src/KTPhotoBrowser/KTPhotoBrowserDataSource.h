@@ -26,6 +26,7 @@
 - (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView;
 
 - (void)deleteImageAtIndex:(NSInteger)index;
+- (void)exportImageAtIndex:(NSInteger)index;
 
 - (CGSize)thumbSize;
 - (NSInteger)thumbsPerRow;

@@ -33,6 +33,8 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
 - (void)loadPhoto:(NSInteger)index;
 - (void)unloadPhoto:(NSInteger)index;
+- (void)trashPhoto;
+- (void)exportPhoto;
 @end
 
 @implementation KTPhotoScrollViewController
@@ -112,10 +114,29 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                                                  target:self
                                                                  action:@selector(trashPhoto)];
    }
+   
+   UIBarButtonItem *exportButton = nil;
+   if ([dataSource_ respondsToSelector:@selector(exportImageAtIndex:)])
+   {
+      exportButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
+                                                                   target:self
+                                                                   action:@selector(exportPhoto)];
+   }
+   
 
    UIBarItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                     target:nil 
                                                                     action:nil];
+   
+   NSMutableArray *toolbarItems = [[NSMutableArray alloc] initWithCapacity:7];
+   
+   if (exportButton) [toolbarItems addObject:exportButton];
+   [toolbarItems addObject:space];
+   [toolbarItems addObject:previousButton_];
+   [toolbarItems addObject:space];
+   [toolbarItems addObject:nextButton_];
+   [toolbarItems addObject:space];
+   if (trashButton) [toolbarItems addObject:trashButton];
    
    CGRect screenFrame = [[UIScreen mainScreen] bounds];
    CGRect toolbarFrame = CGRectMake(0, 
@@ -125,11 +146,12 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    toolbar_ = [[UIToolbar alloc] initWithFrame:toolbarFrame];
    [toolbar_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin];
    [toolbar_ setBarStyle:UIBarStyleBlackTranslucent];
-   [toolbar_ setItems:[NSArray arrayWithObjects:
-                       space, previousButton_, space, nextButton_, space, trashButton, nil]];
+   [toolbar_ setItems:toolbarItems];
    [[self view] addSubview:toolbar_];
    
    if (trashButton) [trashButton release];
+   if (exportButton) [exportButton release];
+   [toolbarItems release];
    [space release];
 }
 
@@ -554,6 +576,14 @@ const CGFloat ktkDefaultToolbarHeight = 44;
                                                    otherButtonTitles:nil];
    [actionSheet showInView:[self view]];
    [actionSheet release];
+}
+
+- (void) exportPhoto
+{
+   if ([dataSource_ respondsToSelector:@selector(exportImageAtIndex:)])
+      [dataSource_ exportImageAtIndex:currentIndex_];
+   
+   [self startChromeDisplayTimer];
 }
 
 
