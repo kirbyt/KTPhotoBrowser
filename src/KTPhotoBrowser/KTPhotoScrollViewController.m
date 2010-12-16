@@ -506,6 +506,7 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 {
    if (chromeHideTimer_) {
       [chromeHideTimer_ invalidate];
+      chromeHideTimer_ = nil;
    }
 }
 
