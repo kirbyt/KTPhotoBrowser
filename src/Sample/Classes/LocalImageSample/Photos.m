@@ -281,6 +281,16 @@
    [operation release];
 }
 
+- (void)exportImageAtIndex:(NSInteger)index 
+{
+   NSString *name = [[self fileNames] objectAtIndex:index];
+   NSString *path = [[self photosPath] stringByAppendingPathComponent:name];
+   
+   if (delegate_  && [delegate_ respondsToSelector:@selector(exportImageAtPath:)]) {
+      [delegate_ exportImageAtPath:path];
+   }   
+}
+
 // - (BOOL)thumbsHaveBorder {
 //   return NO;
 // }

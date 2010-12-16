@@ -138,4 +138,48 @@
    [self reloadThumbs];
 }
 
+- (void)exportImageAtPath:(NSString *)path
+{
+   NSData *imageData = [NSData dataWithContentsOfFile:path];
+   
+   MFMailComposeViewController *controller = 
+   [[MFMailComposeViewController alloc] init];
+   
+   [controller setMailComposeDelegate:self];
+   [controller addAttachmentData:imageData 
+                        mimeType:@"image/jpeg" 
+                        fileName:@"Image.jpg"];
+   
+   [controller setMessageBody:@"Image attached" isHTML:NO];
+   
+   // Show the status bar because, otherwise, we will have some layout
+   // problems when the controller is dismissed.
+   if ([[UIApplication sharedApplication] respondsToSelector:
+        @selector(setStatusBarHidden:withAnimation:)]) 
+   {
+      [[UIApplication sharedApplication] setStatusBarHidden:NO 
+                                              withAnimation:YES];
+   } 
+   else 
+   {
+      // get around deprecation warnings.
+      id sharedApp = [UIApplication sharedApplication];
+      [sharedApp setStatusBarHidden:NO animated:YES];
+   }
+   
+   [self.navigationController presentModalViewController:controller 
+                                                animated:YES];
+   [controller release];   
+}
+
+#pragma mark -
+#pragma mark MFMailComposeViewController
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller 
+			 didFinishWithResult:(MFMailComposeResult)result 
+								error:(NSError*)error
+{
+	[self.navigationController dismissModalViewControllerAnimated:YES];
+}
+
 @end

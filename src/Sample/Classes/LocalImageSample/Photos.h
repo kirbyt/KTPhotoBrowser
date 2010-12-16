@@ -36,5 +36,6 @@
 @protocol PhotosDelegate <NSObject>
 @optional
 - (void)didFinishSave;
+- (void)exportImageAtPath:(NSString *)path;
 
 @end
