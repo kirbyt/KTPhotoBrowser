@@ -33,6 +33,9 @@
       
       [self setClipsToBounds:YES];
 
+      // If the thumbnail needs to be scaled, it should mantain its aspect
+      // ratio.
+      [[self imageView] setContentMode:UIViewContentModeScaleAspectFill];
    }
    return self;
 }
