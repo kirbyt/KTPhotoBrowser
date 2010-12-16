@@ -13,7 +13,6 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		6813F443112075BB006B7215 /* KTPhotoBrowserDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F43A112075BB006B7215 /* KTPhotoBrowserDataSource.m */; };
 		6813F444112075BB006B7215 /* KTPhotoScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F43C112075BB006B7215 /* KTPhotoScrollViewController.m */; };
 		6813F446112075BB006B7215 /* KTThumbsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F440112075BB006B7215 /* KTThumbsViewController.m */; };
 		6813F447112075BB006B7215 /* KTThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6813F442112075BB006B7215 /* KTThumbView.m */; };
@@ -57,7 +56,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Sample_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sample_Prefix.pch; sourceTree = "<group>"; };
 		6813F439112075BB006B7215 /* KTPhotoBrowserDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTPhotoBrowserDataSource.h; path = ../KTPhotoBrowser/KTPhotoBrowserDataSource.h; sourceTree = SOURCE_ROOT; };
-		6813F43A112075BB006B7215 /* KTPhotoBrowserDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTPhotoBrowserDataSource.m; path = ../KTPhotoBrowser/KTPhotoBrowserDataSource.m; sourceTree = SOURCE_ROOT; };
 		6813F43B112075BB006B7215 /* KTPhotoScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTPhotoScrollViewController.h; path = ../KTPhotoBrowser/KTPhotoScrollViewController.h; sourceTree = SOURCE_ROOT; };
 		6813F43C112075BB006B7215 /* KTPhotoScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KTPhotoScrollViewController.m; path = ../KTPhotoBrowser/KTPhotoScrollViewController.m; sourceTree = SOURCE_ROOT; };
 		6813F43F112075BB006B7215 /* KTThumbsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KTThumbsViewController.h; path = ../KTPhotoBrowser/KTThumbsViewController.h; sourceTree = SOURCE_ROOT; };
@@ -203,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				6813F439112075BB006B7215 /* KTPhotoBrowserDataSource.h */,
-				6813F43A112075BB006B7215 /* KTPhotoBrowserDataSource.m */,
 				68316E7E1124743F00A906B3 /* KTPhotoBrowserGlobal.h */,
 				68316E7F1124743F00A906B3 /* KTPhotoBrowserGlobal.m */,
 				6813F43B112075BB006B7215 /* KTPhotoScrollViewController.h */,
@@ -353,7 +350,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* SampleAppDelegate.m in Sources */,
-				6813F443112075BB006B7215 /* KTPhotoBrowserDataSource.m in Sources */,
 				6813F444112075BB006B7215 /* KTPhotoScrollViewController.m in Sources */,
 				6813F446112075BB006B7215 /* KTThumbsViewController.m in Sources */,
 				6813F447112075BB006B7215 /* KTThumbView.m in Sources */,
