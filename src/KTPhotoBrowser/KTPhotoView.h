@@ -18,7 +18,7 @@
    NSInteger index_;
 }
 
-@property (nonatomic, retain) KTPhotoScrollViewController *scroller;
+@property (nonatomic, assign) KTPhotoScrollViewController *scroller;
 @property (nonatomic, assign) NSInteger index;
 
 - (void)setImage:(UIImage *)newImage;

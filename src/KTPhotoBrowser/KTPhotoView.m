@@ -24,7 +24,6 @@
 - (void)dealloc 
 {
    [imageView_ release], imageView_ = nil;
-   [scroller_ release], scroller_ = nil;
    [super dealloc];
 }
 
