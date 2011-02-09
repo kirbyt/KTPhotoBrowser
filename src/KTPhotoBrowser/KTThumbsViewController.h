@@ -10,10 +10,10 @@
 #import "KTPhotoBrowserDataSource.h"
 
 @class KTThumbsView;
-
+@class KTReusableThumbsView;
 @interface KTThumbsViewController : UIViewController {
   id <KTPhotoBrowserDataSource> dataSource_;
-  KTThumbsView *scrollView_;
+  KTReusableThumbsView *scrollView_;
   BOOL viewDidAppearOnce_;
   BOOL navbarWasTranslucent_;
 }
