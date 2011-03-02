@@ -25,6 +25,7 @@
 		6865D096131E65DB00FE2601 /* Photos.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D092131E65DB00FE2601 /* Photos.m */; };
 		6865D097131E65DB00FE2601 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D094131E65DB00FE2601 /* UIImage+KTCategory.m */; };
 		6865D0AC131E67B900FE2601 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6865D0AB131E67B900FE2601 /* MessageUI.framework */; };
+		6865D141131E6DD500FE2601 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6865D140131E6DD500FE2601 /* iAd.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		6865D093131E65DB00FE2601 /* UIImage+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KTCategory.h"; sourceTree = "<group>"; };
 		6865D094131E65DB00FE2601 /* UIImage+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KTCategory.m"; sourceTree = "<group>"; };
 		6865D0AB131E67B900FE2601 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		6865D140131E6DD500FE2601 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,6 +74,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6865D0AC131E67B900FE2601 /* MessageUI.framework in Frameworks */,
+				6865D141131E6DD500FE2601 /* iAd.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +115,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				6865D140131E6DD500FE2601 /* iAd.framework */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";

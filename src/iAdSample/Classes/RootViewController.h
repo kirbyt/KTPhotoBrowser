@@ -8,17 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import <MessageUI/MessageUI.h>
+#import <iAd/iAd.h>
 #import "KTThumbsViewController.h"
 #import "PhotoPickerController.h"
 #import "Photos.h"
 
 
-@interface RootViewController : KTThumbsViewController <PhotoPickerControllerDelegate, PhotosDelegate, MFMailComposeViewControllerDelegate>
+@interface RootViewController : KTThumbsViewController <PhotoPickerControllerDelegate, PhotosDelegate, MFMailComposeViewControllerDelegate, ADBannerViewDelegate>
 {
    PhotoPickerController *photoPicker_;
    Photos *myPhotos_;
    UIActivityIndicatorView *activityIndicatorView_;
    UIWindow *window_;
+   UIView *thumbnailView_;
+   ADBannerView *bannerView_;
+   BOOL bannerIsVisible_;
 }
 
 - (id)initWithWindow:(UIWindow *)window;

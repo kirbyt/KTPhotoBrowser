@@ -21,6 +21,8 @@
 {
    [myPhotos_ release], myPhotos_ = nil;
    [activityIndicatorView_ release], activityIndicatorView_ = nil;
+   [thumbnailView_ release], thumbnailView_ = nil;
+   [bannerView_ release], bannerView_ = nil;
    
    [super dealloc];
 }
@@ -39,15 +41,23 @@
    [super loadView];
    
    // Build a new view hierarchy.
-
+   
    [self setWantsFullScreenLayout:NO];
 
-   UIView *thumbnailView = [[self view] retain];
-   [thumbnailView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-   
    UIView *newContainerView = [[UIView alloc] initWithFrame:CGRectZero];
    [newContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
-   [newContainerView addSubview:thumbnailView];
+   
+   thumbnailView_ = [[self view] retain];
+   [thumbnailView_ setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+   [newContainerView addSubview:thumbnailView_];
+   
+   bannerIsVisible_ = NO;
+   bannerView_ = [[ADBannerView alloc] initWithFrame:CGRectZero];
+   [bannerView_ setDelegate:self];
+   [bannerView_ setRequiredContentSizeIdentifiers:[NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, ADBannerContentSizeIdentifierLandscape, nil]];
+   [bannerView_ setCurrentContentSizeIdentifier:ADBannerContentSizeIdentifierPortrait];
+   [newContainerView addSubview:bannerView_];
+   
    
    [self setView:newContainerView];
    [newContainerView release];
@@ -68,6 +78,12 @@
       [myPhotos_ setDelegate:self];
    }
    [self setDataSource:myPhotos_];
+   
+   // Hide the banner view just off the top.
+   CGRect bannerViewFrame = [bannerView_ frame];
+   bannerViewFrame.origin.y = -bannerViewFrame.size.height;
+   bannerViewFrame.origin.x = 0;
+   [bannerView_ setFrame:bannerViewFrame];
 }
 
 - (void)viewWillAppear:(BOOL)animated 
@@ -83,16 +99,25 @@
 
 - (void)didReceiveMemoryWarning 
 {
-	// Releases the view if it doesn't have a superview.
+   // Releases the view if it doesn't have a superview.
    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
+   
+   // Release any cached data, images, etc that aren't in use.
    [myPhotos_ flushCache];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
    return YES;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+      [bannerView_ setCurrentContentSizeIdentifier:ADBannerContentSizeIdentifierLandscape];
+   } else {
+      [bannerView_ setCurrentContentSizeIdentifier:ADBannerContentSizeIdentifierPortrait];
+   }
 }
 
 - (void)willLoadThumbs 
@@ -216,10 +241,42 @@
 #pragma mark MFMailComposeViewController
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller 
-			 didFinishWithResult:(MFMailComposeResult)result 
-								error:(NSError*)error
+          didFinishWithResult:(MFMailComposeResult)result 
+                        error:(NSError*)error
 {
-	[self.navigationController dismissModalViewControllerAnimated:YES];
+   [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
+
+#pragma mark -
+#pragma mark ADBannerViewDelegate
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+   if (!bannerIsVisible_)
+   {
+      [UIView beginAnimations:@"animateAdBannerOn" context:NULL];
+      // Slide down the thumbnail view to display the ad.
+      // Assumes the banner view is just off the top of the screen.
+      [banner setFrame:CGRectOffset([banner frame], 0, [banner frame].size.height)];
+      [thumbnailView_ setFrame:CGRectOffset([thumbnailView_ frame], 0, [banner frame].size.height)];
+      [UIView commitAnimations];
+      bannerIsVisible_ = YES;
+   }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+   if (bannerIsVisible_)
+   {
+      [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
+      // Assumes the banner view is placed at the top of the screen.
+      [banner setFrame:CGRectOffset([banner frame], 0, -[banner frame].size.height)];
+      [thumbnailView_ setFrame:CGRectOffset([thumbnailView_ frame], 0, -[banner frame].size.height)];
+      [UIView commitAnimations];
+      bannerIsVisible_ = NO;
+   }
+}
+       
+       
 @end
