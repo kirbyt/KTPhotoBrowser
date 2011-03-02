@@ -16,11 +16,9 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		68FF594F123FE459001379D5 /* KTPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68FF593E123FE459001379D5 /* KTPhotoBrowser.bundle */; };
-		68FF5950123FE459001379D5 /* KTPhotoBrowserDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FF5940123FE459001379D5 /* KTPhotoBrowserDataSource.m */; };
 		68FF5951123FE459001379D5 /* KTPhotoBrowserGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FF5942123FE459001379D5 /* KTPhotoBrowserGlobal.m */; };
 		68FF5952123FE459001379D5 /* KTPhotoScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FF5944123FE459001379D5 /* KTPhotoScrollViewController.m */; };
 		68FF5953123FE459001379D5 /* KTPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FF5946123FE459001379D5 /* KTPhotoView.m */; };
-		68FF5954123FE459001379D5 /* KTPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FF5948123FE459001379D5 /* KTPhotoViewController.m */; };
 		68FF5955123FE459001379D5 /* KTThumbsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FF594A123FE459001379D5 /* KTThumbsView.m */; };
 		68FF5956123FE459001379D5 /* KTThumbsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FF594C123FE459001379D5 /* KTThumbsViewController.m */; };
 		68FF5957123FE459001379D5 /* KTThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68FF594E123FE459001379D5 /* KTThumbView.m */; };
@@ -45,15 +43,12 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		68FF593E123FE459001379D5 /* KTPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KTPhotoBrowser.bundle; sourceTree = "<group>"; };
 		68FF593F123FE459001379D5 /* KTPhotoBrowserDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoBrowserDataSource.h; sourceTree = "<group>"; };
-		68FF5940123FE459001379D5 /* KTPhotoBrowserDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTPhotoBrowserDataSource.m; sourceTree = "<group>"; };
 		68FF5941123FE459001379D5 /* KTPhotoBrowserGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoBrowserGlobal.h; sourceTree = "<group>"; };
 		68FF5942123FE459001379D5 /* KTPhotoBrowserGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTPhotoBrowserGlobal.m; sourceTree = "<group>"; };
 		68FF5943123FE459001379D5 /* KTPhotoScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoScrollViewController.h; sourceTree = "<group>"; };
 		68FF5944123FE459001379D5 /* KTPhotoScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTPhotoScrollViewController.m; sourceTree = "<group>"; };
 		68FF5945123FE459001379D5 /* KTPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoView.h; sourceTree = "<group>"; };
 		68FF5946123FE459001379D5 /* KTPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTPhotoView.m; sourceTree = "<group>"; };
-		68FF5947123FE459001379D5 /* KTPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoViewController.h; sourceTree = "<group>"; };
-		68FF5948123FE459001379D5 /* KTPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTPhotoViewController.m; sourceTree = "<group>"; };
 		68FF5949123FE459001379D5 /* KTThumbsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTThumbsView.h; sourceTree = "<group>"; };
 		68FF594A123FE459001379D5 /* KTThumbsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTThumbsView.m; sourceTree = "<group>"; };
 		68FF594B123FE459001379D5 /* KTThumbsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTThumbsViewController.h; sourceTree = "<group>"; };
@@ -154,15 +149,12 @@
 			children = (
 				68FF593E123FE459001379D5 /* KTPhotoBrowser.bundle */,
 				68FF593F123FE459001379D5 /* KTPhotoBrowserDataSource.h */,
-				68FF5940123FE459001379D5 /* KTPhotoBrowserDataSource.m */,
 				68FF5941123FE459001379D5 /* KTPhotoBrowserGlobal.h */,
 				68FF5942123FE459001379D5 /* KTPhotoBrowserGlobal.m */,
 				68FF5943123FE459001379D5 /* KTPhotoScrollViewController.h */,
 				68FF5944123FE459001379D5 /* KTPhotoScrollViewController.m */,
 				68FF5945123FE459001379D5 /* KTPhotoView.h */,
 				68FF5946123FE459001379D5 /* KTPhotoView.m */,
-				68FF5947123FE459001379D5 /* KTPhotoViewController.h */,
-				68FF5948123FE459001379D5 /* KTPhotoViewController.m */,
 				68FF5949123FE459001379D5 /* KTThumbsView.h */,
 				68FF594A123FE459001379D5 /* KTThumbsView.m */,
 				68FF594B123FE459001379D5 /* KTThumbsViewController.h */,
@@ -242,11 +234,9 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* ReallyBigPhotoLibraryAppDelegate.m in Sources */,
 				28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */,
-				68FF5950123FE459001379D5 /* KTPhotoBrowserDataSource.m in Sources */,
 				68FF5951123FE459001379D5 /* KTPhotoBrowserGlobal.m in Sources */,
 				68FF5952123FE459001379D5 /* KTPhotoScrollViewController.m in Sources */,
 				68FF5953123FE459001379D5 /* KTPhotoView.m in Sources */,
-				68FF5954123FE459001379D5 /* KTPhotoViewController.m in Sources */,
 				68FF5955123FE459001379D5 /* KTThumbsView.m in Sources */,
 				68FF5956123FE459001379D5 /* KTThumbsViewController.m in Sources */,
 				68FF5957123FE459001379D5 /* KTThumbView.m in Sources */,
@@ -269,6 +259,7 @@
 				INFOPLIST_FILE = "ReallyBigPhotoLibrary-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PRODUCT_NAME = ReallyBigPhotoLibrary;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
