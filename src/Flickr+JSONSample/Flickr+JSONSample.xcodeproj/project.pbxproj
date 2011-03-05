@@ -21,6 +21,8 @@
 		689D250B1322D07F00A08DEC /* KTThumbsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25021322D07F00A08DEC /* KTThumbsView.m */; };
 		689D250C1322D07F00A08DEC /* KTThumbsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25041322D07F00A08DEC /* KTThumbsViewController.m */; };
 		689D250D1322D07F00A08DEC /* KTThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25061322D07F00A08DEC /* KTThumbView.m */; };
+		689D25101322D19800A08DEC /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D250F1322D19800A08DEC /* RootViewController.m */; };
+		689D25131322D34F00A08DEC /* FlickrPhotosDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25121322D34F00A08DEC /* FlickrPhotosDataSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,10 @@
 		689D25041322D07F00A08DEC /* KTThumbsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTThumbsViewController.m; sourceTree = "<group>"; };
 		689D25051322D07F00A08DEC /* KTThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTThumbView.h; sourceTree = "<group>"; };
 		689D25061322D07F00A08DEC /* KTThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTThumbView.m; sourceTree = "<group>"; };
+		689D250E1322D19800A08DEC /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		689D250F1322D19800A08DEC /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		689D25111322D34E00A08DEC /* FlickrPhotosDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotosDataSource.h; sourceTree = "<group>"; };
+		689D25121322D34F00A08DEC /* FlickrPhotosDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotosDataSource.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,10 @@
 				689D24F81322D07F00A08DEC /* KTPhotoBrowser */,
 				689D24ED1322CF8B00A08DEC /* AppDelegate.h */,
 				689D24EE1322CF8B00A08DEC /* AppDelegate.m */,
+				689D250E1322D19800A08DEC /* RootViewController.h */,
+				689D250F1322D19800A08DEC /* RootViewController.m */,
+				689D25111322D34E00A08DEC /* FlickrPhotosDataSource.h */,
+				689D25121322D34F00A08DEC /* FlickrPhotosDataSource.m */,
 				689D24F01322CF8B00A08DEC /* MainWindow.xib */,
 				689D24E51322CF8B00A08DEC /* Supporting Files */,
 			);
@@ -208,6 +218,8 @@
 				689D250B1322D07F00A08DEC /* KTThumbsView.m in Sources */,
 				689D250C1322D07F00A08DEC /* KTThumbsViewController.m in Sources */,
 				689D250D1322D07F00A08DEC /* KTThumbView.m in Sources */,
+				689D25101322D19800A08DEC /* RootViewController.m in Sources */,
+				689D25131322D34F00A08DEC /* FlickrPhotosDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,7 +10,9 @@
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> 
 {
-
+@private
+   UIWindow *window_;
+   UINavigationController *navController_;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
