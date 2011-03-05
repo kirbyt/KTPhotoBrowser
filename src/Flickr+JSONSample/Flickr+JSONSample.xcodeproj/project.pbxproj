@@ -1,0 +1,320 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		689D24DF1322CF8B00A08DEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689D24DE1322CF8B00A08DEC /* UIKit.framework */; };
+		689D24E11322CF8B00A08DEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689D24E01322CF8B00A08DEC /* Foundation.framework */; };
+		689D24E31322CF8B00A08DEC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689D24E21322CF8B00A08DEC /* CoreGraphics.framework */; };
+		689D24E91322CF8B00A08DEC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 689D24E71322CF8B00A08DEC /* InfoPlist.strings */; };
+		689D24EC1322CF8B00A08DEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D24EB1322CF8B00A08DEC /* main.m */; };
+		689D24EF1322CF8B00A08DEC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D24EE1322CF8B00A08DEC /* AppDelegate.m */; };
+		689D24F21322CF8B00A08DEC /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689D24F01322CF8B00A08DEC /* MainWindow.xib */; };
+		689D25071322D07F00A08DEC /* KTPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 689D24F91322D07F00A08DEC /* KTPhotoBrowser.bundle */; };
+		689D25081322D07F00A08DEC /* KTPhotoBrowserGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D24FC1322D07F00A08DEC /* KTPhotoBrowserGlobal.m */; };
+		689D25091322D07F00A08DEC /* KTPhotoScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D24FE1322D07F00A08DEC /* KTPhotoScrollViewController.m */; };
+		689D250A1322D07F00A08DEC /* KTPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25001322D07F00A08DEC /* KTPhotoView.m */; };
+		689D250B1322D07F00A08DEC /* KTThumbsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25021322D07F00A08DEC /* KTThumbsView.m */; };
+		689D250C1322D07F00A08DEC /* KTThumbsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25041322D07F00A08DEC /* KTThumbsViewController.m */; };
+		689D250D1322D07F00A08DEC /* KTThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25061322D07F00A08DEC /* KTThumbView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		689D24DA1322CF8B00A08DEC /* Flickr+JSONSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flickr+JSONSample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		689D24DE1322CF8B00A08DEC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		689D24E01322CF8B00A08DEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		689D24E21322CF8B00A08DEC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		689D24E61322CF8B00A08DEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		689D24E81322CF8B00A08DEC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		689D24EA1322CF8B00A08DEC /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		689D24EB1322CF8B00A08DEC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		689D24ED1322CF8B00A08DEC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		689D24EE1322CF8B00A08DEC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		689D24F11322CF8B00A08DEC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		689D24F91322D07F00A08DEC /* KTPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = KTPhotoBrowser.bundle; sourceTree = "<group>"; };
+		689D24FA1322D07F00A08DEC /* KTPhotoBrowserDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoBrowserDataSource.h; sourceTree = "<group>"; };
+		689D24FB1322D07F00A08DEC /* KTPhotoBrowserGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoBrowserGlobal.h; sourceTree = "<group>"; };
+		689D24FC1322D07F00A08DEC /* KTPhotoBrowserGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTPhotoBrowserGlobal.m; sourceTree = "<group>"; };
+		689D24FD1322D07F00A08DEC /* KTPhotoScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoScrollViewController.h; sourceTree = "<group>"; };
+		689D24FE1322D07F00A08DEC /* KTPhotoScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTPhotoScrollViewController.m; sourceTree = "<group>"; };
+		689D24FF1322D07F00A08DEC /* KTPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTPhotoView.h; sourceTree = "<group>"; };
+		689D25001322D07F00A08DEC /* KTPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTPhotoView.m; sourceTree = "<group>"; };
+		689D25011322D07F00A08DEC /* KTThumbsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTThumbsView.h; sourceTree = "<group>"; };
+		689D25021322D07F00A08DEC /* KTThumbsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTThumbsView.m; sourceTree = "<group>"; };
+		689D25031322D07F00A08DEC /* KTThumbsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTThumbsViewController.h; sourceTree = "<group>"; };
+		689D25041322D07F00A08DEC /* KTThumbsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTThumbsViewController.m; sourceTree = "<group>"; };
+		689D25051322D07F00A08DEC /* KTThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTThumbView.h; sourceTree = "<group>"; };
+		689D25061322D07F00A08DEC /* KTThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTThumbView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		689D24D71322CF8B00A08DEC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				689D24DF1322CF8B00A08DEC /* UIKit.framework in Frameworks */,
+				689D24E11322CF8B00A08DEC /* Foundation.framework in Frameworks */,
+				689D24E31322CF8B00A08DEC /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		689D24CF1322CF8A00A08DEC = {
+			isa = PBXGroup;
+			children = (
+				689D24E41322CF8B00A08DEC /* Flickr+JSONSample */,
+				689D24DD1322CF8B00A08DEC /* Frameworks */,
+				689D24DB1322CF8B00A08DEC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		689D24DB1322CF8B00A08DEC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				689D24DA1322CF8B00A08DEC /* Flickr+JSONSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		689D24DD1322CF8B00A08DEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				689D24DE1322CF8B00A08DEC /* UIKit.framework */,
+				689D24E01322CF8B00A08DEC /* Foundation.framework */,
+				689D24E21322CF8B00A08DEC /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		689D24E41322CF8B00A08DEC /* Flickr+JSONSample */ = {
+			isa = PBXGroup;
+			children = (
+				689D24F81322D07F00A08DEC /* KTPhotoBrowser */,
+				689D24ED1322CF8B00A08DEC /* AppDelegate.h */,
+				689D24EE1322CF8B00A08DEC /* AppDelegate.m */,
+				689D24F01322CF8B00A08DEC /* MainWindow.xib */,
+				689D24E51322CF8B00A08DEC /* Supporting Files */,
+			);
+			path = "Flickr+JSONSample";
+			sourceTree = "<group>";
+		};
+		689D24E51322CF8B00A08DEC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				689D24E61322CF8B00A08DEC /* Info.plist */,
+				689D24E71322CF8B00A08DEC /* InfoPlist.strings */,
+				689D24EA1322CF8B00A08DEC /* Prefix.pch */,
+				689D24EB1322CF8B00A08DEC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		689D24F81322D07F00A08DEC /* KTPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				689D24F91322D07F00A08DEC /* KTPhotoBrowser.bundle */,
+				689D24FA1322D07F00A08DEC /* KTPhotoBrowserDataSource.h */,
+				689D24FB1322D07F00A08DEC /* KTPhotoBrowserGlobal.h */,
+				689D24FC1322D07F00A08DEC /* KTPhotoBrowserGlobal.m */,
+				689D24FD1322D07F00A08DEC /* KTPhotoScrollViewController.h */,
+				689D24FE1322D07F00A08DEC /* KTPhotoScrollViewController.m */,
+				689D24FF1322D07F00A08DEC /* KTPhotoView.h */,
+				689D25001322D07F00A08DEC /* KTPhotoView.m */,
+				689D25011322D07F00A08DEC /* KTThumbsView.h */,
+				689D25021322D07F00A08DEC /* KTThumbsView.m */,
+				689D25031322D07F00A08DEC /* KTThumbsViewController.h */,
+				689D25041322D07F00A08DEC /* KTThumbsViewController.m */,
+				689D25051322D07F00A08DEC /* KTThumbView.h */,
+				689D25061322D07F00A08DEC /* KTThumbView.m */,
+			);
+			name = KTPhotoBrowser;
+			path = ../../KTPhotoBrowser;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		689D24D91322CF8B00A08DEC /* Flickr+JSONSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 689D24F51322CF8B00A08DEC /* Build configuration list for PBXNativeTarget "Flickr+JSONSample" */;
+			buildPhases = (
+				689D24D61322CF8B00A08DEC /* Sources */,
+				689D24D71322CF8B00A08DEC /* Frameworks */,
+				689D24D81322CF8B00A08DEC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Flickr+JSONSample";
+			productName = "Flickr+JSONSample";
+			productReference = 689D24DA1322CF8B00A08DEC /* Flickr+JSONSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		689D24D11322CF8A00A08DEC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "White Peak Software Inc.";
+			};
+			buildConfigurationList = 689D24D41322CF8A00A08DEC /* Build configuration list for PBXProject "Flickr+JSONSample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 689D24CF1322CF8A00A08DEC;
+			productRefGroup = 689D24DB1322CF8B00A08DEC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				689D24D91322CF8B00A08DEC /* Flickr+JSONSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		689D24D81322CF8B00A08DEC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				689D24E91322CF8B00A08DEC /* InfoPlist.strings in Resources */,
+				689D24F21322CF8B00A08DEC /* MainWindow.xib in Resources */,
+				689D25071322D07F00A08DEC /* KTPhotoBrowser.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		689D24D61322CF8B00A08DEC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				689D24EC1322CF8B00A08DEC /* main.m in Sources */,
+				689D24EF1322CF8B00A08DEC /* AppDelegate.m in Sources */,
+				689D25081322D07F00A08DEC /* KTPhotoBrowserGlobal.m in Sources */,
+				689D25091322D07F00A08DEC /* KTPhotoScrollViewController.m in Sources */,
+				689D250A1322D07F00A08DEC /* KTPhotoView.m in Sources */,
+				689D250B1322D07F00A08DEC /* KTThumbsView.m in Sources */,
+				689D250C1322D07F00A08DEC /* KTThumbsViewController.m in Sources */,
+				689D250D1322D07F00A08DEC /* KTThumbView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		689D24E71322CF8B00A08DEC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				689D24E81322CF8B00A08DEC /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		689D24F01322CF8B00A08DEC /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				689D24F11322CF8B00A08DEC /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		689D24F31322CF8B00A08DEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		689D24F41322CF8B00A08DEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		689D24F61322CF8B00A08DEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Flickr+JSONSample/Prefix.pch";
+				INFOPLIST_FILE = "Flickr+JSONSample/Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		689D24F71322CF8B00A08DEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Flickr+JSONSample/Prefix.pch";
+				INFOPLIST_FILE = "Flickr+JSONSample/Info.plist";
+				INSTALL_PATH = "$(LOCAL_APPS_DIR)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		689D24D41322CF8A00A08DEC /* Build configuration list for PBXProject "Flickr+JSONSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				689D24F31322CF8B00A08DEC /* Debug */,
+				689D24F41322CF8B00A08DEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		689D24F51322CF8B00A08DEC /* Build configuration list for PBXNativeTarget "Flickr+JSONSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				689D24F61322CF8B00A08DEC /* Debug */,
+				689D24F71322CF8B00A08DEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 689D24D11322CF8A00A08DEC /* Project object */;
+}
