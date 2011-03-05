@@ -32,6 +32,7 @@
 		689D252E1322D4CB00A08DEC /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25231322D4CB00A08DEC /* SBJsonStreamWriterState.m */; };
 		689D252F1322D4CB00A08DEC /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25251322D4CB00A08DEC /* SBJsonTokeniser.m */; };
 		689D25301322D4CB00A08DEC /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25271322D4CB00A08DEC /* SBJsonWriter.m */; };
+		689D25331322DB3400A08DEC /* SimpleFlickrAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25321322DB3300A08DEC /* SimpleFlickrAPI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,8 @@
 		689D25251322D4CB00A08DEC /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
 		689D25261322D4CB00A08DEC /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		689D25271322D4CB00A08DEC /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		689D25311322DB3300A08DEC /* SimpleFlickrAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleFlickrAPI.h; sourceTree = "<group>"; };
+		689D25321322DB3300A08DEC /* SimpleFlickrAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleFlickrAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 				689D250F1322D19800A08DEC /* RootViewController.m */,
 				689D25111322D34E00A08DEC /* FlickrPhotosDataSource.h */,
 				689D25121322D34F00A08DEC /* FlickrPhotosDataSource.m */,
+				689D25311322DB3300A08DEC /* SimpleFlickrAPI.h */,
+				689D25321322DB3300A08DEC /* SimpleFlickrAPI.m */,
 				689D24F01322CF8B00A08DEC /* MainWindow.xib */,
 				689D24F81322D07F00A08DEC /* KTPhotoBrowser */,
 				689D25141322D4CB00A08DEC /* JSONFramework */,
@@ -284,6 +289,7 @@
 				689D252E1322D4CB00A08DEC /* SBJsonStreamWriterState.m in Sources */,
 				689D252F1322D4CB00A08DEC /* SBJsonTokeniser.m in Sources */,
 				689D25301322D4CB00A08DEC /* SBJsonWriter.m in Sources */,
+				689D25331322DB3400A08DEC /* SimpleFlickrAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
