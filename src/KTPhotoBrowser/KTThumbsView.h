@@ -11,9 +11,12 @@
 
 @class KTThumbsViewController;
 
-@interface KTThumbsView : UIScrollView {
+@interface KTThumbsView : UIScrollView 
+{
+@private
    id <KTPhotoBrowserDataSource> dataSource_;
    KTThumbsViewController *controller_;
+   NSMutableSet *reusableThumbViews_;
 }
 
 @property (nonatomic, assign) KTThumbsViewController *controller;

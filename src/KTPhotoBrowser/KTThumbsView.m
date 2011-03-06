@@ -15,6 +15,12 @@
 
 @synthesize controller = controller_;
 
+- (void)dealloc
+{
+   [reusableThumbViews_ release], reusableThumbViews_ = nil;
+   [super dealloc];
+}
+
 - (void)setDataSource:(id <KTPhotoBrowserDataSource>)newDataSource {
    dataSource_ = newDataSource;
    [self setNeedsLayout];
@@ -26,6 +32,33 @@
       UIView *subview = [[self subviews] objectAtIndex:i - 1];
       [subview removeFromSuperview];
    }
+}
+
+- (void)queueNonVisibleSubviews
+{
+   if (!reusableThumbViews_) {
+      reusableThumbViews_ = [[NSMutableSet alloc] init];
+   }
+   
+   int count = [[self subviews] count];
+   for (int i = count; i > 0; i--) {
+      UIView *subview = [[self subviews] objectAtIndex:i - 1];
+      if ([subview isKindOfClass:[KTThumbView class]] && !CGRectContainsPoint([subview frame], [self contentOffset])) {
+         // Queue the subview.
+         [reusableThumbViews_ addObject:[subview retain]];
+         [subview removeFromSuperview];
+      }
+   }
+}
+
+- (KTThumbView *)dequeueReusableThumbView
+{
+   KTThumbView *thumbView = [reusableThumbViews_ anyObject];
+   if (thumbView != nil) {
+      [[thumbView retain] autorelease];
+      [reusableThumbViews_ removeObject:thumbView];
+   }
+   return thumbView;
 }
 
 - (void)layoutSubviews {
@@ -76,7 +109,7 @@
    
    [self setContentSize:contentSize];
    
-   [self removeAllSubviews];
+   [self queueNonVisibleSubviews];
    
    BOOL thumbsHaveBorder = YES;
    if ([dataSource_ respondsToSelector:@selector(thumbsHaveBorder)]) {
@@ -97,8 +130,17 @@
    // Add new subviews.
    for (int i = startAtIndex; i < stopAtIndex; i++) {
       if (i >= 0) {
-         KTThumbView *thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight) andHasBorder:thumbsHaveBorder];
-         [thumbView setController:controller_];
+         KTThumbView *thumbView = [self dequeueReusableThumbView];
+         if (!thumbView) {
+            thumbView = [[KTThumbView alloc] initWithFrame:CGRectMake(x, y, thumbnailWidth, thumbnailHeight) andHasBorder:thumbsHaveBorder];
+            [thumbView setController:controller_];
+         }
+         
+         CGRect newFrame = [thumbView frame];
+         newFrame.origin.x = x;
+         newFrame.origin.y = y;
+         [thumbView setFrame:newFrame];
+         
          [thumbView setTag:i];
          
          if ([dataSource_ respondsToSelector:@selector(thumbImageAtIndex:thumbView:)] == NO) {
