@@ -12,8 +12,8 @@
 #import "NSString+KTString.h"
 
 
-// #error Changes this value to your own application key
-#define flickrAPIKey @"8d9281869aba4a8ffd534f7d418d9644"
+#error Changes this value to your own application key. More info at http://www.flickr.com/services/api/misc.api_keys.html 
+#define flickrAPIKey @"YOUR_FLICKR_APP_KEY"
 
 #define flickrBaseURL @"http://api.flickr.com/services/rest/?format=json&"
 

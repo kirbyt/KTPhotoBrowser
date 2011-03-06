@@ -74,14 +74,16 @@
 
 - (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView {
    NSDictionary *photo = [[self photos] objectAtIndex:index];
-//   NSString *url = [imageUrls objectAtIndex:FULL_SIZE_INDEX];
-//   [photoView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
+   NSString *urlString = [photo objectForKey:@"url_m"];
+   NSURL *URL = [NSURL URLWithString:urlString];
+   [photoView setImageWithURL:URL placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
 }
 
 - (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView {
-   NSDictioonary *photo = [[self photos] objectAtIndex:index];
-//   NSString *url = [imageUrls objectAtIndex:THUMBNAIL_INDEX];
-//   [thumbView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
+   NSDictionary *photo = [[self photos] objectAtIndex:index];
+   NSString *urlString = [photo objectForKey:@"url_t"];
+   NSURL *URL = [NSURL URLWithString:urlString];
+   [thumbView setImageWithURL:URL placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
 }
 
 @end
