@@ -7,12 +7,22 @@
 //
 
 #import "FlickrPhotosDataSource.h"
+#import "SimpleFlickrAPI.h"
+#import "KTPhotoView+SDWebImage.h"
+#import "KTThumbView+SDWebImage.h"
 
+
+@interface FlickrPhotosDataSource ()
+@property (nonatomic, retain) NSArray *photos;
+@end
 
 @implementation FlickrPhotosDataSource
 
+@synthesize photos = photos_;
+
 - (void)dealloc
 {
+   [photos_ release], photos_ = nil;
    [super dealloc];
 }
 
@@ -25,20 +35,53 @@
    return self;
 }
 
+- (NSString *)photoSetIdWithTitle:(NSString *)title photoSets:(NSArray *)photoSets
+{
+   NSString *result;
+   for (NSDictionary *photoSet in photoSets) {
+      NSDictionary *titleDict = [photoSet objectForKey:@"title"];
+      NSString *titleContent = [titleDict objectForKey:@"_content"];
+      if ([titleContent isEqualToString:title]) {
+         result = [photoSet objectForKey:@"id"];
+         break;
+      }
+   }
+   
+   return result;
+}
+
+- (void)fetchPhotos
+{
+   SimpleFlickrAPI *flickr = [[SimpleFlickrAPI alloc] init];
+   NSString *userId = [flickr userIdForUsername:@"Kirby Turner"];
+   NSArray *photoSets = [flickr photoSetListWithUserId:userId];
+   NSString *photoSetId = [self photoSetIdWithTitle:@"Rowan" photoSets:photoSets];
+   NSArray *photos = [flickr photosWithPhotoSetId:photoSetId];
+   [flickr release];
+   
+   [self setPhotos:photos];
+}
+
+
+#pragma -
+#pragma KTPhotoBrowserDataSource
+
 - (NSInteger)numberOfPhotos
 {
-   return 0;
+   NSInteger count = [[self photos] count];
+   return count;
 }
 
-// Implement either these, for synchronous images…
-- (UIImage *)imageAtIndex:(NSInteger)index
-{
-   return nil;
+- (void)imageAtIndex:(NSInteger)index photoView:(KTPhotoView *)photoView {
+   NSDictionary *photo = [[self photos] objectAtIndex:index];
+//   NSString *url = [imageUrls objectAtIndex:FULL_SIZE_INDEX];
+//   [photoView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
 }
 
-- (UIImage *)thumbImageAtIndex:(NSInteger)index
-{
-   return nil;
+- (void)thumbImageAtIndex:(NSInteger)index thumbView:(KTThumbView *)thumbView {
+   NSDictioonary *photo = [[self photos] objectAtIndex:index];
+//   NSString *url = [imageUrls objectAtIndex:THUMBNAIL_INDEX];
+//   [thumbView setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"photoDefault.png"]];
 }
 
 @end

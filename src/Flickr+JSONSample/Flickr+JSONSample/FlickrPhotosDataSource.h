@@ -12,7 +12,10 @@
 
 @interface FlickrPhotosDataSource : NSObject <KTPhotoBrowserDataSource>
 {
-    
+@private
+   NSArray *photos_;
 }
+
+- (void)fetchPhotos;
 
 @end
