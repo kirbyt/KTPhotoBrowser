@@ -23,16 +23,18 @@
 		689D250D1322D07F00A08DEC /* KTThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25061322D07F00A08DEC /* KTThumbView.m */; };
 		689D25101322D19800A08DEC /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D250F1322D19800A08DEC /* RootViewController.m */; };
 		689D25131322D34F00A08DEC /* FlickrPhotosDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25121322D34F00A08DEC /* FlickrPhotosDataSource.m */; };
-		689D25281322D4CB00A08DEC /* NSObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25171322D4CB00A08DEC /* NSObject+JSON.m */; };
-		689D25291322D4CB00A08DEC /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25191322D4CB00A08DEC /* SBJsonParser.m */; };
-		689D252A1322D4CB00A08DEC /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D251B1322D4CB00A08DEC /* SBJsonStreamParser.m */; };
-		689D252B1322D4CB00A08DEC /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D251D1322D4CB00A08DEC /* SBJsonStreamParserAdapter.m */; };
-		689D252C1322D4CB00A08DEC /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D251F1322D4CB00A08DEC /* SBJsonStreamParserState.m */; };
-		689D252D1322D4CB00A08DEC /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25211322D4CB00A08DEC /* SBJsonStreamWriter.m */; };
-		689D252E1322D4CB00A08DEC /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25231322D4CB00A08DEC /* SBJsonStreamWriterState.m */; };
-		689D252F1322D4CB00A08DEC /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25251322D4CB00A08DEC /* SBJsonTokeniser.m */; };
-		689D25301322D4CB00A08DEC /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25271322D4CB00A08DEC /* SBJsonWriter.m */; };
 		689D25331322DB3400A08DEC /* SimpleFlickrAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25321322DB3300A08DEC /* SimpleFlickrAPI.m */; };
+		689D25361322E17800A08DEC /* WebServiceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25351322E17800A08DEC /* WebServiceClient.m */; };
+		689D254B1322E5FA00A08DEC /* NSObject+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D253A1322E5FA00A08DEC /* NSObject+JSON.m */; };
+		689D254C1322E5FA00A08DEC /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D253C1322E5FA00A08DEC /* SBJsonParser.m */; };
+		689D254D1322E5FA00A08DEC /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D253E1322E5FA00A08DEC /* SBJsonStreamParser.m */; };
+		689D254E1322E5FA00A08DEC /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25401322E5FA00A08DEC /* SBJsonStreamParserAdapter.m */; };
+		689D254F1322E5FA00A08DEC /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25421322E5FA00A08DEC /* SBJsonStreamParserState.m */; };
+		689D25501322E5FA00A08DEC /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25441322E5FA00A08DEC /* SBJsonStreamWriter.m */; };
+		689D25511322E5FA00A08DEC /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25461322E5FA00A08DEC /* SBJsonStreamWriterState.m */; };
+		689D25521322E5FA00A08DEC /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D25481322E5FA00A08DEC /* SBJsonTokeniser.m */; };
+		689D25531322E5FA00A08DEC /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 689D254A1322E5FA00A08DEC /* SBJsonWriter.m */; };
+		68DBE45F1323B79400047944 /* NSString+KTString.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DBE45E1323B79400047944 /* NSString+KTString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,27 +67,31 @@
 		689D250F1322D19800A08DEC /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		689D25111322D34E00A08DEC /* FlickrPhotosDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrPhotosDataSource.h; sourceTree = "<group>"; };
 		689D25121322D34F00A08DEC /* FlickrPhotosDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrPhotosDataSource.m; sourceTree = "<group>"; };
-		689D25151322D4CB00A08DEC /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		689D25161322D4CB00A08DEC /* NSObject+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSON.h"; sourceTree = "<group>"; };
-		689D25171322D4CB00A08DEC /* NSObject+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSON.m"; sourceTree = "<group>"; };
-		689D25181322D4CB00A08DEC /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		689D25191322D4CB00A08DEC /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		689D251A1322D4CB00A08DEC /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
-		689D251B1322D4CB00A08DEC /* SBJsonStreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParser.m; sourceTree = "<group>"; };
-		689D251C1322D4CB00A08DEC /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAdapter.h; sourceTree = "<group>"; };
-		689D251D1322D4CB00A08DEC /* SBJsonStreamParserAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAdapter.m; sourceTree = "<group>"; };
-		689D251E1322D4CB00A08DEC /* SBJsonStreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserState.h; sourceTree = "<group>"; };
-		689D251F1322D4CB00A08DEC /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
-		689D25201322D4CB00A08DEC /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriter.h; sourceTree = "<group>"; };
-		689D25211322D4CB00A08DEC /* SBJsonStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriter.m; sourceTree = "<group>"; };
-		689D25221322D4CB00A08DEC /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
-		689D25231322D4CB00A08DEC /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
-		689D25241322D4CB00A08DEC /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
-		689D25251322D4CB00A08DEC /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
-		689D25261322D4CB00A08DEC /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		689D25271322D4CB00A08DEC /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		689D25311322DB3300A08DEC /* SimpleFlickrAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleFlickrAPI.h; sourceTree = "<group>"; };
 		689D25321322DB3300A08DEC /* SimpleFlickrAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleFlickrAPI.m; sourceTree = "<group>"; };
+		689D25341322E17700A08DEC /* WebServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceClient.h; sourceTree = "<group>"; };
+		689D25351322E17800A08DEC /* WebServiceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceClient.m; sourceTree = "<group>"; };
+		689D25381322E5FA00A08DEC /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		689D25391322E5FA00A08DEC /* NSObject+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JSON.h"; sourceTree = "<group>"; };
+		689D253A1322E5FA00A08DEC /* NSObject+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JSON.m"; sourceTree = "<group>"; };
+		689D253B1322E5FA00A08DEC /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		689D253C1322E5FA00A08DEC /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		689D253D1322E5FA00A08DEC /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
+		689D253E1322E5FA00A08DEC /* SBJsonStreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParser.m; sourceTree = "<group>"; };
+		689D253F1322E5FA00A08DEC /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAdapter.h; sourceTree = "<group>"; };
+		689D25401322E5FA00A08DEC /* SBJsonStreamParserAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAdapter.m; sourceTree = "<group>"; };
+		689D25411322E5FA00A08DEC /* SBJsonStreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserState.h; sourceTree = "<group>"; };
+		689D25421322E5FA00A08DEC /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
+		689D25431322E5FA00A08DEC /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriter.h; sourceTree = "<group>"; };
+		689D25441322E5FA00A08DEC /* SBJsonStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriter.m; sourceTree = "<group>"; };
+		689D25451322E5FA00A08DEC /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
+		689D25461322E5FA00A08DEC /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
+		689D25471322E5FA00A08DEC /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
+		689D25481322E5FA00A08DEC /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
+		689D25491322E5FA00A08DEC /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		689D254A1322E5FA00A08DEC /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		68DBE45D1323B79400047944 /* NSString+KTString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+KTString.h"; sourceTree = "<group>"; };
+		68DBE45E1323B79400047944 /* NSString+KTString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+KTString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,9 +146,13 @@
 				689D25121322D34F00A08DEC /* FlickrPhotosDataSource.m */,
 				689D25311322DB3300A08DEC /* SimpleFlickrAPI.h */,
 				689D25321322DB3300A08DEC /* SimpleFlickrAPI.m */,
+				689D25341322E17700A08DEC /* WebServiceClient.h */,
+				689D25351322E17800A08DEC /* WebServiceClient.m */,
+				68DBE45D1323B79400047944 /* NSString+KTString.h */,
+				68DBE45E1323B79400047944 /* NSString+KTString.m */,
 				689D24F01322CF8B00A08DEC /* MainWindow.xib */,
 				689D24F81322D07F00A08DEC /* KTPhotoBrowser */,
-				689D25141322D4CB00A08DEC /* JSONFramework */,
+				689D25371322E5FA00A08DEC /* JSONFramework */,
 				689D24E51322CF8B00A08DEC /* Supporting Files */,
 			);
 			path = "Flickr+JSONSample";
@@ -181,28 +191,28 @@
 			path = ../../KTPhotoBrowser;
 			sourceTree = "<group>";
 		};
-		689D25141322D4CB00A08DEC /* JSONFramework */ = {
+		689D25371322E5FA00A08DEC /* JSONFramework */ = {
 			isa = PBXGroup;
 			children = (
-				689D25151322D4CB00A08DEC /* JSON.h */,
-				689D25161322D4CB00A08DEC /* NSObject+JSON.h */,
-				689D25171322D4CB00A08DEC /* NSObject+JSON.m */,
-				689D25181322D4CB00A08DEC /* SBJsonParser.h */,
-				689D25191322D4CB00A08DEC /* SBJsonParser.m */,
-				689D251A1322D4CB00A08DEC /* SBJsonStreamParser.h */,
-				689D251B1322D4CB00A08DEC /* SBJsonStreamParser.m */,
-				689D251C1322D4CB00A08DEC /* SBJsonStreamParserAdapter.h */,
-				689D251D1322D4CB00A08DEC /* SBJsonStreamParserAdapter.m */,
-				689D251E1322D4CB00A08DEC /* SBJsonStreamParserState.h */,
-				689D251F1322D4CB00A08DEC /* SBJsonStreamParserState.m */,
-				689D25201322D4CB00A08DEC /* SBJsonStreamWriter.h */,
-				689D25211322D4CB00A08DEC /* SBJsonStreamWriter.m */,
-				689D25221322D4CB00A08DEC /* SBJsonStreamWriterState.h */,
-				689D25231322D4CB00A08DEC /* SBJsonStreamWriterState.m */,
-				689D25241322D4CB00A08DEC /* SBJsonTokeniser.h */,
-				689D25251322D4CB00A08DEC /* SBJsonTokeniser.m */,
-				689D25261322D4CB00A08DEC /* SBJsonWriter.h */,
-				689D25271322D4CB00A08DEC /* SBJsonWriter.m */,
+				689D25381322E5FA00A08DEC /* JSON.h */,
+				689D25391322E5FA00A08DEC /* NSObject+JSON.h */,
+				689D253A1322E5FA00A08DEC /* NSObject+JSON.m */,
+				689D253B1322E5FA00A08DEC /* SBJsonParser.h */,
+				689D253C1322E5FA00A08DEC /* SBJsonParser.m */,
+				689D253D1322E5FA00A08DEC /* SBJsonStreamParser.h */,
+				689D253E1322E5FA00A08DEC /* SBJsonStreamParser.m */,
+				689D253F1322E5FA00A08DEC /* SBJsonStreamParserAdapter.h */,
+				689D25401322E5FA00A08DEC /* SBJsonStreamParserAdapter.m */,
+				689D25411322E5FA00A08DEC /* SBJsonStreamParserState.h */,
+				689D25421322E5FA00A08DEC /* SBJsonStreamParserState.m */,
+				689D25431322E5FA00A08DEC /* SBJsonStreamWriter.h */,
+				689D25441322E5FA00A08DEC /* SBJsonStreamWriter.m */,
+				689D25451322E5FA00A08DEC /* SBJsonStreamWriterState.h */,
+				689D25461322E5FA00A08DEC /* SBJsonStreamWriterState.m */,
+				689D25471322E5FA00A08DEC /* SBJsonTokeniser.h */,
+				689D25481322E5FA00A08DEC /* SBJsonTokeniser.m */,
+				689D25491322E5FA00A08DEC /* SBJsonWriter.h */,
+				689D254A1322E5FA00A08DEC /* SBJsonWriter.m */,
 			);
 			path = JSONFramework;
 			sourceTree = SOURCE_ROOT;
@@ -280,16 +290,18 @@
 				689D250D1322D07F00A08DEC /* KTThumbView.m in Sources */,
 				689D25101322D19800A08DEC /* RootViewController.m in Sources */,
 				689D25131322D34F00A08DEC /* FlickrPhotosDataSource.m in Sources */,
-				689D25281322D4CB00A08DEC /* NSObject+JSON.m in Sources */,
-				689D25291322D4CB00A08DEC /* SBJsonParser.m in Sources */,
-				689D252A1322D4CB00A08DEC /* SBJsonStreamParser.m in Sources */,
-				689D252B1322D4CB00A08DEC /* SBJsonStreamParserAdapter.m in Sources */,
-				689D252C1322D4CB00A08DEC /* SBJsonStreamParserState.m in Sources */,
-				689D252D1322D4CB00A08DEC /* SBJsonStreamWriter.m in Sources */,
-				689D252E1322D4CB00A08DEC /* SBJsonStreamWriterState.m in Sources */,
-				689D252F1322D4CB00A08DEC /* SBJsonTokeniser.m in Sources */,
-				689D25301322D4CB00A08DEC /* SBJsonWriter.m in Sources */,
 				689D25331322DB3400A08DEC /* SimpleFlickrAPI.m in Sources */,
+				689D25361322E17800A08DEC /* WebServiceClient.m in Sources */,
+				689D254B1322E5FA00A08DEC /* NSObject+JSON.m in Sources */,
+				689D254C1322E5FA00A08DEC /* SBJsonParser.m in Sources */,
+				689D254D1322E5FA00A08DEC /* SBJsonStreamParser.m in Sources */,
+				689D254E1322E5FA00A08DEC /* SBJsonStreamParserAdapter.m in Sources */,
+				689D254F1322E5FA00A08DEC /* SBJsonStreamParserState.m in Sources */,
+				689D25501322E5FA00A08DEC /* SBJsonStreamWriter.m in Sources */,
+				689D25511322E5FA00A08DEC /* SBJsonStreamWriterState.m in Sources */,
+				689D25521322E5FA00A08DEC /* SBJsonTokeniser.m in Sources */,
+				689D25531322E5FA00A08DEC /* SBJsonWriter.m in Sources */,
+				68DBE45F1323B79400047944 /* NSString+KTString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +407,7 @@
 				689D24F71322CF8B00A08DEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

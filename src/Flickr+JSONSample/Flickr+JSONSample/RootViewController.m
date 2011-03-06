@@ -8,9 +8,11 @@
 
 #import "RootViewController.h"
 #import "FlickrPhotosDataSource.h"
+#import "SimpleFlickrAPI.h"
 
 @interface RootViewController ()
 - (FlickrPhotosDataSource *)photos;
+- (NSString *)photoSetIdWithTitle:(NSString *)title photoSets:(NSArray *)photoSets;
 @end
 
 @implementation RootViewController
@@ -23,6 +25,15 @@
 - (void)viewDidLoad 
 {
    [super viewDidLoad];
+   
+   SimpleFlickrAPI *flickr = [[SimpleFlickrAPI alloc] init];
+   NSString *userId = [flickr userIdForUsername:@"Kirby Turner"];
+   NSArray *photoSets = [flickr photoSetListWithUserId:userId];
+   NSString *photoSetId = [self photoSetIdWithTitle:@"Rowan" photoSets:photoSets];
+   NSArray *photos = [flickr photosWithPhotoSetId:photoSetId];
+   [flickr release];
+
+   NSLog(@"%@", photos);
    
    [self setDataSource:[self photos]];
    [self setTitle:[NSString stringWithFormat:@"%i Photos", [[self photos] numberOfPhotos]]];
@@ -40,6 +51,21 @@
    }
    
    return nil;
+}
+
+- (NSString *)photoSetIdWithTitle:(NSString *)title photoSets:(NSArray *)photoSets
+{
+   NSString *result;
+   for (NSDictionary *photoSet in photoSets) {
+      NSDictionary *titleDict = [photoSet objectForKey:@"title"];
+      NSString *titleContent = [titleDict objectForKey:@"_content"];
+      if ([titleContent isEqualToString:title]) {
+         result = [photoSet objectForKey:@"id"];
+         break;
+      }
+   }
+   
+   return result;
 }
 
 @end
