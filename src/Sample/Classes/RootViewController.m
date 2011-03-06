@@ -65,7 +65,7 @@
 }
 
 - (void)showSDWebImageSample {
-   SDWebImageRootViewController *newController = [[SDWebImageRootViewController alloc] init];
+   SDWebImageRootViewController *newController = [[SDWebImageRootViewController alloc] initWithWindow:window_];
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
 }

@@ -13,6 +13,10 @@
 
 @interface SDWebImageRootViewController : KTThumbsViewController {
    SDWebImageDataSource *images_;
+   UIActivityIndicatorView *activityIndicatorView_;
+   UIWindow *window_;
 }
+
+- (id)initWithWindow:(UIWindow *)window;
 
 @end
