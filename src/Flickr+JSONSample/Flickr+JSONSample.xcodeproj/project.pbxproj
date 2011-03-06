@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68112CDA1323F5F800C808D1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68112CD81323F5F800C808D1 /* Default.png */; };
+		68112CDB1323F5F800C808D1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68112CD91323F5F800C808D1 /* Default@2x.png */; };
 		689D24DF1322CF8B00A08DEC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689D24DE1322CF8B00A08DEC /* UIKit.framework */; };
 		689D24E11322CF8B00A08DEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689D24E01322CF8B00A08DEC /* Foundation.framework */; };
 		689D24E31322CF8B00A08DEC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689D24E21322CF8B00A08DEC /* CoreGraphics.framework */; };
@@ -47,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68112CD81323F5F800C808D1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		68112CD91323F5F800C808D1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		689D24DA1322CF8B00A08DEC /* Flickr+JSONSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Flickr+JSONSample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		689D24DE1322CF8B00A08DEC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		689D24E01322CF8B00A08DEC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -198,6 +202,8 @@
 				689D24E71322CF8B00A08DEC /* InfoPlist.strings */,
 				689D24EA1322CF8B00A08DEC /* Prefix.pch */,
 				689D24EB1322CF8B00A08DEC /* main.m */,
+				68112CD81323F5F800C808D1 /* Default.png */,
+				68112CD91323F5F800C808D1 /* Default@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -326,6 +332,8 @@
 				68DBE46F1323D2D200047944 /* LICENSE in Resources */,
 				68DBE4701323D2D200047944 /* README.md in Resources */,
 				68DBE47C1323D32800047944 /* photoDefault.png in Resources */,
+				68112CDA1323F5F800C808D1 /* Default.png in Resources */,
+				68112CDB1323F5F800C808D1 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
