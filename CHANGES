@@ -1,3 +1,10 @@
+Changes since April 6, 2011
+
+(Note: I realize I failed to update the change log over the last year. Apologies to all. I will do a better job going forward.)
+
+- [NEW] Added new Flickr+JSON sample. Shows how to use the Flickr JSON API to retrieve and display photos. This sample uses SDWebImage to cache downloaded photos.
+
+
 Changes since March 23, 2010
 
 - [NEW] Added photo rotation support.
