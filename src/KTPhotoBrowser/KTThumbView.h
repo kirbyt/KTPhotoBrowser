@@ -10,14 +10,17 @@
 
 @class KTThumbsViewController;
 
-@interface KTThumbView : UIButton {
+@interface KTThumbView : UIButton 
+{
+@private
    KTThumbsViewController *controller_;
 }
 
 @property (nonatomic, assign) KTThumbsViewController *controller;
 
-- (id)initWithFrame:(CGRect)frame andHasBorder:(BOOL)hasBorder;
+- (id)initWithFrame:(CGRect)frame;
 - (void)setThumbImage:(UIImage *)newImage;
+- (void)setHasBorder:(BOOL)hasBorder;
 
 @end
 

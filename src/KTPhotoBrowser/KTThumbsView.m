@@ -15,6 +15,9 @@
 
 @synthesize dataSource = dataSource_;
 @synthesize controller = controller_;
+@synthesize thumbsHaveBorder = thumbsHaveBorder_;
+@synthesize thumbsPerRow = thumbsPerRow_;
+@synthesize thumbSize = thumbSize_;
 
 - (void)dealloc
 {
@@ -26,6 +29,11 @@
 {
    self = [super initWithFrame:frame];
    if (self) {
+      // Set default values.
+      thumbsHaveBorder_ = YES;
+      thumbsPerRow_ = NSIntegerMin; // Forces caluation because on view size.
+      thumbSize_ = CGSizeMake(75, 75);
+      
       // We keep a collection of reusable thumbnail
       // views. This improves performance by not
       // requiring a create view each and every time.
@@ -127,36 +135,26 @@
    // Do a bunch of math to determine which rows and colums
    // are visible.
 
-   int thumbnailWidth = 75;   // Default thumbnail size.
-   int thumbnailHeight = 75;  // Default thumbnail size.
-   if ([dataSource_ respondsToSelector:@selector(thumbsViewThumbSize:)]) {
-      CGSize customThumbSize = [dataSource_ thumbsViewThumbSize:self];
-      thumbnailWidth = customThumbSize.width;
-      thumbnailHeight = customThumbSize.height;
-   }
-
-   int itemsPerRow;
-   if ([dataSource_ respondsToSelector:@selector(thumbsViewThumbsPerRow:)]) {
-      itemsPerRow = [dataSource_ thumbsViewThumbsPerRow:self];
-   } else {  // Figure it out.
-      itemsPerRow = floor(viewWidth / thumbnailWidth);
+   int itemsPerRow = thumbsPerRow_;
+   if (itemsPerRow == NSIntegerMin) {
+      itemsPerRow = floor(viewWidth / thumbSize_.width);
    }
    
    // Ensure a minimum of space between images.
    int minimumSpace = 5;
-   if (viewWidth - itemsPerRow * thumbnailWidth < minimumSpace) {
+   if (viewWidth - itemsPerRow * thumbSize_.width < minimumSpace) {
      itemsPerRow--;
    }
    
    if (itemsPerRow < 1) itemsPerRow = 1;  // Ensure at least one per row.
    
-   int spaceWidth = round((viewWidth - thumbnailWidth * itemsPerRow) / (itemsPerRow + 1));
+   int spaceWidth = round((viewWidth - thumbSize_.width * itemsPerRow) / (itemsPerRow + 1));
    int spaceHeight = spaceWidth;
    
    // Calculate content size.
    int thumbCount = [dataSource_ thumbsViewNumberOfThumbs:self];
    int rowCount = ceil(thumbCount / (float)itemsPerRow);
-   int rowHeight = thumbnailHeight + spaceHeight;
+   int rowHeight = thumbSize_.height + spaceHeight;
    CGSize contentSize = CGSizeMake(viewWidth, (rowHeight * rowCount + spaceHeight));
    [self setContentSize:contentSize];
    
@@ -180,12 +178,14 @@
          KTThumbView *thumbView = [dataSource_ thumbsView:self thumbForIndex:index];
 
          // Set the frame so the view is inserted into the correct position.
-         CGRect newFrame = CGRectMake(x, y, thumbnailWidth, thumbnailHeight);
+         CGRect newFrame = CGRectMake(x, y, thumbSize_.width, thumbSize_.height);
          [thumbView setFrame:newFrame];
          
          // Store the current index so the thumb view can 
          // find it later.
          [thumbView setTag:index];
+         
+         [thumbView setHasBorder:thumbsHaveBorder_];
          
          [self addSubview:thumbView];
       }
@@ -194,9 +194,9 @@
       if ( (index+1) % itemsPerRow == 0) {
          // Start new row.
          x = spaceWidth;
-         y += thumbnailHeight + spaceHeight;
+         y += thumbSize_.height + spaceHeight;
       } else {
-         x += thumbnailWidth + spaceWidth;
+         x += thumbSize_.width + spaceWidth;
       }
    }
    

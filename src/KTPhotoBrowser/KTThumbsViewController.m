@@ -39,6 +39,19 @@
    [scrollView setAlwaysBounceVertical:YES];
    [scrollView setBackgroundColor:[UIColor whiteColor]];
    
+   if ([dataSource_ respondsToSelector:@selector(thumbsHaveBorder)]) {
+      [scrollView setThumbsHaveBorder:[dataSource_ thumbsHaveBorder]];
+   }
+   
+   if ([dataSource_ respondsToSelector:@selector(thumbSize)]) {
+      [scrollView setThumbSize:[dataSource_ thumbSize]];
+   }
+   
+   if ([dataSource_ respondsToSelector:@selector(thumbsPerRow)]) {
+      [scrollView setThumbsPerRow:[dataSource_ thumbsPerRow]];
+   }
+   
+   
    // Set main view to the scroll view.
    [self setView:scrollView];
    
@@ -121,12 +134,7 @@
 {
    KTThumbView *thumbView = [thumbsView dequeueReusableThumbView];
    if (!thumbView) {
-      BOOL hasBorder = YES;
-      if ([dataSource_ respondsToSelector:@selector(thumbsHaveBorder)]) {
-         hasBorder = [dataSource_ thumbsHaveBorder];
-      }
-      
-      thumbView = [[[KTThumbView alloc] initWithFrame:CGRectZero andHasBorder:hasBorder] autorelease];
+      thumbView = [[[KTThumbView alloc] initWithFrame:CGRectZero] autorelease];
       [thumbView setController:self];
    }
 

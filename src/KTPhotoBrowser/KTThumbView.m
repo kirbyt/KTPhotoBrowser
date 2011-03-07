@@ -15,21 +15,18 @@
 
 @synthesize controller = controller_;
 
-- (void)dealloc {
+- (void)dealloc 
+{
    [super dealloc];
 }
 
-- (id)initWithFrame:(CGRect)frame andHasBorder:(BOOL)hasBorder {
+- (id)initWithFrame:(CGRect)frame
+{
    if (self = [super initWithFrame:frame]) {
 
       [self addTarget:self
                action:@selector(didTouch:)
      forControlEvents:UIControlEventTouchUpInside];
-      
-      if (hasBorder) {
-         self.layer.borderColor = [UIColor colorWithWhite:0.85 alpha:1.0].CGColor;
-         self.layer.borderWidth = 1;
-      }
       
       [self setClipsToBounds:YES];
 
@@ -40,14 +37,27 @@
    return self;
 }
 
-- (void)didTouch:(id)sender {
+- (void)didTouch:(id)sender 
+{
    if (controller_) {
       [controller_ didSelectThumbAtIndex:[self tag]];
    }
 }
 
-- (void)setThumbImage:(UIImage *)newImage {
+- (void)setThumbImage:(UIImage *)newImage 
+{
   [self setImage:newImage forState:UIControlStateNormal];
 }
+
+- (void)setHasBorder:(BOOL)hasBorder
+{
+   if (hasBorder) {
+      self.layer.borderColor = [UIColor colorWithWhite:0.85 alpha:1.0].CGColor;
+      self.layer.borderWidth = 1;
+   } else {
+      self.layer.borderColor = nil;
+   }
+}
+
 
 @end

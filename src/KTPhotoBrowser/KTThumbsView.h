@@ -17,6 +17,10 @@
 @private
    id <KTThumbsViewDataSource> dataSource_;
    KTThumbsViewController *controller_;
+   BOOL thumbsHaveBorder_;
+   NSInteger thumbsPerRow_;
+   CGSize thumbSize_;
+   
    NSMutableSet *reusableThumbViews_;
    
    // We use the following ivars to keep track of 
@@ -27,6 +31,9 @@
 
 @property (nonatomic, assign) id<KTThumbsViewDataSource> dataSource;
 @property (nonatomic, assign) KTThumbsViewController *controller;
+@property (nonatomic, assign) BOOL thumbsHaveBorder;
+@property (nonatomic, assign) NSInteger thumbsPerRow;
+@property (nonatomic, assign) CGSize thumbSize;
 
 - (KTThumbView *)dequeueReusableThumbView;
 - (void)reloadData;
@@ -37,8 +44,5 @@
 @required
 - (NSInteger)thumbsViewNumberOfThumbs:(KTThumbsView *)thumbsView;
 - (KTThumbView *)thumbsView:(KTThumbsView *)thumbsView thumbForIndex:(NSInteger)index;
-@optional
-- (CGSize)thumbsViewThumbSize:(KTThumbsView *)thumbsView;
-- (NSInteger)thumbsViewThumbsPerRow:(KTThumbsView *)thumbsView;
 
 @end
