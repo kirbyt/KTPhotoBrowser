@@ -97,7 +97,10 @@
       itemsPerRow = floor(visibleWidth / thumbSize_.width);
    }
    if (itemsPerRow != lastItemsPerRow_) {
-      // Force re-load of grid cells.
+      // Force re-load of grid cells. Unfortunately this means
+      // visible cells will reload, which can hurt performance
+      // when the thumbnail image isn't cached. Need to find a
+      // better approach.
       [self queueReusableThumbViews];
    }
    lastItemsPerRow_ = itemsPerRow;
