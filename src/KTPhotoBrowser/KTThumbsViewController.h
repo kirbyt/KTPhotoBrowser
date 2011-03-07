@@ -14,6 +14,7 @@
 
 @interface KTThumbsViewController : UIViewController <KTThumbsViewDataSource>
 {
+@private
    id <KTPhotoBrowserDataSource> dataSource_;
    KTThumbsView *scrollView_;
    BOOL viewDidAppearOnce_;
