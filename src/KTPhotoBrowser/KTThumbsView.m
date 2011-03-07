@@ -115,6 +115,8 @@
    NSInteger bottomRow = topRow + rowsPerView;
 
    
+   CGRect extendedVisibleBounds = CGRectMake(visibleBounds.origin.x, MAX(0, visibleBounds.origin.y), visibleBounds.size.width, visibleBounds.size.height + rowHeight);
+   
    // Recycle all thumb views that are no longer visible
    for (UIView *view in [self subviews]) {
       
@@ -123,7 +125,6 @@
          // bounds, so we need to convert their frames to our own 
          // coordinate system.
          CGRect viewFrame = [view frame];
-         CGRect extendedVisibleBounds = CGRectMake(visibleBounds.origin.x, visibleBounds.origin.y, visibleBounds.size.width, visibleBounds.size.height + rowHeight);
          
          // If the view doesn't intersect, it's not visible, so we can recycle it
          if (! CGRectIntersectsRect(viewFrame, extendedVisibleBounds)) {
@@ -145,7 +146,7 @@
    // any views that are missing.
    for (int index = startAtIndex; index < stopAtIndex; index++) {
       // If index is between first and last, then not missing.
-      BOOL isThumbViewMissing = !(index = firstVisibleIndex_ && index < lastVisibleIndex_);
+      BOOL isThumbViewMissing = !(index > firstVisibleIndex_ && index < lastVisibleIndex_);
 
       if (isThumbViewMissing) {
          KTThumbView *thumbView = [dataSource_ thumbsView:self thumbForIndex:index];
