@@ -103,12 +103,14 @@
 }
 
 - (void)reloadThumbs {
+   [self willLoadThumbs];
    [scrollView_ reloadData];
+   [self didLoadThumbs];
 }
 
 - (void)setDataSource:(id <KTPhotoBrowserDataSource>)newDataSource {
    dataSource_ = newDataSource;
-   [scrollView_ reloadData];
+   [self reloadThumbs];
 }
 
 - (void)didSelectThumbAtIndex:(NSUInteger)index {
