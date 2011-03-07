@@ -159,7 +159,7 @@
    // any views that are missing.
    for (int index = startAtIndex; index < stopAtIndex; index++) {
       // If index is between first and last, then not missing.
-      BOOL isThumbViewMissing = !(index > firstVisibleIndex_ && index < lastVisibleIndex_);
+      BOOL isThumbViewMissing = !(index >= firstVisibleIndex_ && index < lastVisibleIndex_);
 
       if (isThumbViewMissing) {
          KTThumbView *thumbView = [dataSource_ thumbsView:self thumbForIndex:index];
