@@ -267,6 +267,7 @@
 
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
+   NSLog(@"iAd banner error: %@", [error localizedDescription]);
    if (bannerIsVisible_)
    {
       [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
