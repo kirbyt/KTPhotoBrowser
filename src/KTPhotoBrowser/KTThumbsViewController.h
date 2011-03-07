@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "KTPhotoBrowserDataSource.h"
+#import "KTThumbsView.h"
 
 @class KTThumbsView;
 
-@interface KTThumbsViewController : UIViewController {
-  id <KTPhotoBrowserDataSource> dataSource_;
-  KTThumbsView *scrollView_;
-  BOOL viewDidAppearOnce_;
-  BOOL navbarWasTranslucent_;
+@interface KTThumbsViewController : UIViewController <KTThumbsViewDataSource>
+{
+   id <KTPhotoBrowserDataSource> dataSource_;
+   KTThumbsView *scrollView_;
+   BOOL viewDidAppearOnce_;
+   BOOL navbarWasTranslucent_;
 }
 
 @property (nonatomic, retain) id <KTPhotoBrowserDataSource> dataSource;

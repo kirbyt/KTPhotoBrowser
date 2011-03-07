@@ -8,6 +8,7 @@
 
 #import "KTThumbsViewController.h"
 #import "KTThumbsView.h"
+#import "KTThumbView.h"
 #import "KTPhotoScrollViewController.h"
 
 
@@ -31,6 +32,7 @@
    [self setWantsFullScreenLayout:YES];
 
    KTThumbsView *scrollView = [[KTThumbsView alloc] initWithFrame:CGRectZero];
+   [scrollView setDataSource:self];
    [scrollView setController:self];
    [scrollView setScrollsToTop:YES];
    [scrollView setScrollEnabled:YES];
@@ -93,7 +95,7 @@
 
 - (void)setDataSource:(id <KTPhotoBrowserDataSource>)newDataSource {
    dataSource_ = newDataSource;
-   [scrollView_ setDataSource:newDataSource];
+   [scrollView_ reloadData];
 }
 
 - (void)didSelectThumbAtIndex:(NSUInteger)index {
@@ -104,5 +106,42 @@
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
 }
+
+
+#pragma mark -
+#pragma mark KTThumbsViewDataSource
+
+- (NSInteger)thumbsViewNumberOfThumbs:(KTThumbsView *)thumbsView
+{
+   NSInteger count = [dataSource_ numberOfPhotos];
+   return count;
+}
+
+- (KTThumbView *)thumbsView:(KTThumbsView *)thumbsView thumbForIndex:(NSInteger)index
+{
+   KTThumbView *thumbView = [thumbsView dequeueReusableThumbView];
+   if (!thumbView) {
+      BOOL hasBorder = YES;
+      if ([dataSource_ respondsToSelector:@selector(thumbsHaveBorder)]) {
+         hasBorder = [dataSource_ thumbsHaveBorder];
+      }
+      
+      thumbView = [[[KTThumbView alloc] initWithFrame:CGRectZero andHasBorder:hasBorder] autorelease];
+      [thumbView setController:self];
+   }
+
+   // Set thumbnail image.
+   if ([dataSource_ respondsToSelector:@selector(thumbImageAtIndex:thumbView:)] == NO) {
+      // Set thumbnail image synchronously.
+      UIImage *thumbImage = [dataSource_ thumbImageAtIndex:index];
+      [thumbView setThumbImage:thumbImage];
+   } else {
+      // Set thumbnail image asynchronously.
+      [dataSource_ thumbImageAtIndex:index thumbView:thumbView];
+   }
+   
+   return thumbView;
+}
+
 
 @end
