@@ -1,3 +1,7 @@
+Changes since April 7, 2011
+
+- [NEW] Re-wrote the thumbnail scroll view to reuse thumbnail views. Improves scroll performance.
+
 Changes since April 6, 2011
 
 (Note: I realize I failed to update the change log over the last year. Apologies to all. I will do a better job going forward.)
