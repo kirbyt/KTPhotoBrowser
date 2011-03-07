@@ -43,6 +43,7 @@
       // making the firsts very high and the lasts very low
       firstVisibleIndex_ = NSIntegerMax;
       lastVisibleIndex_  = NSIntegerMin;
+      lastItemsPerRow_   = NSIntegerMin;
    }
    return self;
 }
@@ -61,7 +62,7 @@
    return thumbView;
 }
 
-- (void)reloadData
+- (void)queueReusableThumbViews
 {
    for (UIView *view in [self subviews]) {
       if ([view isKindOfClass:[KTThumbView class]]) {
@@ -72,7 +73,11 @@
    
    firstVisibleIndex_ = NSIntegerMax;
    lastVisibleIndex_  = NSIntegerMin;
-   
+}
+
+- (void)reloadData
+{
+   [self queueReusableThumbViews];
    [self setNeedsLayout];
 }
 
@@ -91,6 +96,11 @@
    if (itemsPerRow == NSIntegerMin) {
       itemsPerRow = floor(visibleWidth / thumbSize_.width);
    }
+   if (itemsPerRow != lastItemsPerRow_) {
+      // Force re-load of grid cells.
+      [self queueReusableThumbViews];
+   }
+   lastItemsPerRow_ = itemsPerRow;
    
    // Ensure a minimum of space between images.
    int minimumSpace = 5;
@@ -154,7 +164,7 @@
          // Set the frame so the view is inserted into the correct position.
          CGRect newFrame = CGRectMake(x, y, thumbSize_.width, thumbSize_.height);
          [thumbView setFrame:newFrame];
-         
+
          // Store the current index so the thumb view can 
          // find it later.
          [thumbView setTag:index];
@@ -163,6 +173,7 @@
          
          [self addSubview:thumbView];
       }
+
       
       // Adjust the position.
       if ( (index+1) % itemsPerRow == 0) {

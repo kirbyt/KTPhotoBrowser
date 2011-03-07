@@ -27,6 +27,7 @@
    // which thumbnail view indexes are visible.
    int firstVisibleIndex_;
    int lastVisibleIndex_;
+   int lastItemsPerRow_;
 }
 
 @property (nonatomic, assign) id<KTThumbsViewDataSource> dataSource;
