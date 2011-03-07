@@ -103,7 +103,7 @@
 }
 
 - (void)reloadThumbs {
-   [scrollView_ setNeedsLayout];
+   [scrollView_ reloadData];
 }
 
 - (void)setDataSource:(id <KTPhotoBrowserDataSource>)newDataSource {
@@ -136,6 +136,9 @@
    if (!thumbView) {
       thumbView = [[[KTThumbView alloc] initWithFrame:CGRectZero] autorelease];
       [thumbView setController:self];
+      NSLog(@"view created.");
+   } else {
+      NSLog(@"view reused.");
    }
 
    // Set thumbnail image.
