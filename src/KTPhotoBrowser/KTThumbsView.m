@@ -66,8 +66,8 @@
    for (UIView *view in [self subviews]) {
       if ([view isKindOfClass:[KTThumbView class]]) {
          [reusableThumbViews_ addObject:view];
+         [view removeFromSuperview];
       }
-      [view removeFromSuperview];
    }
    
    firstVisibleIndex_ = NSIntegerMax;

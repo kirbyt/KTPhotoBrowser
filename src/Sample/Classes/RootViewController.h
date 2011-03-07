@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-@interface RootViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface RootViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource> 
+{
+@private
    UIWindow *window_;
 }
 

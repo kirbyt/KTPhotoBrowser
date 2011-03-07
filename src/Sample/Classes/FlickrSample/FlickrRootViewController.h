@@ -11,8 +11,12 @@
 
 @class FlickrDataSource;
 
-@interface FlickrRootViewController : KTThumbsViewController {
+@interface FlickrRootViewController : KTThumbsViewController 
+{
+@private
    FlickrDataSource *images_;
+   UIActivityIndicatorView *activityIndicator_;
 }
+
 
 @end

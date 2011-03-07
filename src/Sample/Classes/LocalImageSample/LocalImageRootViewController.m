@@ -17,22 +17,17 @@
 
 @implementation LocalImageRootViewController
 
-- (void)dealloc {
+- (void)dealloc 
+{
+   [activityIndicatorView_ release], activityIndicatorView_ = nil;
    [myPhotos_ release], myPhotos_ = nil;
    [activityIndicatorView_ release], activityIndicatorView_ = nil;
    
    [super dealloc];
 }
 
-- (id)initWithWindow:(UIWindow *)window {
-   self = [super init];
-   if (self) {
-      window_ = window;
-   }
-   return self;
-}
-
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
    [super viewDidLoad];
    
    [self setTitle:NSLocalizedString(@"Photo Album", @"Photo Album screen title.")];
@@ -50,7 +45,8 @@
    [self setDataSource:myPhotos_];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
 	// Releases the view if it doesn't have a superview.
    [super didReceiveMemoryWarning];
 	
@@ -58,15 +54,18 @@
    [myPhotos_ flushCache];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
    return YES;
 }
 
-- (void)willLoadThumbs {
+- (void)willLoadThumbs 
+{
    [self showActivityIndicator];
 }
 
-- (void)didLoadThumbs {
+- (void)didLoadThumbs 
+{
    [self hideActivityIndicator];
 }
 
@@ -74,7 +73,8 @@
 #pragma mark -
 #pragma mark Activity Indicator
    
-- (UIActivityIndicatorView *)activityIndicator {
+- (UIActivityIndicatorView *)activityIndicator 
+{
    if (activityIndicatorView_) {
       return activityIndicatorView_;
    }
@@ -82,27 +82,27 @@
    activityIndicatorView_ = [[UIActivityIndicatorView alloc] 
                              initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
    [activityIndicatorView_ setCenter:self.view.center];
+   [[self view] addSubview:activityIndicatorView_];
    
    return activityIndicatorView_;
 }
 
-- (void)showActivityIndicator {
-   if (window_) {
-      [window_ addSubview:[self activityIndicator]];
-   }
+- (void)showActivityIndicator 
+{
    [[self activityIndicator] startAnimating];
 }
 
-- (void)hideActivityIndicator {
+- (void)hideActivityIndicator 
+{
    [[self activityIndicator] stopAnimating];
-   [[self activityIndicator] removeFromSuperview];
 }
 
 
 #pragma mark -
 #pragma mark Actions
 
-- (void)addPhoto {
+- (void)addPhoto 
+{
    if (!photoPicker_) {
       photoPicker_ = [[PhotoPickerController alloc] initWithDelegate:self];
    }
@@ -113,7 +113,8 @@
 #pragma mark -
 #pragma mark PhotoPickerControllerDelegate
 
-- (void)photoPickerController:(PhotoPickerController *)controller didFinishPickingWithImage:(UIImage *)image isFromCamera:(BOOL)isFromCamera {
+- (void)photoPickerController:(PhotoPickerController *)controller didFinishPickingWithImage:(UIImage *)image isFromCamera:(BOOL)isFromCamera 
+{
    [self showActivityIndicator];
    
    NSString * const key = @"nextNumber";
@@ -134,7 +135,8 @@
 #pragma mark -
 #pragma mark PhotosDelegate
 
-- (void)didFinishSave {
+- (void)didFinishSave 
+{
    [self reloadThumbs];
 }
 

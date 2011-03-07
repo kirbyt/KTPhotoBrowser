@@ -16,20 +16,15 @@
 
 @implementation SDWebImageRootViewController
 
-- (void)dealloc {
+- (void)dealloc 
+{
+   [activityIndicatorView_ release], activityIndicatorView_ = nil;
    [images_ release], images_ = nil;
    [super dealloc];
 }
 
-- (id)initWithWindow:(UIWindow *)window {
-   self = [super init];
-   if (self) {
-      window_ = window;
-   }
-   return self;
-}
-
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
    [super viewDidLoad];
   
    self.title = @"SDWebImage Sample";
@@ -46,23 +41,27 @@
 }
 */
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
 
-- (void)willLoadThumbs {
+- (void)willLoadThumbs 
+{
    [self showActivityIndicator];
 }
 
-- (void)didLoadThumbs {
+- (void)didLoadThumbs 
+{
    [self hideActivityIndicator];
 }
 
@@ -70,28 +69,30 @@
 #pragma mark -
 #pragma mark Activity Indicator
 
-- (UIActivityIndicatorView *)activityIndicator {
+- (UIActivityIndicatorView *)activityIndicator 
+{
    if (activityIndicatorView_) {
       return activityIndicatorView_;
    }
-   
-   activityIndicatorView_ = [[UIActivityIndicatorView alloc] 
-                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-   [activityIndicatorView_ setCenter:self.view.center];
+
+   activityIndicatorView_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+   CGPoint center = [[self view] center];
+   [activityIndicatorView_ setCenter:center];
+   [activityIndicatorView_ setHidesWhenStopped:YES];
+   [activityIndicatorView_ startAnimating];
+   [[self view] addSubview:activityIndicatorView_];
    
    return activityIndicatorView_;
 }
 
-- (void)showActivityIndicator {
-   if (window_) {
-      [window_ addSubview:[self activityIndicator]];
-   }
+- (void)showActivityIndicator 
+{
    [[self activityIndicator] startAnimating];
 }
 
-- (void)hideActivityIndicator {
+- (void)hideActivityIndicator 
+{
    [[self activityIndicator] stopAnimating];
-   [[self activityIndicator] removeFromSuperview];
 }
 
 

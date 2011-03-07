@@ -1,7 +1,12 @@
+---------------------------
 Changes since April 7, 2011
 
 - [NEW] Re-wrote the thumbnail scroll view to reuse thumbnail views. Improves scroll performance.
 
+- [UPDATE] Cleaned up sample projects. Added activity indicator on the Flickr and SDWebImage view controllers.
+
+
+---------------------------
 Changes since April 6, 2011
 
 (Note: I realize I failed to update the change log over the last year. Apologies to all. I will do a better job going forward.)
@@ -11,6 +16,7 @@ Changes since April 6, 2011
 - [NEW] Added new Flickr+JSON sample. Shows how to use the Flickr JSON API to retrieve and display photos. This sample uses SDWebImage to cache downloaded photos.
 
 
+----------------------------
 Changes since March 23, 2010
 
 - [NEW] Added photo rotation support.

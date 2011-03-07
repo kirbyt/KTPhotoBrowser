@@ -15,13 +15,12 @@
 
 @class Photos;
 
-@interface LocalImageRootViewController : KTThumbsViewController <PhotoPickerControllerDelegate, PhotosDelegate, MFMailComposeViewControllerDelegate> {
+@interface LocalImageRootViewController : KTThumbsViewController <PhotoPickerControllerDelegate, PhotosDelegate, MFMailComposeViewControllerDelegate> 
+{
+@private
    PhotoPickerController *photoPicker_;
    Photos *myPhotos_;
    UIActivityIndicatorView *activityIndicatorView_;
-   UIWindow *window_;
 }
-
-- (id)initWithWindow:(UIWindow *)window;
 
 @end

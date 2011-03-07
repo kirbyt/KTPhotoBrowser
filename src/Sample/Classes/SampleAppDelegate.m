@@ -27,7 +27,7 @@
       newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
       [newController release];
    } else {
-      LocalImageRootViewController *newController = [[LocalImageRootViewController alloc] initWithWindow:window];
+      LocalImageRootViewController *newController = [[LocalImageRootViewController alloc] init];
       newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
       [newController release];
    }

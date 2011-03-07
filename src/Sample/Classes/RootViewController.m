@@ -20,11 +20,13 @@
 
 @synthesize window = window_;
 
-- (void)dealloc {
+- (void)dealloc 
+{
    [super dealloc];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
    [super viewDidLoad];
    
    [self setTitle:@"Samples"];
@@ -42,35 +44,46 @@
 }
 */
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
 	// Release any retained subviews of the main view.
 	// e.g. self.myOutlet = nil;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
+   return YES;
+}
+
+
 #pragma mark -
 #pragma mark Show Samples
 
-- (void)showLocalImageSample {
-   LocalImageRootViewController *newController = [[LocalImageRootViewController alloc] initWithWindow:window_];
+- (void)showLocalImageSample 
+{
+   LocalImageRootViewController *newController = [[LocalImageRootViewController alloc] init];
    [[self navigationController] pushViewController:newController
                                           animated:YES];
    [newController release]; 
 }
 
-- (void)showSDWebImageSample {
-   SDWebImageRootViewController *newController = [[SDWebImageRootViewController alloc] initWithWindow:window_];
+- (void)showSDWebImageSample 
+{
+   SDWebImageRootViewController *newController = [[SDWebImageRootViewController alloc] init];
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
 }
 
-- (void)showFlickrSample {
+- (void)showFlickrSample 
+{
    FlickrRootViewController *newController = [[FlickrRootViewController alloc] init];
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
@@ -81,17 +94,20 @@
 #pragma mark -
 #pragma mark TableView Events
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView 
+{
    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section {
+ numberOfRowsInSection:(NSInteger)section 
+{
    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath 
+{
    
    static NSString *CellIdentifier = @"RootViewControllerCellCache";
    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -113,14 +129,15 @@
          break;
       case FLICKR_SAMPLE:
          [[cell textLabel] setText:@"Flickr Sample"];
-         [[cell detailTextLabel] setText:@"Web images, synchronous without cache."];
+         [[cell detailTextLabel] setText:@"Web images, synchronous with cache."];
          break;
    }
    
    return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath 
+{
    switch ([indexPath row]) {
       case LOCAL_IMAGE_SAMPLE:
          [self showLocalImageSample];
