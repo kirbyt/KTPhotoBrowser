@@ -14,7 +14,7 @@
 
 @interface PhotoPickerController (Private)
 - (UIImagePickerController *)imagePicker;
-- (UIPopoverController *)popoverController;
+- (id)popoverController;
 - (void)showWithCamera;
 - (void)showWithPhotoLibrary;
 @end
@@ -29,7 +29,8 @@
 }
 
 - (id)initWithDelegate:(id)delegate {
-   if (self = [super init]) {
+   self = [super init];
+   if (self) {
       delegate_ = delegate;
    }
    return self;
@@ -95,14 +96,14 @@
    return imagePicker_;
 }
 
-- (UIPopoverController *)popoverController {
+- (id)popoverController {
    if (popoverController_) {
       return popoverController_;
    }
    
    Class popoverControllerClass = NSClassFromString(@"UIPopoverController");
    if (popoverControllerClass && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      popoverController_ = [[UIPopoverController alloc] initWithContentViewController:[self imagePicker]];
+      popoverController_ = [[popoverControllerClass alloc] initWithContentViewController:[self imagePicker]];
    }
    
    return popoverController_;

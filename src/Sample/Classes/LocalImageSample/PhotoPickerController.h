@@ -11,7 +11,7 @@
 @interface PhotoPickerController : NSObject <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate> {
    id delegate_;
    UIImagePickerController *imagePicker_;
-   UIPopoverController *popoverController_;
+   id popoverController_;
    BOOL isFromCamera_;
 }
 
