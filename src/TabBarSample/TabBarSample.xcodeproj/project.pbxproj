@@ -390,6 +390,7 @@
 				GCC_PREFIX_HEADER = TabBarSample_Prefix.pch;
 				INFOPLIST_FILE = "TabBarSample-Info.plist";
 				PRODUCT_NAME = TabBarSample;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

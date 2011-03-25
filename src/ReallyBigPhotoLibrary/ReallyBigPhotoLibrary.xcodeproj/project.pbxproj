@@ -273,6 +273,7 @@
 				GCC_PREFIX_HEADER = ReallyBigPhotoLibrary_Prefix.pch;
 				INFOPLIST_FILE = "ReallyBigPhotoLibrary-Info.plist";
 				PRODUCT_NAME = ReallyBigPhotoLibrary;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
