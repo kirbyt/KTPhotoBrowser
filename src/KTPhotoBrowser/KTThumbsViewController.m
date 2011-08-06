@@ -13,6 +13,7 @@
 
 
 @interface KTThumbsViewController (Private)
+- (void)fixViewContentInset;
 @end
 
 
@@ -80,6 +81,8 @@
   // Then ensure translucency to match the look of Apple's Photos app.
   [navbar setTranslucent:YES];
   [super viewWillAppear:animated];
+  
+  [self fixViewContentInset];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -120,6 +123,20 @@
   
    [[self navigationController] pushViewController:newController animated:YES];
    [newController release];
+}
+
+#pragma mark - private methods
+// sometimes depending on how the navigation controller stack is pushed and popped the content
+// inset top of our view can be double set (to twice the height of the status bar and nav bar)
+// method to make sure it's set correctly
+- (void)fixViewContentInset{
+  CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+  CGRect navBarFrame = self.navigationController.navigationBar.frame;
+ 	int barsHeight = statusBarFrame.size.height + navBarFrame.size.height;
+  
+  UIEdgeInsets inset = scrollView_.contentInset;
+  inset.top = barsHeight;
+  scrollView_.contentInset = inset;
 }
 
 
