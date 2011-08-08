@@ -49,6 +49,12 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [previousButton_ release], previousButton_ = nil;
    [scrollView_ release], scrollView_ = nil;
    [toolbar_ release], toolbar_ = nil;
+   
+   for (KTPhotoView *pv in photoViews_) {
+     // Make sure it's not NSNull
+     if([pv isKindOfClass:[KTPhotoView class]])
+       pv.scroller = nil;
+   }
    [photoViews_ release], photoViews_ = nil;
   
    [dataSource_ release], dataSource_ = nil;  
