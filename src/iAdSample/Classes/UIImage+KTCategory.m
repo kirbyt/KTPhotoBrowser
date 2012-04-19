@@ -24,6 +24,7 @@
    UIGraphicsBeginImageContext(rect.size);
    [self drawInRect:rect];
    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
    return scaledImage;
 }
 
@@ -47,6 +48,7 @@
    UIGraphicsBeginImageContext(rect.size);
    [self drawInRect:rect];
    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
    
    // Crop the image to the requested new size maintaining
    // the inner most parts of the image.
