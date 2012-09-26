@@ -8,7 +8,6 @@
 
 #import "KTPhotoScrollViewController.h"
 #import "KTPhotoBrowserDataSource.h"
-#import "KTPhotoBrowserGlobal.h"
 #import "KTPhotoView.h"
 
 const CGFloat ktkDefaultPortraitToolbarHeight   = 44;
@@ -98,13 +97,13 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [newView release];
    
    nextButton_ = [[UIBarButtonItem alloc] 
-                  initWithImage:KTLoadImageFromBundle(@"nextIcon.png")
+                  initWithImage:[UIImage imageNamed:@"KTPhotoBrowser.bundle/images/nextIcon.png"]
                   style:UIBarButtonItemStylePlain
                   target:self
                   action:@selector(nextPhoto)];
    
    previousButton_ = [[UIBarButtonItem alloc] 
-                      initWithImage:KTLoadImageFromBundle(@"previousIcon.png")
+                      initWithImage:[UIImage imageNamed:@"KTPhotoBrowser.bundle/images/previousIcon.png"]
                       style:UIBarButtonItemStylePlain
                       target:self
                       action:@selector(previousPhoto)];
