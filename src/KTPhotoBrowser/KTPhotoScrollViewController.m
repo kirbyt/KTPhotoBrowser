@@ -137,7 +137,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    [toolbarItems addObject:space];
    [toolbarItems addObject:nextButton_];
    [toolbarItems addObject:space];
-   if (trashButton) [toolbarItems addObject:trashButton];
+   if (trashButton) {
+      [toolbarItems addObject:trashButton];
+   } else {
+      [toolbarItems addObjsec:space];
+   }
    
    CGRect screenFrame = [[UIScreen mainScreen] bounds];
    CGRect toolbarFrame = CGRectMake(0, 
