@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/kirbyt/KTPhotoBrowser"
   s.license      = "MIT"
   s.author       = "Kirby Turner"
-  s.source       = { :git => "https://github.com/kirbyt/KTPhotoBrowser.git", :commit => "8da811aa1e6b153315334e98abb345a3a67126ad" }
+  s.source       = { :git => "https://github.com/mtlhd/KTPhotoBrowser.git", :tag => "0.0.1" }
   s.platform     = :ios, "3.0"
   s.source_files  = "KTPhotoBrowser/**/*.{h,m}"
   s.requires_arc = false
