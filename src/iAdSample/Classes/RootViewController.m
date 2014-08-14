@@ -42,7 +42,10 @@
    
    // Build a new view hierarchy.
    
-   [self setWantsFullScreenLayout:NO];
+#ifdef __IPHONE_7_0
+#else
+    [self setWantsFullScreenLayout:NO];
+#endif
 
    UIView *newContainerView = [[UIView alloc] initWithFrame:CGRectZero];
    [newContainerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
