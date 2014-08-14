@@ -225,7 +225,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    }
    // Then ensure translucency. Without it, the view will appear below rather than under it.  
    [navbar setTranslucent:YES];
-   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
+#ifdef __IPHONE_7_0
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+#else
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
+#endif
 
    // Set the scroll view's content size, auto-scroll to the stating photo,
    // and setup the other display elements.
