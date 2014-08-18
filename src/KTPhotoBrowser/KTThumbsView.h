@@ -25,9 +25,9 @@
    
    // We use the following ivars to keep track of 
    // which thumbnail view indexes are visible.
-   int firstVisibleIndex_;
-   int lastVisibleIndex_;
-   int lastItemsPerRow_;
+   NSInteger firstVisibleIndex_;
+   NSInteger lastVisibleIndex_;
+   NSInteger lastItemsPerRow_;
 }
 
 @property (nonatomic, assign) id<KTThumbsViewDataSource> dataSource;

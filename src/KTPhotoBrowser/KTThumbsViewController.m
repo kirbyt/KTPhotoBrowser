@@ -29,7 +29,12 @@
 - (void)loadView {
    // Make sure to set wantsFullScreenLayout or the photo
    // will not display behind the status bar.
-   [self setWantsFullScreenLayout:YES];
+#ifdef __IPHONE_7_0
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.extendedLayoutIncludesOpaqueBars = YES;
+#else
+    [self setWantsFullScreenLayout:YES];
+#endif
 
    KTThumbsView *scrollView = [[KTThumbsView alloc] initWithFrame:CGRectZero];
    [scrollView setDataSource:self];

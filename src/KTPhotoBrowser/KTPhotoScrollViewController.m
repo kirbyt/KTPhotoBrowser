@@ -58,20 +58,25 @@ const CGFloat ktkDefaultToolbarHeight = 44;
 
 - (id)initWithDataSource:(id <KTPhotoBrowserDataSource>)dataSource andStartWithPhotoAtIndex:(NSUInteger)index 
 {
-   if (self = [super init]) {
-     startWithIndex_ = index;
-     dataSource_ = [dataSource retain];
-     
-     // Make sure to set wantsFullScreenLayout or the photo
-     // will not display behind the status bar.
-     [self setWantsFullScreenLayout:YES];
-
-     BOOL isStatusbarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
-     [self setStatusbarHidden:isStatusbarHidden];
-     
-     self.hidesBottomBarWhenPushed = YES;
-   }
-   return self;
+    if (self = [super init]) {
+        startWithIndex_ = index;
+        dataSource_ = [dataSource retain];
+        
+        // Make sure to set wantsFullScreenLayout or the photo
+        // will not display behind the status bar.
+#ifdef __IPHONE_7_0
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = YES;
+#else
+        [self setWantsFullScreenLayout:YES];
+#endif
+        BOOL isStatusbarHidden = [[UIApplication sharedApplication] isStatusBarHidden];
+        [self setStatusbarHidden:isStatusbarHidden];
+        
+        self.hidesBottomBarWhenPushed = YES;
+    }
+    
+    return self;
 }
 
 - (void)loadView 
@@ -220,7 +225,11 @@ const CGFloat ktkDefaultToolbarHeight = 44;
    }
    // Then ensure translucency. Without it, the view will appear below rather than under it.  
    [navbar setTranslucent:YES];
-   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
+#ifdef __IPHONE_7_0
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+#else
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent animated:YES];
+#endif
 
    // Set the scroll view's content size, auto-scroll to the stating photo,
    // and setup the other display elements.
